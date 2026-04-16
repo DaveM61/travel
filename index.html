@@ -68,28 +68,30 @@
     }
 
     /* ── Header image zone
-       Sits to the right of the logo, fills header height.
-       Left edge aligns with the right edge of the logo (= logo-w + h-pad).
-       CSS mask fades it to transparent before the back-link.
-       When travel_header.png is ready: drop it in assets/ and it appears automatically.
+       Flush to left edge of page. Logo sits above it via z-index.
+       Gradient: left = transparent (cream shows through, keeps logo readable),
+                 right = fully visible image.
+       object-position: left top — anchors top of image so top of photo is visible.
     ── */
     .header-img-zone {
       position: absolute;
-      left: calc(var(--h-pad) + var(--logo-w));
+      left: 0;
       top: 0;
       right: 0;
       bottom: 0;
       z-index: 1;
       overflow: hidden;
       -webkit-mask-image: linear-gradient(to right,
-        black 0%,
-        black 45%,
-        transparent 82%
+        transparent 0%,
+        transparent 22%,
+        black 48%,
+        black 100%
       );
       mask-image: linear-gradient(to right,
-        black 0%,
-        black 45%,
-        transparent 82%
+        transparent 0%,
+        transparent 22%,
+        black 48%,
+        black 100%
       );
     }
 
@@ -97,7 +99,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: left center;
+      object-position: left top;   /* show top of image */
       display: block;
     }
 
