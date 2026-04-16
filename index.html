@@ -84,14 +84,14 @@
       overflow: hidden;
       -webkit-mask-image: linear-gradient(to right,
         transparent 0%,
-        transparent 22%,
-        black 48%,
+        transparent 9%,
+        black 20%,
         black 100%
       );
       mask-image: linear-gradient(to right,
         transparent 0%,
-        transparent 22%,
-        black 48%,
+        transparent 9%,
+        black 20%,
         black 100%
       );
     }
@@ -104,6 +104,15 @@
       display: block;
     }
 
+    /* ── Back link — slim cream bar below header ── */
+    .back-bar {
+      background: var(--bg);
+      display: flex;
+      justify-content: flex-end;
+      padding: 8px var(--h-pad);
+      flex-shrink: 0;
+    }
+
     .back-link {
       font-family: 'DM Sans', sans-serif;
       font-size: 12px;
@@ -111,8 +120,6 @@
       color: var(--slate);
       text-decoration: none;
       letter-spacing: 0.02em;
-      position: relative;
-      z-index: 2;
     }
 
     .back-link:hover { text-decoration: underline; }
@@ -255,9 +262,11 @@
       <img src="assets/travel_header.png" alt="">
     </div>
 
-    <a class="back-link" href="https://daveandmike.net">← Travel</a>
-
   </header>
+
+  <div class="back-bar">
+    <a class="back-link" href="https://daveandmike.net">← Travel</a>
+  </div>
 
   <main>
     <div class="content">
