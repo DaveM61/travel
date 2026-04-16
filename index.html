@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Travel — dave&amp;mike</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+
+    :root {
+      --bg:       #F0EDE7;
+      --slate:    #5E82A0;
+      --text:     #1C1A16;
+      --muted:    #7A746C;
+      --faded:    #C0BAB2;
+      --footer-bg:#8AAEC8;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── 4px slate bar ── */
+    .top-bar {
+      height: 4px;
+      background: var(--slate);
+      flex-shrink: 0;
+    }
+
+    /* ── Header ── */
+    header {
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 32px;
+      flex-shrink: 0;
+    }
+
+    .logo-wrap {
+      width: 100px;
+      display: block;
+    }
+
+    .logo-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .back-link {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--slate);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    /* ── Main content — vertically centered ── */
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 32px;
+    }
+
+    .content {
+      max-width: 480px;
+      width: 100%;
+    }
+
+    /* ── Page title ── */
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 2.8rem;
+      color: var(--text);
+      line-height: 1.1;
+      margin-bottom: 0.6rem;
+    }
+
+    /* ── Descriptor ── */
+    .descriptor {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    /* ── Thin rule ── */
+    .rule {
+      border: none;
+      border-top: 0.5px solid rgba(28, 26, 22, 0.15);
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── Link list ── */
+    .link-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .link-list a {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .link-list a .arrow {
+      color: var(--slate);
+    }
+
+    .link-list a:hover {
+      color: var(--slate);
+    }
+
+    .link-list .coming-soon {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--faded);
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--footer-bg);
+      padding: 14px 32px;
+      flex-shrink: 0;
+    }
+
+    footer p {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--text);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar"></div>
+
+  <header>
+    <a class="logo-wrap" href="https://daveandmike.net">
+      <img src="assets/dnm_logo.svg" alt="dave&amp;mike">
+    </a>
+    <a class="back-link" href="https://daveandmike.net">← Travel</a>
+  </header>
+
+  <main>
+    <div class="content">
+      <h1>Travel</h1>
+      <p class="descriptor">Where we've been, where we're going</p>
+      <hr class="rule">
+      <ul class="link-list">
+        <li><a href="https://italy.daveandmike.net">Italy 2026 <span class="arrow">→</span></a></li>
+        <li><span class="coming-soon">Past trips</span></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>dave&amp;mike · esperienze · travel</p>
+  </footer>
+
+</body>
+</html>
