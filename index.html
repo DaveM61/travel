@@ -19,8 +19,8 @@
       --muted:     #7A746C;
       --faded:     #C0BAB2;
       --footer-bg: #8AAEC8;
-      --logo-w:    100px;       /* logo width — used to align content */
-      --h-pad:     32px;        /* header / page horizontal padding */
+      --logo-w:    100px;
+      --h-pad:     32px;
     }
 
     body {
@@ -34,7 +34,7 @@
       flex-direction: column;
     }
 
-    /* ── 12px slate bar — clearly site chrome, not browser ── */
+    /* ── 12px slate bar ── */
     .top-bar {
       height: 12px;
       background: var(--slate);
@@ -49,17 +49,55 @@
       justify-content: space-between;
       padding: 20px var(--h-pad);
       flex-shrink: 0;
+      position: relative;   /* needed for absolute image zone */
+      overflow: hidden;
     }
 
     .logo-wrap {
       width: var(--logo-w);
       display: block;
       flex-shrink: 0;
+      position: relative;
+      z-index: 2;
     }
 
     .logo-wrap img {
       width: 100%;
       height: auto;
+      display: block;
+    }
+
+    /* ── Header image zone
+       Sits to the right of the logo, fills header height.
+       Left edge aligns with the right edge of the logo (= logo-w + h-pad).
+       CSS mask fades it to transparent before the back-link.
+       When travel_header.png is ready: drop it in assets/ and it appears automatically.
+    ── */
+    .header-img-zone {
+      position: absolute;
+      left: calc(var(--h-pad) + var(--logo-w));
+      top: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 1;
+      overflow: hidden;
+      -webkit-mask-image: linear-gradient(to right,
+        black 0%,
+        black 45%,
+        transparent 82%
+      );
+      mask-image: linear-gradient(to right,
+        black 0%,
+        black 45%,
+        transparent 82%
+      );
+    }
+
+    .header-img-zone img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: left center;
       display: block;
     }
 
@@ -70,14 +108,15 @@
       color: var(--slate);
       text-decoration: none;
       letter-spacing: 0.02em;
+      position: relative;
+      z-index: 2;
     }
 
     .back-link:hover { text-decoration: underline; }
 
     /* ── Main content
-       Left edge of content aligns with right edge of logo:
-       h-pad (32px) + logo-width (100px) = 132px from viewport left.
-       Content sits near the top — no vertical centering.
+       Left edge aligns with logo right edge = h-pad + logo-w = 132px.
+       Top-aligned — no vertical centering.
     ── */
     main {
       flex: 1;
@@ -158,17 +197,33 @@
       flex-shrink: 0;
     }
 
-    .footer-left {
+    /* Breadcrumb trail — dave&mike and esperienze are linked, travel is current */
+    .footer-breadcrumb {
       font-family: 'DM Sans', sans-serif;
       font-size: 12px;
       font-weight: 400;
       color: var(--text);
     }
 
-    .footer-left em {
+    .footer-breadcrumb a {
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .footer-breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    .footer-breadcrumb .crumb-esperienze {
       font-family: 'Cormorant Garamond', serif;
       font-style: italic;
       font-weight: 400;
+      font-size: 16px;   /* larger than surrounding 12px DM Sans */
+    }
+
+    .footer-breadcrumb .crumb-current {
+      /* unlinked — you are here */
+      color: var(--text);
     }
 
     .footer-contact {
@@ -187,10 +242,18 @@
   <div class="top-bar"></div>
 
   <header>
+
     <a class="logo-wrap" href="https://daveandmike.net">
       <img src="assets/dnm_logo.svg" alt="dave&amp;mike">
     </a>
+
+    <!-- Header image — drop assets/travel_header.png in place when ready -->
+    <div class="header-img-zone">
+      <img src="assets/travel_header.png" alt="">
+    </div>
+
     <a class="back-link" href="https://daveandmike.net">← Travel</a>
+
   </header>
 
   <main>
@@ -206,7 +269,13 @@
   </main>
 
   <footer>
-    <span class="footer-left">dave&amp;mike · <em>esperienze</em> · travel</span>
+    <span class="footer-breadcrumb">
+      <a href="https://daveandmike.net">dave&amp;mike</a>
+      &nbsp;·&nbsp;
+      <a href="https://daveandmike.net" class="crumb-esperienze">esperienze</a>
+      &nbsp;·&nbsp;
+      <span class="crumb-current">travel</span>
+    </span>
     <a class="footer-contact" href="mailto:services@musel.us">Contact Dave &amp; Mike</a>
   </footer>
 
