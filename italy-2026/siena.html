@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Italy 2026 — Siena</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── Variable aliases (old → d&m) ── */
+    :root {
+      --tuscany:    var(--slate);
+      --gold:       var(--slate);
+      --ink:        var(--text);
+      --terracotta: var(--muted);
+      --warm-rule:  rgba(28, 26, 22, 0.12);
+      --parchment:  var(--bg);
+    }
+
+    /* ── Centering ── */
+    .trip-header { max-width: 860px; margin: 0 auto; padding-left: 0; }
+    .page-body   { max-width: 860px; margin: 0 auto; padding: 0 0 80px; }
+
+    /* ── Page back-link (within content) ── */
+    .back-link-page {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 400;
+      letter-spacing: 0.02em; color: var(--slate); text-decoration: none;
+      margin-bottom: 28px;
+    }
+    .back-link-page:hover { text-decoration: underline; }
+
+    /* ── Itinerary meta ── */
+    .itinerary-meta {
+      background: white; border: 0.5px solid rgba(28,26,22,0.12);
+      border-left: 3px solid var(--slate); border-radius: 6px;
+      padding: 20px 24px; margin-bottom: 32px;
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+      gap: 14px 20px;
+    }
+    .meta-item-label {
+      font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 500;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--slate); margin-bottom: 3px;
+    }
+    .meta-item-value {
+      font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 300;
+      color: var(--text); line-height: 1.45;
+    }
+    .meta-item-value.tbd { color: var(--muted); font-style: italic; }
+
+    /* ── Trip summary ── */
+    .trip-summary {
+      font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 300;
+      line-height: 1.8; color: var(--text);
+      background: white; border: 0.5px solid rgba(28,26,22,0.12);
+      border-radius: 6px; padding: 20px 24px; margin-bottom: 32px;
+    }
+
+    /* ── Section headers ── */
+    .section-eyebrow {
+      font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 500;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 6px;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif; font-style: italic;
+      font-size: 22px; font-weight: 400; color: var(--text);
+      margin-bottom: 18px; padding-bottom: 10px;
+      border-bottom: 0.5px solid rgba(28,26,22,0.12);
+    }
+
+    /* ── Route table ── */
+    .route-table-wrap { margin-bottom: 10px; overflow-x: auto; }
+    .route-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    .route-table th {
+      font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: white; background: var(--slate); padding: 8px 14px; text-align: left;
+    }
+    .route-table td {
+      padding: 8px 14px; border-bottom: 0.5px solid rgba(28,26,22,0.10);
+      color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 300;
+    }
+    .route-table tr:nth-child(even) td { background: rgba(28,26,22,0.02); }
+    .route-table tr.total-row td {
+      font-weight: 500; background: rgba(94,130,160,0.06);
+      border-top: 1.5px solid var(--slate);
+    }
+    .full-day-note {
+      font-family: 'DM Sans', sans-serif; font-size: 13px; font-style: italic;
+      color: var(--muted); margin-top: 6px; margin-bottom: 28px;
+    }
+
+    /* ── Map ── */
+    .map-wrap { margin: 20px 0 8px; border-radius: 8px; overflow: hidden; border: 0.5px solid rgba(28,26,22,0.12); }
+    .map-wrap iframe { display: block; }
+    .map-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      margin: 8px 0 28px; font-family: 'DM Sans', sans-serif;
+      font-size: 13px; font-weight: 500; color: var(--slate); text-decoration: none;
+    }
+    .map-link:hover { text-decoration: underline; }
+
+    /* ── Why box ── */
+    .why-box {
+      background: rgba(94,130,160,0.05); border: 0.5px solid rgba(94,130,160,0.2);
+      border-left: 3px solid var(--slate); border-radius: 6px;
+      padding: 18px 22px; margin-bottom: 40px;
+      font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 300;
+      line-height: 1.75; color: var(--text);
+    }
+    .why-box-label {
+      font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 500;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--slate); margin-bottom: 8px;
+    }
+
+    /* ── Stop section ── */
+    .stop-section { margin-bottom: 48px; }
+    .stop-header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 4px; flex-wrap: wrap; }
+    .stop-number {
+      font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 500;
+      letter-spacing: 0.2em; text-transform: uppercase; color: var(--slate); flex-shrink: 0;
+    }
+    .stop-name {
+      font-family: 'Cormorant Garamond', serif; font-style: italic;
+      font-size: 24px; font-weight: 400; color: var(--text);
+    }
+    .stop-time {
+      font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 300;
+      color: var(--muted); flex-shrink: 0;
+    }
+    .stop-tagline {
+      font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 300;
+      font-style: italic; color: var(--muted);
+      margin-bottom: 16px; padding-bottom: 12px;
+      border-bottom: 0.5px solid rgba(28,26,22,0.10);
+    }
+
+    /* ── Parking box ── */
+    .parking-box {
+      background: white; border: 0.5px solid rgba(28,26,22,0.12);
+      border-radius: 6px; padding: 14px 18px; margin: 14px 0;
+      font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 300;
+      line-height: 1.6; color: var(--text);
+    }
+    .parking-box-label {
+      font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 5px;
+    }
+    .parking-box strong { font-weight: 500; color: var(--text); }
+    .parking-box a { color: var(--slate); text-decoration: none; font-weight: 500; font-size: 12px; }
+    .parking-box a:hover { text-decoration: underline; }
+
+    /* ── Sub headings ── */
+    .sub-head {
+      font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500;
+      color: var(--text); margin: 20px 0 8px;
+    }
+    .sub-head-minor {
+      font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--muted); margin: 14px 0 6px;
+    }
+
+    /* ── Body text ── */
+    .body-text {
+      font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 300;
+      line-height: 1.75; color: var(--text); margin-bottom: 12px;
+    }
+    .body-text strong { font-weight: 500; }
+    .body-text em { color: var(--muted); font-style: italic; }
+
+    /* ── Time table ── */
+    .time-table-wrap { margin: 14px 0 18px; overflow-x: auto; }
+    .time-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .time-table th {
+      font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: white; background: var(--slate); padding: 7px 14px; text-align: left;
+    }
+    .time-table td {
+      padding: 7px 14px; border-bottom: 0.5px solid rgba(28,26,22,0.08);
+      color: var(--text); font-family: 'DM Sans', sans-serif; font-weight: 300;
+    }
+    .time-table tr:nth-child(even) td { background: rgba(28,26,22,0.02); }
+
+    /* ── Restaurant table ── */
+    .restaurant-table-wrap { margin: 10px 0 14px; overflow-x: auto; }
+    .restaurant-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    .restaurant-table th {
+      font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: white; background: var(--slate); padding: 8px 14px; text-align: left;
+    }
+    .restaurant-table td {
+      padding: 10px 14px; border-bottom: 0.5px solid rgba(28,26,22,0.08);
+      color: var(--text); vertical-align: top;
+      font-family: 'DM Sans', sans-serif; font-weight: 300; font-size: 14px;
+    }
+    .restaurant-table tr:last-child td { border-bottom: none; }
+    .restaurant-table tr:nth-child(even) td { background: rgba(28,26,22,0.02); }
+    .restaurant-name { font-weight: 500; }
+
+    /* ── Pro tip ── */
+    .pro-tip {
+      background: white; border: 0.5px solid rgba(28,26,22,0.12);
+      border-left: 3px solid var(--slate); border-radius: 6px;
+      padding: 12px 18px; margin: 14px 0;
+      font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 300;
+      line-height: 1.65; color: var(--text);
+    }
+    .pro-tip-label {
+      font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--slate); margin-bottom: 5px;
+    }
+
+    /* ── Tips list ── */
+    .tips-list { list-style: none; padding: 0; margin: 8px 0 18px; }
+    .tips-list li {
+      font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 300;
+      line-height: 1.65; color: var(--text);
+      padding: 5px 0 5px 20px; border-bottom: 0.5px solid rgba(28,26,22,0.06);
+      position: relative;
+    }
+    .tips-list li:last-child { border-bottom: none; }
+    .tips-list li::before { content: '\2192'; position: absolute; left: 0; color: var(--slate); font-size: 12px; }
+
+    /* ── Return box ── */
+    .return-box {
+      background: var(--text); border-radius: 8px;
+      padding: 22px 26px; margin-bottom: 40px;
+      display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
+    }
+    .return-box-icon { font-size: 26px; flex-shrink: 0; }
+    .return-box-text { flex: 1; min-width: 200px; }
+    .return-box-text p {
+      font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 300;
+      color: rgba(240,237,231,0.85); line-height: 1.6; margin-bottom: 6px;
+    }
+    .return-box-text p:last-child { margin-bottom: 0; }
+    .return-box-text a {
+      color: var(--faded); font-family: 'DM Sans', sans-serif;
+      font-size: 13px; font-weight: 400; text-decoration: none;
+    }
+    .return-box-text a:hover { text-decoration: underline; }
+
+    /* ── Practical table ── */
+    .practical-table-wrap { margin: 8px 0 40px; overflow-x: auto; }
+    .practical-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    .practical-table th {
+      font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: white; background: var(--slate); padding: 8px 14px; text-align: left;
+    }
+    .practical-table td {
+      padding: 10px 14px; border-bottom: 0.5px solid rgba(28,26,22,0.08);
+      color: var(--text); vertical-align: top;
+      font-family: 'DM Sans', sans-serif; font-weight: 300; font-size: 14px;
+    }
+    .practical-table td:first-child { font-weight: 500; white-space: nowrap; width: 130px; }
+    .practical-table tr:nth-child(even) td { background: rgba(28,26,22,0.02); }
+
+    /* ── Quick links ── */
+    .quick-links {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 10px; margin-bottom: 40px;
+    }
+    .quick-link-item {
+      background: white; border: 0.5px solid rgba(28,26,22,0.12);
+      border-radius: 6px; padding: 12px 16px;
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none; transition: border-color 0.2s, transform 0.2s;
+    }
+    .quick-link-item:hover { border-color: var(--slate); transform: translateY(-2px); }
+    .quick-link-icon { font-size: 16px; flex-shrink: 0; }
+    .quick-link-text {
+      font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 300;
+      color: var(--text); line-height: 1.4;
+    }
+    .quick-link-text strong {
+      display: block; font-size: 10px; font-weight: 500;
+      color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 2px;
+    }
+
+    /* ── Divider ── */
+    .stop-divider { border: none; border-top: 0.5px solid rgba(28,26,22,0.12); margin: 40px 0; }
+
+    /* ── Footer note ── */
+    .itinerary-footer-note {
+      font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 300;
+      color: var(--muted); font-style: italic; text-align: center;
+      padding-top: 22px; border-top: 0.5px solid rgba(28,26,22,0.12); line-height: 1.8;
+    }
+
+    @media (max-width: 600px) {
+      .itinerary-meta { grid-template-columns: 1fr 1fr; }
+      .stop-header { gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar"></div>
+
+  <header>
+    <a class="logo-wrap" href="https://daveandmike.net">
+      <img src="assets/dnm_logo.svg" alt="dave&amp;mike">
+    </a>
+    <div class="header-img-zone">
+      <img src="assets/italy-header.jpg" alt="">
+    </div>
+  </header>
+
+  <div class="back-bar">
+    <a class="back-link" href="excursions.html">← Excursions</a>
+  </div>
+
+  <main>
+
+    <div class="trip-header">
+      <div class="trip-eyebrow">Excursions</div>
+      <h1 class="trip-name">Siena</h1>
+      <hr class="rule">
+    </div>
+
+    <div class="page-body">
+
+      <a href="excursions.html" class="back-link-page">&larr; Back to Day Excursions</a>
+
+      <!-- META INFO -->
+      <div class="itinerary-meta">
+        <div>
+          <div class="meta-item-label">Date</div>
+          <div class="meta-item-value tbd">TBD &mdash; during Arezzo phase (Jun 1&ndash;3 best window)</div>
+        </div>
+        <div>
+          <div class="meta-item-label">Travelers</div>
+          <div class="meta-item-value">Jane &middot; Chuck &middot; Mary</div>
+        </div>
+        <div>
+          <div class="meta-item-label">Departure</div>
+          <div class="meta-item-value">8:30 AM</div>
+        </div>
+        <div>
+          <div class="meta-item-label">Base Villa</div>
+          <div class="meta-item-value">Pergine Valdarno, Arezzo</div>
+        </div>
+        <div>
+          <div class="meta-item-label">Theme</div>
+          <div class="meta-item-value">History &middot; Architecture &middot; Contrade Culture</div>
+        </div>
+        <div>
+          <div class="meta-item-label">Full Day</div>
+          <div class="meta-item-value">8:30 AM &ndash; 5:00 PM &middot; ~8.5 hours</div>
+        </div>
+      </div>
+
+      <!-- TRIP SUMMARY -->
+      <div class="trip-summary">
+        A full day in one of Italy's most architecturally complete medieval cities. Siena's great shell-shaped Piazza del Campo is the heart of contrade life &mdash; and in June, the 17 neighborhoods are deep in preparation for the Palio (July 2). Walk into the Duomo and its extraordinary Piccolomini Library, climb the Torre del Mangia for a 360&deg; panorama of Tuscany, and spend the afternoon wandering the atmospheric streets beyond the tourist spine. A city best experienced slowly, with a long lunch in between.
+      </div>
+
+      <!-- ROUTE AT A GLANCE -->
+      <div class="section-eyebrow">Getting There</div>
+      <div class="section-title">Route at a Glance</div>
+      <div class="route-table-wrap">
+        <table class="route-table">
+          <thead>
+            <tr>
+              <th>Leg</th>
+              <th>From &rarr; To</th>
+              <th>Distance</th>
+              <th>Drive Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>Villa Pergine Valdarno &rarr; Siena (Stadio Fortezza)</td><td>~75 km</td><td>~1h 15min</td></tr>
+            <tr><td>2</td><td>Siena &rarr; Villa Pergine Valdarno</td><td>~75 km</td><td>~1h 15min</td></tr>
+            <tr class="total-row"><td colspan="2"><strong>Total (round trip)</strong></td><td><strong>~150 km</strong></td><td><strong>~2h 30min</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="full-day-note">Full day: 8:30 AM &ndash; 5:00 PM &middot; ~8.5 hours including drive, all stops, and lunch</p>
+
+      <!-- MAP -->
+      <div class="section-eyebrow">Overview Map</div>
+      <div class="section-title">Pergine Valdarno &rarr; Siena</div>
+      <div class="map-wrap">
+        <iframe width="100%" height="380" frameborder="0" scrolling="no"
+          src="https://www.openstreetmap.org/export/embed.html?bbox=11.310%2C43.310%2C11.345%2C43.330&layer=mapnik"
+          style="display:block;">
+        </iframe>
+      </div>
+      <a href="https://www.google.com/maps/dir/Pergine+Valdarno,+AR,+Italy/Siena,+SI,+Italy" target="_blank" class="map-link">
+        &#128205; Open Route in Google Maps &rarr;
+      </a>
+
+      <!-- WHY THIS ORDER -->
+      <div class="why-box">
+        <div class="why-box-label">Why This Flow?</div>
+        Siena is arranged around the Piazza del Campo, which is the natural gathering point. You'll start there at opening, experience the tower climb for panoramic views, then move to the Duomo complex immediately north (a 15-minute walk uphill via Via di Città). After the Duomo and Piccolomini Library, lunch comes naturally in the maze of side streets where real Siena lives. The afternoon flows through the contrade neighborhoods and back toward the parking lot, avoiding tourist congestion by moving counterclockwise from the Campo.
+      </div>
+
+      <hr class="stop-divider">
+
+      <!-- STOP 1 -->
+      <div class="stop-section">
+        <div class="stop-header">
+          <span class="stop-number">Stop 1</span>
+          <span class="stop-name">Piazza del Campo &amp; Torre del Mangia</span>
+          <span class="stop-time">~9:45 AM &ndash; 11:15 AM &middot; ~1h 30min</span>
+        </div>
+        <p class="stop-tagline">The most beautiful civic piazza in Italy &mdash; and the stage for the Palio</p>
+
+        <div class="parking-box">
+          <div class="parking-box-label">&#127359; Parking</div>
+          <strong>Parcheggio Stadio Fortezza</strong> &mdash; 698 spaces on two levels, &euro;2/hr. 10-minute walk downhill to the Campo. The most reliable parking in Siena. Don't attempt to drive into the centro storico; it's entirely ZTL.
+          &nbsp;<a href="https://www.google.com/maps/search/Stadio+Fortezza+Siena" target="_blank">Google Maps &rarr;</a>
+        </div>
+
+        <div class="sub-head">The Piazza del Campo</div>
+        <p class="body-text">The Campo's distinctive shell shape &mdash; nine travertine segments radiating from the Palazzo Pubblico &mdash; is unique in Italy. In June, you'll see contrade flags and hear preparations for the July 2 Palio. The <strong>Fonte Gaia</strong> (Fountain of Joy) sits at the top of the piazza &mdash; a 19th-century replica of Jacopo della Quercia's 1419 original (the real pieces are in Santa Maria della Scala). Sit on the sloping brick surface and take it in before heading to the tower.</p>
+
+        <div class="sub-head-minor">Torre del Mangia</div>
+        <p class="body-text">400+ steps, 102 meters, extraordinary 360&deg; views of Tuscany. Tickets are &euro;10 or &euro;15 as a combo with Museo Civico. Timed entry, sold on-site only at the Palazzo Pubblico base. Best time: open (usually 10 AM) or mid-afternoon to avoid crowds.</p>
+
+        <div class="pro-tip">
+          <div class="pro-tip-label">Tower Strategy</div>
+          Arrive early or go mid-afternoon. Timed slots fill up during peak mid-morning hours. Go at opening (10 AM) when the view is crisp and the crowds haven't arrived. Alternatively, tackle the tower at 2:30 PM after lunch. Closed 1:45&ndash;2:30 PM for cleaning.
+        </div>
+
+        <div class="sub-head">Time Allocation</div>
+        <div class="time-table-wrap">
+          <table class="time-table">
+            <thead><tr><th>Activity</th><th>Time</th></tr></thead>
+            <tbody>
+              <tr><td>Piazza del Campo exploration &mdash; Fonte Gaia, soak it in</td><td>30 min</td></tr>
+              <tr><td>Torre del Mangia (queue + climb)</td><td>45 min</td></tr>
+              <tr><td>Photos, settle in, absorb</td><td>15 min</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="sub-head">Tips</div>
+        <ul class="tips-list">
+          <li>The piazza cafés charge premium prices &mdash; save lunch for the side streets away from the tourists.</li>
+          <li>The Campo is best photographed from the top of the Torre del Mangia. The panorama of the piazza from above is iconic.</li>
+          <li>In June, ask at any bar which contrada you're standing in &mdash; locals love talking about the Palio and their neighborhood pride is genuine.</li>
+        </ul>
+      </div>
+
+      <hr class="stop-divider">
+
+      <!-- STOP 2 -->
+      <div class="stop-section">
+        <div class="stop-header">
+          <span class="stop-number">Stop 2</span>
+          <span class="stop-name">The Duomo Complex</span>
+          <span class="stop-time">~11:15 AM &ndash; 12:45 PM &middot; ~1h 30min</span>
+        </div>
+        <p class="stop-tagline">One of Italy's greatest Gothic cathedrals &mdash; and a library that will stop you in your tracks</p>
+
+        <p class="body-text">The walk from the Campo to the Duomo goes uphill via <strong>Via di Città</strong>, one of Siena's most beautiful medieval streets. Palazzo Chigi-Saracini is on the left, artisan shops line the way, and the gentle climb takes about 15 minutes. You'll emerge at the cathedral piazza at the summit of the old town.</p>
+
+        <div class="sub-head-minor">The Cathedral</div>
+        <p class="body-text">Black and white striped marble columns, <strong>Nicola Pisano's 13th-century pulpit</strong>, and the extraordinary marble floor (often covered for preservation &mdash; but sections visible in June). The interior is a masterclass in Italian Gothic craftsmanship. Don't miss the side chapels.</p>
+
+        <div class="sub-head-minor">Piccolomini Library</div>
+        <p class="body-text"><strong>Pinturicchio's 15 frescoes</strong> (1502&ndash;1509) illuminate the walls in vivid color &mdash; one of the most visually stunning rooms in Italy. Take your time. This is not a space to rush through.</p>
+
+        <div class="sub-head-minor">Baptistery &amp; Crypt</div>
+        <p class="body-text">Included in the OPA SI Pass. The Baptistery has a Renaissance font with panels by <strong>Donatello, Ghiberti, and della Quercia</strong>. The Crypt is a sacred, quiet space with frescoes and a sense of centuries.</p>
+
+        <div class="pro-tip">
+          <div class="pro-tip-label">Booking the Duomo</div>
+          The <strong>OPA SI Pass</strong> (&euro;15&ndash;20) should be purchased in advance at <a href="https://www.operaduomo.siena.it" target="_blank" style="color:var(--slate); font-weight:500;">operaduomo.siena.it</a>. It includes Cathedral, Piccolomini Library, Baptistery, Crypt, and Museum. Valid for 3 days &mdash; no need to rush. Skip the line by buying online.
+        </div>
+
+        <div class="sub-head">Time Allocation</div>
+        <div class="time-table-wrap">
+          <table class="time-table">
+            <thead><tr><th>Activity</th><th>Time</th></tr></thead>
+            <tbody>
+              <tr><td>Walk up Via di Città</td><td>15 min</td></tr>
+              <tr><td>Cathedral interior</td><td>30 min</td></tr>
+              <tr><td>Piccolomini Library (take your time)</td><td>20 min</td></tr>
+              <tr><td>Baptistery &amp; Crypt</td><td>20 min</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="sub-head">Tips</div>
+        <ul class="tips-list">
+          <li>The OPA SI Pass is valid for 3 days &mdash; you don't have to see everything today. But the Piccolomini Library is worth prioritizing.</li>
+          <li>Comfortable shoes essential. The marble floor is beautiful but unforgiving.</li>
+          <li>The &ldquo;Porta del Cielo&rdquo; (Door to Heaven) roof tour offers access to areas normally closed. Book well in advance if interested &mdash; it's extraordinary but not essential for a first visit.</li>
+        </ul>
+      </div>
+
+      <hr class="stop-divider">
+
+      <!-- STOP 3 -->
+      <div class="stop-section">
+        <div class="stop-header">
+          <span class="stop-number">Stop 3</span>
+          <span class="stop-name">Lunch</span>
+          <span class="stop-time">~12:45 PM &ndash; 2:15 PM &middot; ~1h 30min</span>
+        </div>
+        <p class="stop-tagline">Pici, Cinta Senese, and a proper Tuscan table &mdash; off the tourist path</p>
+
+        <div class="restaurant-table-wrap">
+          <table class="restaurant-table">
+            <thead><tr><th>Restaurant</th><th>Details</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><span class="restaurant-name">Osteria Il Grattacielo</span></td>
+                <td><strong>Via dei Pontani 8, Siena</strong><br>Small, historic, daily-changing menu. Pici all'aglione (thick pasta with garlic-tomato sauce) is the house classic. Ribollita in cooler weather. Honest prices, local crowd, no frills. &euro;15&ndash;22 per person. No reservations &mdash; arrive by 12:45 PM or expect a wait.</td>
+              </tr>
+              <tr>
+                <td><span class="restaurant-name">Enoteca I Terzi</span></td>
+                <td><strong>Via dei Termini 7, Siena</strong><br>Slightly more polished &mdash; excellent wine list, refined Tuscan dishes with local ingredients. Pici, Cinta Senese pork, seasonal specials. &euro;20&ndash;30 per person. Reserve ahead: +39 0577 46329. Strong wine program if you want to taste beyond the local.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="pro-tip">
+          <div class="pro-tip-label">Recommendation</div>
+          <strong>Il Grattacielo</strong> is the more authentic choice &mdash; locals only, no tourists, casual. <strong>Enoteca I Terzi</strong> if the group prefers a slightly more refined setting and wants to explore wine. Either way, both are a short walk from the Duomo in the contrade neighborhoods.
+        </div>
+
+        <div class="sub-head">What to Order</div>
+        <p class="body-text"><strong>Pici all'aglione</strong> &mdash; fat hand-rolled pasta with a garlicky tomato sauce, the signature dish of Siena. <strong>Cinta Senese</strong> &mdash; local heritage pork, grilled or in a ragù. <strong>Ribollita</strong> &mdash; if available. Local Chianti Classico or Vino Nobile by the glass.</p>
+
+        <div class="sub-head">Tips</div>
+        <ul class="tips-list">
+          <li>Il Grattacielo doesn't take reservations &mdash; arrive at 12:45 PM to secure a table without a long wait.</li>
+          <li>Both restaurants are away from the piazza on purpose &mdash; quieter, better food, better prices.</li>
+          <li>The menu changes daily based on what's available. Be flexible and order what the cook is proud of.</li>
+        </ul>
+      </div>
+
+      <hr class="stop-divider">
+
+      <!-- STOP 4 -->
+      <div class="stop-section">
+        <div class="stop-header">
+          <span class="stop-number">Stop 4</span>
+          <span class="stop-name">Afternoon Wandering</span>
+          <span class="stop-time">~2:15 PM &ndash; 3:30 PM &middot; ~1h 15min</span>
+        </div>
+        <p class="stop-tagline">Beyond the tourist spine &mdash; the neighborhoods the guidebooks skip</p>
+
+        <p class="body-text">After lunch, resist the pull back to the Campo. Instead, head into the contrade neighborhoods where the real Siena lives. In June, the streets are decorated with contrada flags and the energy of Palio preparation is everywhere. The alleys between the Campo and San Domenico are some of the best in the city &mdash; atmospheric, quiet, full of Sienese character.</p>
+
+        <div class="sub-head-minor">Via Banchi di Sopra &amp; San Domenico</div>
+        <p class="body-text">Walk north from the Campo along the main shopping street, then descend toward the massive <strong>Basilica of San Domenico</strong> (where Saint Catherine's head is kept &mdash; genuinely). The views back toward the Duomo from here are excellent. The basilica interior is stark and powerful.</p>
+
+        <div class="sub-head-minor">Fontebranda &amp; the Oca Contrada</div>
+        <p class="body-text">Below San Domenico, the medieval <strong>Fontebranda fountain</strong> sits in one of the most atmospheric corners of the city. The surrounding <strong>Oca (Goose) contrada</strong> is fiercely proud and visually decorated in its colors (white and black with the goose emblem). This is the Siena tourists miss.</p>
+
+        <div class="pro-tip">
+          <div class="pro-tip-label">For Chuck &amp; Jane</div>
+          You've both been to Siena before &mdash; use that. Show Mary the spots most tourists walk past. The alleys, the quiet piazzas, the contrada shrines and flags. This is where Siena's soul is, not in the guidebook attractions. Take time to get lost deliberately.
+        </div>
+
+        <div class="sub-head">Tips</div>
+        <ul class="tips-list">
+          <li>June is Palio season. The neighborhoods are festooned with flags, and you'll see trial runs and preparations. Locals will gladly talk about their contrada.</li>
+          <li>Bring a bottle of water. Siena is hilly and these afternoon wanderings involve some climbing.</li>
+          <li>Get back to the car lot by 3:30 PM to make the drive comfortable. The return is straightforward.</li>
+        </ul>
+      </div>
+
+      <hr class="stop-divider">
+
+      <!-- RETURN -->
+      <div class="return-box">
+        <div class="return-box-icon">&#127969;</div>
+        <div class="return-box-text">
+          <p><strong style="color:white;">Return to Pergine Valdarno &mdash; ~3:30 PM &middot; ~1h 15min</strong></p>
+          <p>Depart Stadio Fortezza around 3:30 PM and head east toward the villa. Straightforward drive &mdash; either A1 autostrada or scenic route through Chianti. Back at the villa by ~4:45 PM &mdash; time for a swim or a rest before dinner.</p>
+          <a href="https://www.google.com/maps/dir/Siena,+SI,+Italy/Pergine+Valdarno,+AR,+Italy" target="_blank">Directions: Siena &rarr; Pergine Valdarno &rarr;</a>
+        </div>
+      </div>
+
+      <!-- PRACTICAL TIPS -->
+      <div class="section-eyebrow">Before You Go</div>
+      <div class="section-title">Practical Notes</div>
+      <div class="practical-table-wrap">
+        <table class="practical-table">
+          <thead><tr><th>Topic</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>Duomo Tickets</td><td>Buy OPA SI Pass online at operaduomo.siena.it &mdash; skip the line. &euro;15&ndash;20, valid 3 days.</td></tr>
+            <tr><td>Torre del Mangia</td><td>On-site only. 400+ steps, no elevator. Timed entry slots every 45 minutes. Arrive early or go mid-afternoon. &euro;10, or &euro;15 combo with Museo Civico. Closed 1:45&ndash;2:30 PM for cleaning.</td></tr>
+            <tr><td>ZTL Warning</td><td>Siena's entire centro storico is ZTL (restricted traffic zone). Do not drive in. Park at Stadio Fortezza and walk. Use the 10-minute descent to the Campo to get oriented.</td></tr>
+            <tr><td>Palio Atmosphere</td><td>In June, the contrade are in full preparation mode. Flags, dinners, trial runs everywhere. Ask locals &mdash; they'll talk your ear off about their neighborhood and horse.</td></tr>
+            <tr><td>Cash</td><td>Most places take cards, but bring some cash for small cafés and museum tips.</td></tr>
+            <tr><td>Weather</td><td>June in Siena is warm (~25&ndash;28&deg;C). Sun protection for walking. Comfortable shoes essential &mdash; medieval streets are entirely cobblestone.</td></tr>
+            <tr><td>Time Buffer</td><td>~30 min of slack is built in. If the Duomo runs long, skip San Domenico wandering and return straight to the parking lot.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- QUICK LINKS -->
+      <div class="section-eyebrow">Quick Access</div>
+      <div class="section-title">Links &amp; Navigation</div>
+      <div class="quick-links">
+        <a href="https://www.google.com/maps/dir/Pergine+Valdarno,+AR,+Italy/Siena,+SI,+Italy" target="_blank" class="quick-link-item">
+          <span class="quick-link-icon">&#128506;&#65039;</span>
+          <span class="quick-link-text"><strong>Full Route</strong>Google Maps &mdash; villa to Siena</span>
+        </a>
+        <a href="https://www.google.com/maps/search/Stadio+Fortezza+Siena" target="_blank" class="quick-link-item">
+          <span class="quick-link-icon">&#127359;&#65039;</span>
+          <span class="quick-link-text"><strong>Stadio Fortezza</strong>Parking &mdash; 698 spaces</span>
+        </a>
+        <a href="https://www.google.com/maps/search/Piazza+del+Campo+Siena" target="_blank" class="quick-link-item">
+          <span class="quick-link-icon">&#128505;&#65039;</span>
+          <span class="quick-link-text"><strong>Piazza del Campo</strong>The heart of Siena</span>
+        </a>
+        <a href="https://www.google.com/maps/search/Duomo+di+Siena" target="_blank" class="quick-link-item">
+          <span class="quick-link-icon">&#9962;&#65039;</span>
+          <span class="quick-link-text"><strong>Duomo di Siena</strong>Cathedral complex</span>
+        </a>
+        <a href="https://www.operaduomo.siena.it" target="_blank" class="quick-link-item">
+          <span class="quick-link-icon">&#127863;</span>
+          <span class="quick-link-text"><strong>OPA SI Pass</strong>Duomo tickets online</span>
+        </a>
+        <a href="https://www.google.com/maps/search/Osteria+Il+Grattacielo+Siena" target="_blank" class="quick-link-item">
+          <span class="quick-link-icon">&#127869;&#65039;</span>
+          <span class="quick-link-text"><strong>Osteria Il Grattacielo</strong>Via dei Pontani 8</span>
+        </a>
+        <a href="https://www.google.com/maps/search/Enoteca+I+Terzi+Siena" target="_blank" class="quick-link-item">
+          <span class="quick-link-icon">&#127863;</span>
+          <span class="quick-link-text"><strong>Enoteca I Terzi</strong>Via dei Termini 7</span>
+        </a>
+      </div>
+
+      <p class="itinerary-footer-note">
+        Itinerary prepared for Italy 2026 group trip &middot; Base: Pergine Valdarno, Arezzo<br>
+        Distances and times are driving estimates &mdash; verify with Google Maps before departure.
+      </p>
+
+    </div><!-- /.page-body -->
+  </main>
+
+  <footer>
+    <span class="footer-breadcrumb">
+      <a href="https://daveandmike.net/index.html">dave&amp;mike</a>
+      &nbsp;·&nbsp;
+      <a href="https://daveandmike.net/index.html" class="crumb-esperienze">esperienze</a>
+      &nbsp;·&nbsp;
+      <a href="https://travel.daveandmike.net">travel</a>
+      &nbsp;·&nbsp;
+      <a href="index.html">italy 2026</a>
+      &nbsp;·&nbsp;
+      <a href="excursions.html">excursions</a>
+      &nbsp;·&nbsp;
+      <span class="crumb-current">siena</span>
+    </span>
+    <a class="footer-contact" href="mailto:services@musel.us">Contact Dave &amp; Mike</a>
+  </footer>
+
+</body>
+</html>

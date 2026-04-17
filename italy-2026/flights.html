@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flights — Italy 2026 — dave&amp;mike</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+
+    /* ── Page body + title — centered ── */
+    .page-body {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* Override the logo-offset indent from style.css for this page */
+    .trip-header {
+      max-width: 900px;
+      margin: 0 auto;
+      padding-left: 0;
+    }
+
+    /* ── Leg section ── */
+    .leg-section { margin-bottom: 52px; }
+
+    .leg-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 12px;
+      border-bottom: 0.5px solid rgba(28,26,22,0.15);
+      margin-bottom: 20px;
+    }
+
+    .leg-pill {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      background: var(--text);
+      color: #F0EDE7;
+      border-radius: 20px;
+      padding: 3px 12px;
+    }
+
+    .leg-pill.transfer { background: var(--slate); }
+
+    .leg-route {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--text);
+    }
+
+    /* ── Flight cards grid ── */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 16px;
+    }
+
+    /* ── Flight card ── */
+    .flight-card {
+      background: white;
+      border: 0.5px solid rgba(28,26,22,0.12);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .fc-accent { height: 3px; }
+    .fc-accent.outbound { background: var(--slate); }
+    .fc-accent.return   { background: var(--faded); }
+    .fc-accent.transfer { background: var(--slate); }
+
+    .fc-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 10px 16px 8px;
+      background: rgba(28,26,22,0.03);
+      border-bottom: 0.5px solid rgba(28,26,22,0.10);
+    }
+
+    .fc-travelers {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .fc-meta { text-align: right; }
+
+    .fc-booking {
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+
+    .fc-date {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--slate);
+      display: block;
+      text-align: right;
+      margin-top: 2px;
+    }
+
+    /* ── Segment ── */
+    .segment { padding: 12px 16px; }
+
+    .seg-depart {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 2px;
+    }
+
+    .seg-time {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      color: var(--text);
+    }
+
+    .seg-airport {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--muted);
+    }
+
+    .seg-details {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-top: 1px;
+    }
+
+    .seg-arrive {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--muted);
+      font-style: italic;
+      margin-top: 4px;
+    }
+
+    .seat-badge {
+      display: inline-block;
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      background: rgba(94,130,160,0.10);
+      color: var(--slate);
+      border-radius: 3px;
+      padding: 1px 5px;
+      margin-left: 2px;
+    }
+
+    /* ── Stopover ── */
+    .stopover {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      background: rgba(28,26,22,0.02);
+      border-top: 0.5px dashed rgba(28,26,22,0.12);
+      border-bottom: 0.5px dashed rgba(28,26,22,0.12);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .stop-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      border: 1.5px solid var(--faded);
+      flex-shrink: 0;
+    }
+
+    /* ── TBD card ── */
+    .tbd-card {
+      background: white;
+      border: 0.5px dashed rgba(28,26,22,0.15);
+      border-radius: 8px;
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      min-height: 160px;
+    }
+
+    .tbd-name {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--muted);
+    }
+
+    .tbd-note {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--faded);
+      font-style: italic;
+    }
+
+    /* ── Transfer card ── */
+    .transfer-card {
+      background: white;
+      border: 0.5px solid rgba(28,26,22,0.12);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .transfer-route { padding: 16px 20px 0; }
+
+    .transfer-bookings {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      padding: 12px 20px 16px;
+      border-top: 0.5px solid rgba(28,26,22,0.10);
+      margin-top: 12px;
+    }
+
+    .booking-group {
+      padding: 8px 12px;
+      background: rgba(28,26,22,0.03);
+      border-radius: 6px;
+    }
+
+    .booking-group + .booking-group { margin-left: 10px; }
+
+    .bg-code {
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--slate);
+      letter-spacing: 0.05em;
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .bg-names {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* ── Full-width span ── */
+    .span-full { grid-column: 1 / -1; }
+
+    /* ── Transfer day rows ── */
+    .pre-flight {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      background: rgba(28,26,22,0.03);
+      border-bottom: 0.5px solid rgba(28,26,22,0.10);
+      font-size: 14px;
+    }
+
+    .pre-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .pre-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--text);
+    }
+
+    .post-arrival { border-top: 0.5px solid rgba(28,26,22,0.10); padding: 4px 0; }
+
+    .post-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 7px 20px;
+      font-size: 14px;
+      border-bottom: 0.5px solid rgba(28,26,22,0.06);
+    }
+
+    .post-row:last-child { border-bottom: none; }
+
+    .post-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .post-value {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--text);
+    }
+
+    .post-row.highlight .post-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px;
+      font-weight: 400;
+      color: var(--slate);
+    }
+
+    /* ── Note callout ── */
+    .note-callout {
+      background: var(--bg);
+      border-left: 2px solid var(--slate);
+      border-radius: 0 6px 6px 0;
+      padding: 10px 16px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--muted);
+      margin-top: 16px;
+      font-style: italic;
+    }
+
+    @media (max-width: 520px) {
+      .transfer-bookings { grid-template-columns: 1fr; }
+      .booking-group + .booking-group { margin-left: 0; margin-top: 8px; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="top-bar"></div>
+
+  <header>
+    <a class="logo-wrap" href="https://daveandmike.net">
+      <img src="assets/dnm_logo.svg" alt="dave&amp;mike">
+    </a>
+    <div class="header-img-zone">
+      <img src="assets/italy-header.jpg" alt="">
+    </div>
+  </header>
+
+  <div class="back-bar">
+    <a class="back-link" href="index.html">← Italy 2026</a>
+  </div>
+
+  <main>
+
+    <div class="trip-header">
+      <div class="trip-eyebrow">Italy 2026</div>
+      <h1 class="trip-name">Flights</h1>
+      <hr class="rule">
+    </div>
+
+    <div class="page-body">
+
+      <!-- ══════════════════════════════════════════
+           OUTBOUND — International
+      ══════════════════════════════════════════ -->
+      <section class="leg-section">
+        <div class="leg-header">
+          <span class="leg-pill">Outbound</span>
+          <span class="leg-route">To Italy</span>
+        </div>
+
+        <div class="cards-grid">
+
+          <!-- Dave M & Mike F -->
+          <div class="flight-card">
+            <div class="fc-accent outbound"></div>
+            <div class="fc-header">
+              <span class="fc-travelers">Dave &amp; Mike</span>
+              <div class="fc-meta">
+                <span class="fc-booking">76EY4E</span>
+                <span class="fc-date">May 10 – 11</span>
+              </div>
+            </div>
+
+            <div class="segment">
+              <div class="seg-depart">
+                <span class="seg-time">22:20</span>
+                <span class="seg-airport">Washington Dulles (IAD)</span>
+              </div>
+              <div class="seg-details">
+                LH415 · Lufthansa · Airbus A380-800<br>
+                Seats <span class="seat-badge">Dave 14A</span><span class="seat-badge">Mike 19A</span>
+              </div>
+            </div>
+
+            <div class="stopover">
+              <div class="stop-dot"></div>
+              Stop · Munich (MUC) · Term. 2 · Arrives May 11 at 12:30 · Layover 3h 05m
+            </div>
+
+            <div class="segment">
+              <div class="seg-depart">
+                <span class="seg-time">15:35</span>
+                <span class="seg-airport">Munich (MUC)</span>
+              </div>
+              <div class="seg-details">
+                LH9470 · Air Dolomiti · Embraer 195<br>
+                Seats <span class="seat-badge">Dave 02A</span><span class="seat-badge">Mike 02D</span>
+              </div>
+              <div class="seg-arrive">Arrives Bari (BRI) · May 11 · 17:15</div>
+            </div>
+          </div>
+
+          <!-- Jane & Chuck G -->
+          <div class="flight-card">
+            <div class="fc-accent outbound"></div>
+            <div class="fc-header">
+              <span class="fc-travelers">Jane &amp; Chuck</span>
+              <div class="fc-meta">
+                <span class="fc-booking">JO4YRG · ALJ6HX</span>
+                <span class="fc-date">May 20 – 21</span>
+              </div>
+            </div>
+
+            <div class="segment">
+              <div class="seg-depart">
+                <span class="seg-time">06:00</span>
+                <span class="seg-airport">Denver (DEN) · May 20</span>
+              </div>
+              <div class="seg-details">UA 2345 · United Airlines</div>
+              <div class="seg-arrive">Arrives Newark (EWR) · 11:50</div>
+            </div>
+
+            <div class="stopover">
+              <div class="stop-dot"></div>
+              Stop · Newark (EWR) · Layover ~3h 45m
+            </div>
+
+            <div class="segment">
+              <div class="seg-depart">
+                <span class="seg-time">15:35</span>
+                <span class="seg-airport">Newark (EWR) · May 20</span>
+              </div>
+              <div class="seg-details">UA 380 · United Airlines</div>
+              <div class="seg-arrive">Arrives Bari (BRI) · May 21 · 06:30</div>
+            </div>
+          </div>
+
+          <!-- Dave W & Teresa W — Outbound -->
+          <div class="flight-card">
+            <div class="fc-accent outbound"></div>
+            <div class="fc-header">
+              <span class="fc-travelers">Dave &amp; Teresa Watt</span>
+              <div class="fc-meta">
+                <span class="fc-date">May 29</span>
+              </div>
+            </div>
+
+            <div class="segment">
+              <div class="seg-depart">
+                <span class="seg-airport">Denver (DEN)</span>
+              </div>
+              <div class="seg-details">LH481 · Lufthansa</div>
+            </div>
+
+            <div class="stopover">
+              <div class="stop-dot"></div>
+              Stop · Munich (MUC)
+            </div>
+
+            <div class="segment">
+              <div class="seg-depart">
+                <span class="seg-airport">Munich (MUC)</span>
+              </div>
+              <div class="seg-details">LH1898 · Lufthansa</div>
+              <div class="seg-arrive">Arrives Bari (BRI) · May 29 · 17:15</div>
+            </div>
+          </div>
+
+          <!-- Mary -->
+          <div class="flight-card">
+            <div class="fc-accent outbound"></div>
+            <div class="fc-header">
+              <span class="fc-travelers">Mary</span>
+              <div class="fc-meta">
+                <span class="fc-date">May 21 – 22</span>
+              </div>
+            </div>
+
+            <div class="segment">
+              <div class="seg-depart">
+                <span class="seg-time">20:45</span>
+                <span class="seg-airport">Washington Dulles (IAD) · May 21</span>
+              </div>
+              <div class="seg-details">AF053 · Air France</div>
+              <div class="seg-arrive">Arrives Paris CDG · May 22 · 11:15</div>
+            </div>
+
+            <div class="stopover">
+              <div class="stop-dot"></div>
+              Stop · Paris CDG · Layover 3h 00m
+            </div>
+
+            <div class="segment">
+              <div class="seg-depart">
+                <span class="seg-time">14:15</span>
+                <span class="seg-airport">Paris CDG · May 22</span>
+              </div>
+              <div class="seg-details">AF1288 · Air France</div>
+              <div class="seg-arrive">Arrives Bari (BRI) · May 22 · 16:35</div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+
+      <!-- ══════════════════════════════════════════
+           ITA INTERCITY TRANSFER — Jun 1
+           Bari → Rome → Florence
+      ══════════════════════════════════════════ -->
+      <section class="leg-section">
+        <div class="leg-header">
+          <span class="leg-pill transfer">Intercity Transfer</span>
+          <span class="leg-route">Bari → Rome → Florence &nbsp;·&nbsp; June 1</span>
+        </div>
+
+        <div class="cards-grid">
+
+          <div class="transfer-card span-full">
+            <div class="fc-accent transfer"></div>
+
+            <div class="pre-flight">
+              <span class="pre-label">Depart Villa</span>
+              <span class="pre-value">8:30 AM</span>
+            </div>
+
+            <div class="transfer-route">
+              <div class="segment" style="padding-left:0; padding-right:0; padding-bottom:0;">
+                <div class="seg-depart">
+                  <span class="seg-time">11:20</span>
+                  <span class="seg-airport">Bari (BRI)</span>
+                </div>
+                <div class="seg-details">AZ1612 · ITA Airways · All 7 travelers</div>
+                <div class="seg-arrive">Arrives Rome Fiumicino (FCO) · 12:30</div>
+              </div>
+
+              <div class="stopover" style="margin: 10px 0 0; padding-left:0;">
+                <div class="stop-dot"></div>
+                Stop · Rome Fiumicino (FCO) · Layover 1h 20m
+              </div>
+
+              <div class="segment" style="padding-left:0; padding-right:0;">
+                <div class="seg-depart">
+                  <span class="seg-time">13:50</span>
+                  <span class="seg-airport">Rome Fiumicino (FCO)</span>
+                </div>
+                <div class="seg-details">AZ1677 · ITA Airways</div>
+                <div class="seg-arrive">Arrives Florence Peretola (FLR) · 14:45</div>
+              </div>
+            </div>
+
+            <div class="transfer-bookings">
+              <div class="booking-group">
+                <span class="bg-code">XRSWDK</span>
+                <span class="bg-names">Dave · Mike · Mary</span>
+              </div>
+              <div class="booking-group">
+                <span class="bg-code">XRZC7M</span>
+                <span class="bg-names">Jane · Chuck · Dave · Teresa</span>
+              </div>
+            </div>
+
+            <div class="post-arrival">
+              <div class="post-row">
+                <span class="post-label">Car Rental</span>
+                <span class="post-value">On-site at FLR · ~30 min</span>
+              </div>
+              <div class="post-row">
+                <span class="post-label">Depart Florence</span>
+                <span class="post-value">~3:30 PM</span>
+              </div>
+              <div class="post-row highlight">
+                <span class="post-label">Arrive Arezzo</span>
+                <span class="post-value">~4:45 PM</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+
+      <!-- ══════════════════════════════════════════
+           RETURN — International
+      ══════════════════════════════════════════ -->
+      <section class="leg-section">
+        <div class="leg-header">
+          <span class="leg-pill">Return</span>
+          <span class="leg-route">Home from Florence</span>
+        </div>
+
+        <div class="cards-grid">
+
+          <!-- Mary — return Jun 5 -->
+          <div class="flight-card">
+            <div class="fc-accent return"></div>
+            <div class="fc-header">
+              <span class="fc-travelers">Mary</span>
+              <div class="fc-meta">
+                <span class="fc-date">June 5</span>
+              </div>
+            </div>
+
+            <div class="segment">
+              <div class="seg-depart">
+                <span class="seg-time">09:50</span>
+                <span class="seg-airport">Florence Peretola (FLR)</span>
+              </div>
+              <div class="seg-details">AF1067 · Air France</div>
+              <div class="seg-arrive">Arrives Paris CDG · 11:40</div>
+            </div>
+
+            <div class="stopover">
+              <div class="stop-dot"></div>
+              Stop · Paris CDG · Layover 1h 45m
+            </div>
+
+            <div class="segment">
+              <div class="seg-depart">
+                <span class="seg-time">13:25</span>
+                <span class="seg-airport">Paris CDG</span>
+              </div>
+              <div class="seg-details">AF050 · Air France</div>
+              <div class="seg-arrive">Arrives Washington Dulles (IAD) · 16:05</div>
+            </div>
+          </div>
+
+          <!-- Jane & Chuck — return Jun 10 -->
+          <div class="flight-card">
+            <div class="fc-accent return"></div>
+            <div class="fc-header">
+              <span class="fc-travelers">Jane &amp; Chuck</span>
+              <div class="fc-meta">
+                <span class="fc-booking">JO4YRG</span>
+                <span class="fc-date">June 10</span>
+              </div>
+            </div>
+
+            <div class="segment">
+              <div class="seg-depart">
+                <span class="seg-time">09:50</span>
+                <span class="seg-airport">Florence Peretola (FLR)</span>
+              </div>
+              <div class="seg-details">UA 9697 · Air Dolomiti</div>
+              <div class="seg-arrive">Arrives Munich (MUC) · 11:05</div>
+            </div>
+
+            <div class="stopover">
+              <div class="stop-dot"></div>
+              Stop · Munich (MUC) · Layover ~5h
+            </div>
+
+            <div class="segment">
+              <div class="seg-depart">
+                <span class="seg-time">16:10</span>
+                <span class="seg-airport">Munich (MUC)</span>
+              </div>
+              <div class="seg-details">UA 761 · United Airlines</div>
+              <div class="seg-arrive">Arrives Denver (DEN) · 18:50</div>
+            </div>
+          </div>
+
+          <!-- Dave & Mike — return Jun 22 -->
+          <div class="flight-card">
+            <div class="fc-accent return"></div>
+            <div class="fc-header">
+              <span class="fc-travelers">Dave &amp; Mike</span>
+              <div class="fc-meta">
+                <span class="fc-booking">76EY4E</span>
+                <span class="fc-date">June 22</span>
+              </div>
+            </div>
+
+            <div class="segment">
+              <div class="seg-depart">
+                <span class="seg-time">10:45</span>
+                <span class="seg-airport">Florence Peretola (FLR)</span>
+              </div>
+              <div class="seg-details">
+                LX1679 · Helvetic Airways · Embraer 195 E2<br>
+                Seats <span class="seat-badge">Dave 04F</span><span class="seat-badge">Mike 04C</span>
+              </div>
+            </div>
+
+            <div class="stopover">
+              <div class="stop-dot"></div>
+              Stop · Zurich (ZRH) · Arrives 12:00 · Layover 1h 10m
+            </div>
+
+            <div class="segment">
+              <div class="seg-depart">
+                <span class="seg-time">13:10</span>
+                <span class="seg-airport">Zurich (ZRH)</span>
+              </div>
+              <div class="seg-details">
+                LX72 · SWISS · Airbus A330-300<br>
+                Seats <span class="seat-badge">Dave 08D</span><span class="seat-badge">Mike 08G</span>
+              </div>
+              <div class="seg-arrive">Arrives Washington Dulles (IAD) · 16:45</div>
+            </div>
+          </div>
+
+          <!-- Dave & Teresa — Return Jun 6 -->
+          <div class="flight-card">
+            <div class="fc-accent return"></div>
+            <div class="fc-header">
+              <span class="fc-travelers">Dave &amp; Teresa Watt</span>
+              <div class="fc-meta">
+                <span class="fc-date">June 6</span>
+              </div>
+            </div>
+
+            <div class="segment">
+              <div class="seg-depart">
+                <span class="seg-time">08:15</span>
+                <span class="seg-airport">Florence Peretola (FLR)</span>
+              </div>
+              <div class="seg-details">LH9443 · Lufthansa</div>
+            </div>
+
+            <div class="stopover">
+              <div class="stop-dot"></div>
+              Stop · Munich (MUC)
+            </div>
+
+            <div class="segment">
+              <div class="seg-depart">
+                <span class="seg-airport">Munich (MUC)</span>
+              </div>
+              <div class="seg-details">LH480 · Lufthansa</div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="note-callout">
+          Mary departs villa Jun 4 → Florence hotel → flies home Jun 5 · Dave &amp; Teresa June 6 · Jane &amp; Chuck June 10 · Dave &amp; Mike June 22.
+        </div>
+      </section>
+
+    </div><!-- /page-body -->
+  </main>
+
+  <footer>
+    <span class="footer-breadcrumb">
+      <a href="https://daveandmike.net/index.html">dave&amp;mike</a>
+      &nbsp;·&nbsp;
+      <a href="https://daveandmike.net/index.html" class="crumb-esperienze">esperienze</a>
+      &nbsp;·&nbsp;
+      <a href="https://travel.daveandmike.net">travel</a>
+      &nbsp;·&nbsp;
+      <a href="index.html">italy 2026</a>
+      &nbsp;·&nbsp;
+      <span class="crumb-current">flights</span>
+    </span>
+    <a class="footer-contact" href="mailto:services@musel.us">Contact Dave &amp; Mike</a>
+  </footer>
+
+</body>
+</html>

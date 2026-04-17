@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Italy 2026 — Day Excursion Options</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    :root {
+      --cream: var(--bg); --parchment: var(--bg); --warm-rule: rgba(28,26,22,0.12);
+      --ink: var(--text); --gold: var(--muted); --terracotta: var(--muted);
+      --rule: rgba(28,26,22,0.12); --warm-bg: var(--bg); --paper: var(--bg);
+      --puglia: var(--slate); --tuscany: var(--slate);
+    }
+
+    .trip-header { max-width: 860px; margin: 0 auto; padding-left: 0; }
+
+    /* Intro / page wrap */
+    .page-body {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    /* ── D&M message box ── */
+    .dm-message {
+      background: rgba(240,237,231,0.6);
+      border: 0.5px solid rgba(28,26,22,0.12);
+      border-left: 3px solid var(--muted);
+      border-radius: 8px;
+      padding: 28px 32px;
+      margin-bottom: 48px;
+    }
+    .dm-message-eyebrow {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 10px; font-weight: 500;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 10px;
+    }
+    .dm-message p {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px; font-weight: 300;
+      line-height: 1.75;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+    .dm-message p:last-child { margin-bottom: 0; }
+    .dm-message a { color: var(--slate); }
+
+    /* ── Itinerary links list ── */
+    .itinerary-links-box { margin-bottom: 48px; }
+    .itinerary-link-list {
+      list-style: none;
+      margin: 14px 0 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .itinerary-link-list li {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding: 12px 0;
+      border-bottom: 0.5px solid rgba(28,26,22,0.10);
+    }
+    .itinerary-link-list li:last-child { border-bottom: none; }
+    .itinerary-link-list a {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px; font-weight: 500;
+      color: var(--slate);
+      text-decoration: none;
+    }
+    .itinerary-link-list a:hover { text-decoration: underline; }
+    .itin-meta {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px; font-weight: 300;
+      color: var(--muted); line-height: 1.4;
+    }
+    .itin-region {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px; font-weight: 500;
+      letter-spacing: 0.06em;
+    }
+    .itin-region.puglia      { color: var(--slate); }
+    .itin-region.basilicata  { color: #8B6F47; }
+    .itin-region.tuscany     { color: var(--slate); }
+
+    /* ── Matrix link ── */
+    .matrix-link-row {
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 0.5px solid rgba(28,26,22,0.10);
+    }
+    .matrix-link-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px; font-weight: 500;
+      letter-spacing: 0.06em;
+      color: var(--slate);
+      text-decoration: none;
+    }
+    .matrix-link-btn:hover { text-decoration: underline; }
+
+    /* ── Region header ── */
+    .region-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 10px;
+    }
+    .region-pill {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 9px; font-weight: 500;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: white;
+      border-radius: 20px;
+      padding: 3px 12px;
+    }
+    .region-pill.puglia  { background: var(--slate); }
+    .region-pill.tuscany { background: var(--slate); }
+    .region-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px; font-weight: 400;
+      color: var(--text);
+    }
+
+    /* ── Section block ── */
+    .section-block { margin-bottom: 48px; }
+    .section-eyebrow {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 10px; font-weight: 500;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 6px;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px; font-weight: 400; font-style: italic;
+      color: var(--text);
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 0.5px solid rgba(28,26,22,0.12);
+    }
+
+    /* ── Trip list ── */
+    .trip-list { display: flex; flex-direction: column; gap: 12px; }
+    .trip-item {
+      background: white;
+      border: 0.5px solid rgba(28,26,22,0.12);
+      border-radius: 6px;
+      padding: 16px 20px;
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+    @media (max-width: 580px) {
+      .trip-item { grid-template-columns: 1fr; gap: 6px; }
+    }
+    /* Override shared .trip-name for use inside .trip-item */
+    .trip-item .trip-name {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px; font-weight: 500; font-style: normal;
+      color: var(--text); line-height: 1.3;
+    }
+    .trip-distance {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px; font-weight: 500;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--muted); margin-top: 3px;
+    }
+    .trip-desc {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px; font-weight: 300;
+      color: var(--text); line-height: 1.6;
+    }
+
+    /* ── Region divider ── */
+    .region-divider {
+      border: none;
+      border-top: 0.5px solid rgba(28,26,22,0.12);
+      margin: 52px 0 48px;
+    }
+
+    /* ── Highlight box ── */
+    .highlight-box {
+      background: var(--text);
+      color: var(--bg);
+      border-radius: 8px;
+      padding: 32px 36px;
+    }
+    .highlight-box .hl-eyebrow {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 10px; font-weight: 500;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(240,237,231,0.6); margin-bottom: 8px;
+    }
+    .highlight-box h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px; font-weight: 400; font-style: italic;
+      color: white; margin-bottom: 14px;
+    }
+    .highlight-box p {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px; font-weight: 300;
+      color: rgba(240,237,231,0.85); line-height: 1.75;
+      margin-bottom: 20px;
+    }
+    .hl-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .hl-item {
+      background: rgba(255,255,255,0.07);
+      border-radius: 4px;
+      padding: 12px 16px;
+    }
+    .hl-item-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 10px; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(240,237,231,0.5); margin-bottom: 4px;
+    }
+    .hl-item-val {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px; font-weight: 300;
+      color: rgba(240,237,231,0.85); line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar"></div>
+
+  <header>
+    <a class="logo-wrap" href="https://daveandmike.net">
+      <img src="assets/dnm_logo.svg" alt="dave&amp;mike">
+    </a>
+    <div class="header-img-zone">
+      <img src="assets/italy-header.jpg" alt="">
+    </div>
+  </header>
+
+  <div class="back-bar">
+    <a class="back-link" href="index.html">&#8592; Home</a>
+  </div>
+
+  <main>
+    <div class="trip-header">
+      <div class="trip-eyebrow">Italy 2026</div>
+      <h1 class="trip-name">Day Excursion Options</h1>
+      <p class="trip-dates">Puglia &nbsp;&middot;&nbsp; Tuscany</p>
+      <hr class="rule">
+    </div>
+
+    <div class="page-body">
+
+      <!-- DAY TRIP ITINERARIES -->
+      <div class="dm-message itinerary-links-box">
+        <div class="dm-message-eyebrow">Suggested Day Trip Itineraries</div>
+        <p>A quick note from Dave &amp; Mike: these aren&rsquo;t marching orders. Our goal is simply to do a little legwork before we leave so that once we&rsquo;re there, we can put the phones away, wander, eat well, and just live it. Italy rewards the unhurried &mdash; and that&rsquo;s exactly what we&rsquo;re after.</p>
+        <p>That said, a little structure goes a long way in a foreign country. Knowing where to park, which restaurant to book, and roughly how the day flows means fewer decisions on the ground and more time just enjoying the moment. Think of these as a head start, not a schedule.</p>
+        <p>If any of these sound like your kind of day, let us know in the group text &mdash; we&rsquo;ll do our best to get it on the calendar. And if you have ideas, restaurant suggestions, or a place we should know about, send those along too. The more input the better.</p>
+        <p>Each itinerary below covers routes, timing, parking, restaurant picks, and logistics &mdash; all in one place. More will be added as we finalize the calendar.</p>
+        <ul class="itinerary-link-list">
+          <li>
+            <a href="itria-valley.html">Itria Valley</a>
+            <span class="itin-meta">Alberobello &middot; Locorotondo &middot; Martina Franca &nbsp;&middot;&nbsp; <span class="itin-region puglia">Puglia</span> &nbsp;&middot;&nbsp; Dave M &middot; Mike &middot; Jane &middot; Chuck &middot; Teresa &middot; Dave W &middot; Mary</span>
+          </li>
+          <li>
+            <a href="polignano.html">Polignano a Mare &amp; Conversano</a>
+            <span class="itin-meta">Grotta Palazzese &middot; Lama Monachile &nbsp;&middot;&nbsp; <span class="itin-region puglia">Puglia</span> &nbsp;&middot;&nbsp; Dave M &middot; Mike &middot; Mary</span>
+          </li>
+          <li>
+            <a href="matera.html">Matera</a>
+            <span class="itin-meta">Sassi &middot; Cave Churches &middot; Overnight May 21&ndash;22 &nbsp;&middot;&nbsp; <span class="itin-region basilicata">Basilicata</span> &nbsp;&middot;&nbsp; Dave M &middot; Mike &middot; Jane &middot; Chuck</span>
+          </li>
+          <li>
+            <a href="florence-june5.html">Florence &mdash; June 5</a>
+            <span class="itin-meta">Accademia &middot; Oltrarno &middot; Piazzale Michelangelo &nbsp;&middot;&nbsp; <span class="itin-region tuscany">Tuscany</span> &nbsp;&middot;&nbsp; Jane &middot; Chuck &middot; Dave W &middot; Teresa</span>
+          </li>
+          <li>
+            <a href="montepulciano.html">Montepulciano</a>
+            <span class="itin-meta">Underground Cellars &middot; Vino Nobile &middot; Gattavecchi &nbsp;&middot;&nbsp; <span class="itin-region tuscany">Tuscany</span> &nbsp;&middot;&nbsp; Dave M &middot; Mike &middot; Jane &middot; Chuck &middot; Teresa &middot; Dave W &middot; Mary</span>
+          </li>
+          <li>
+            <a href="siena.html">Siena</a>
+            <span class="itin-meta">Piazza del Campo &middot; Duomo &middot; Contrade &nbsp;&middot;&nbsp; <span class="itin-region tuscany">Tuscany</span> &nbsp;&middot;&nbsp; Jane &middot; Chuck &middot; Mary</span>
+          </li>
+          <li>
+            <a href="anghiari.html">Anghiari</a>
+            <span class="itin-meta">Medieval Centro Storico &middot; Busatti &middot; Sansepolcro &nbsp;&middot;&nbsp; <span class="itin-region tuscany">Tuscany</span> &nbsp;&middot;&nbsp; Dave M &middot; Mike &middot; Mary</span>
+          </li>
+          <li>
+            <a href="cortona.html">Cortona</a>
+            <span class="itin-meta">MAEC Museum &middot; Fortezza del Girifalco &middot; Ramparts &nbsp;&middot;&nbsp; <span class="itin-region tuscany">Tuscany</span> &nbsp;&middot;&nbsp; Jane &middot; Chuck &middot; Teresa &middot; Dave W</span>
+          </li>
+          <li>
+            <a href="verrazano.html">Castello di Verrazzano</a>
+            <span class="itin-meta">Greve in Chianti &middot; Cena in Fattoria &middot; Overnight Jun 6&ndash;7 &nbsp;&middot;&nbsp; <span class="itin-region tuscany">Tuscany</span> &nbsp;&middot;&nbsp; Dave M &middot; Mike &middot; Jane &middot; Chuck</span>
+          </li>
+        </ul>
+        <div class="matrix-link-row">
+          <a href="matrix.html" class="matrix-link-btn">View Excursion Priority Matrix &rarr;</a>
+        </div>
+      </div>
+
+      <!-- PUGLIA -->
+      <div class="region-header">
+        <span class="region-pill puglia">Puglia</span>
+        <span class="region-name">Day Trips from Ostuni</span>
+      </div>
+
+      <div class="section-block">
+        <div class="section-eyebrow">One per week is plenty</div>
+        <div class="section-title">🗺 Day Trips from Ostuni</div>
+        <div class="trip-list">
+          <div class="trip-item">
+            <div><div class="trip-name">Alberobello</div><div class="trip-distance">35 min</div></div>
+            <div class="trip-desc">The trulli capital of the world &mdash; conical stone houses that look like they grew from the earth. Go early before the coaches arrive. Pair with nearby Locorotondo and Martina Franca for the perfect Valle d&rsquo;Itria loop.</div>
+          </div>
+          <div class="trip-item">
+            <div><div class="trip-name">Polignano a Mare</div><div class="trip-distance">40 min</div></div>
+            <div class="trip-desc">Dramatic clifftop old town perched over a turquoise Adriatic cove. The beach at Lama Monachile &mdash; wedged between limestone cliffs &mdash; is iconic. Gelato mandatory. Best in the morning before day-trippers arrive from Bari.</div>
+          </div>
+          <div class="trip-item">
+            <div><div class="trip-name">Lecce</div><div class="trip-distance">1 hr</div></div>
+            <div class="trip-desc">Puglia&rsquo;s baroque capital. The honey-coloured stone of the cathedral, Santa Croce basilica, and the Roman amphitheatre is stunning. Easy to walk. Good for a full day with lunch and shopping in the old town.</div>
+          </div>
+          <div class="trip-item">
+            <div><div class="trip-name">Matera</div><div class="trip-distance">1.5 hrs (1&ndash;2 nights)</div></div>
+            <div class="trip-desc">Technically Basilicata, not Puglia, but unmissable. The UNESCO-listed sassi (cave dwellings) cut into the gorge are unlike anything in Europe. Plan at least one overnight &mdash; the town after the day-trippers leave is extraordinary. Book ahead; Matera has excellent small hotels in renovated cave houses &mdash; expect approximately $250/night.</div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="region-divider">
+
+      <!-- TUSCANY -->
+      <div class="region-header">
+        <span class="region-pill tuscany">Tuscany</span>
+        <span class="region-name">Day Trips from Pergine Valdarno</span>
+      </div>
+
+      <div class="section-block">
+        <div class="section-eyebrow">All under one hour&rsquo;s drive</div>
+        <div class="section-title">🗺 Day Trips from Pergine Valdarno</div>
+        <div class="trip-list">
+          <div class="trip-item">
+            <div><div class="trip-name">Cortona</div><div class="trip-distance">35 min</div></div>
+            <div class="trip-desc">Medieval hill town with extraordinary views over Lake Trasimeno and the Valdichiana. The Museo dell&rsquo;Accademia Etrusca has one of the finest Etruscan collections in Italy. Walk the ramparts in the late afternoon &mdash; the light is remarkable.</div>
+          </div>
+          <div class="trip-item">
+            <div><div class="trip-name">Sansepolcro</div><div class="trip-distance">40 min</div></div>
+            <div class="trip-desc">Birthplace of Piero della Francesca. The Museo Civico contains his Resurrection fresco &mdash; Aldous Huxley called it the greatest painting in the world. Completely unrushed, very local. Combine with a drive through the upper Tiber valley.</div>
+          </div>
+          <div class="trip-item">
+            <div><div class="trip-name">Anghiari</div><div class="trip-distance">40 min</div></div>
+            <div class="trip-desc">Perfectly preserved medieval village on a hill above the Tiber plain. Famous for the Battle of Anghiari (and Leonardo&rsquo;s lost painting). Beautiful streets, local weaving tradition, and a handful of honest restaurants.</div>
+          </div>
+          <div class="trip-item">
+            <div><div class="trip-name">Casentino Valley</div><div class="trip-distance">45 min north</div></div>
+            <div class="trip-desc">Drive north through Poppi &mdash; whose castle dominates the valley &mdash; then into the Casentino National Forest, one of the most unspoiled forest landscapes in Italy. Continue to the Camaldoli monastery (11th century hermitage) or the Sanctuary of La Verna. A full, deeply peaceful day.</div>
+          </div>
+          <div class="trip-item">
+            <div><div class="trip-name">Montepulciano</div><div class="trip-distance">55 min</div></div>
+            <div class="trip-desc">Renaissance hilltop wine town. The main piazza is one of Tuscany&rsquo;s finest. Go down into the medieval cellars to taste Vino Nobile di Montepulciano &mdash; one of Italy&rsquo;s great reds. <strong>Cantine Gattavecchi</strong> is the standout: a 16th-century cellar carved directly beneath the church of Santa Maria dei Servi, producing excellent Vino Nobile and Rosso di Montepulciano. They offer cellar tours and tastings, and their terrace restaurant serves Tuscan lunch with views over the Val di Chiana &mdash; reserve ahead.</div>
+          </div>
+          <div class="trip-item">
+            <div><div class="trip-name">San Gimignano</div><div class="trip-distance">75 min</div></div>
+            <div class="trip-desc">The medieval &ldquo;City of Beautiful Towers&rdquo; &mdash; 14 surviving towers still dominate the skyline as they have since the 13th century. Go early before the tour buses arrive; by mid-morning the main street fills quickly. The Vernaccia di San Gimignano (Italy&rsquo;s first DOC white wine) is excellent and best tasted at a local cantina rather than a tourist shop. The Museo Civico in the Palazzo del Popolo has fine Sienese and Florentine paintings. Combine with a drive through the surrounding vineyards on the way back.</div>
+          </div>
+          <div class="trip-item">
+            <div><div class="trip-name">Siena</div><div class="trip-distance">60 min</div></div>
+            <div class="trip-desc">The Campo and the Duomo are always worth a return. In June, the city is alive with preparations for the Palio (July 2). Early morning visit to the Duomo before crowds arrive.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Castello di Verrazzano -->
+      <div class="section-block">
+        <div class="section-eyebrow">Special Overnight</div>
+        <div class="section-title">🏰 Castello di Verrazzano</div>
+        <div class="highlight-box">
+          <div class="hl-eyebrow">Albergo Casa Al Sole &middot; Greve in Chianti &middot; Overnight Jun 6&ndash;7 &middot; ~70 km from villa</div>
+          <h3><a href="verrazano.html" style="color:white;text-decoration:none;">Castello di Verrazzano &rarr;</a></h3>
+          <p>A working Chianti wine estate centred on a 16th century castle that belonged to the family of Giovanni da Verrazzano, the Florentine explorer who discovered New York Harbor in 1524. The estate produces outstanding Chianti Classico and extra-virgin olive oil. This is the right kind of Chianti experience &mdash; authentic, unhurried, and deeply rooted in the land. Plan 1&ndash;2 nights.</p>
+          <div class="hl-grid">
+            <div class="hl-item">
+              <div class="hl-item-label">Rooms</div>
+              <div class="hl-item-val">~$150/night for a double room. Recently restored with vineyard views.</div>
+            </div>
+            <div class="hl-item">
+              <div class="hl-item-label">Winery</div>
+              <div class="hl-item-val">Wine tasting dinner ~$80/person &mdash; a guided evening through the estate&rsquo;s Chianti Classico, Vin Santo, and olive oil, ending at the table. Daily tours &amp; tastings also available.</div>
+            </div>
+            <div class="hl-item">
+              <div class="hl-item-label">Nearby</div>
+              <div class="hl-item-val">Greve in Chianti (5 km) &mdash; the charming market town at the heart of Chianti Classico country. Also: Panzano (Dario Cecchini&rsquo;s legendary butcher) and Radda in Chianti.</div>
+            </div>
+            <div class="hl-item">
+              <div class="hl-item-label">Getting There</div>
+              <div class="hl-item-val">~1 hr 15 min via SR 69. Scenic approach through Chianti hills from Figline Valdarno.</div>
+            </div>
+            <div class="hl-item">
+              <div class="hl-item-label">Status</div>
+              <div class="hl-item-val">&#10003; Hotel confirmed &middot; &#10003; Cena in Fattoria booked &middot; Jun 6&ndash;7 &middot; Dave &middot; Mike &middot; Jane &middot; Chuck</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /page-body -->
+  </main>
+
+  <footer>
+    <span class="footer-breadcrumb">
+      <a href="https://daveandmike.net/index.html">dave&amp;mike</a>
+      &nbsp;&middot;&nbsp;
+      <a href="https://daveandmike.net/index.html" class="crumb-esperienze">esperienze</a>
+      &nbsp;&middot;&nbsp;
+      <a href="https://travel.daveandmike.net">travel</a>
+      &nbsp;&middot;&nbsp;
+      <a href="index.html">italy 2026</a>
+      &nbsp;&middot;&nbsp;
+      <span class="crumb-current">excursions</span>
+    </span>
+    <a class="footer-contact" href="mailto:services@musel.us">Contact Dave &amp; Mike</a>
+  </footer>
+
+</body>
+</html>

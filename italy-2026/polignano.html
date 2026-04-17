@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Italy 2026 — Polignano a Mare &amp; Conversano</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+:root {
+  --puglia:     var(--slate);
+  --ink:        var(--text);
+  --terracotta: var(--muted);
+  --gold:       var(--slate);
+  --sage:       var(--slate);
+  --parchment:  var(--bg);
+  --cream:      var(--bg);
+  --warm-rule:  rgba(28, 26, 22, 0.12);
+  --warm-bg:    var(--bg);
+}
+
+.trip-header { max-width: 860px; margin: 0 auto; padding-left: 0; }
+.page-body   { max-width: 860px; margin: 0 auto; padding: 0 0 80px; }
+
+.back-link-page {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 400;
+  color: var(--slate); text-decoration: none; margin-bottom: 28px;
+}
+.back-link-page:hover { text-decoration: underline; }
+
+/* Host badge */
+.host-badge {
+  display: inline-block; background: white;
+  border: 0.5px solid rgba(28,26,22,0.12); border-left: 3px solid var(--slate);
+  border-radius: 6px; padding: 10px 18px; margin-bottom: 28px;
+  font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 300; color: var(--text);
+}
+.host-badge strong {
+  font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 500;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--slate);
+  display: block; margin-bottom: 2px;
+}
+
+/* Meta */
+.itinerary-meta {
+  background: white; border: 0.5px solid rgba(28,26,22,0.12);
+  border-left: 3px solid var(--slate); border-radius: 8px;
+  padding: 22px 28px; margin-bottom: 36px;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 16px 24px;
+}
+.meta-item-label {
+  font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase; color: var(--slate); margin-bottom: 3px;
+}
+.meta-item-value { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 300; color: var(--text); line-height: 1.45; }
+.meta-item-value.tbd { color: var(--muted); font-style: italic; }
+
+/* Booking warning */
+.booking-warn {
+  background: rgba(94,130,160,0.05); border: 0.5px solid rgba(94,130,160,0.2);
+  border-left: 3px solid var(--slate); border-radius: 6px;
+  padding: 18px 22px; margin-bottom: 36px;
+}
+.booking-warn-label {
+  font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--slate); margin-bottom: 8px;
+}
+.booking-warn p { font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 300; line-height: 1.7; color: var(--text); margin-bottom: 8px; }
+.booking-warn p:last-child { margin-bottom: 0; }
+.booking-warn a { color: var(--slate); font-weight: 500; }
+.booking-warn strong { color: var(--text); }
+
+/* Trip summary */
+.trip-summary {
+  font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 300; line-height: 1.8; color: var(--text);
+  background: white; border: 0.5px solid rgba(28,26,22,0.12); border-radius: 6px;
+  padding: 20px 26px; margin-bottom: 36px;
+}
+
+/* Section headers */
+.section-eyebrow {
+  font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px;
+}
+.section-title {
+  font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 22px; font-weight: 400;
+  color: var(--text); margin-bottom: 20px;
+  padding-bottom: 10px; border-bottom: 0.5px solid rgba(28,26,22,0.12);
+}
+
+/* Route table */
+.route-table-wrap { margin-bottom: 12px; overflow-x: auto; }
+.route-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.route-table th {
+  font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: white; background: var(--slate); padding: 8px 14px; text-align: left;
+}
+.route-table td { padding: 8px 14px; border-bottom: 0.5px solid rgba(28,26,22,0.12); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 300; }
+.route-table tr:nth-child(even) td { background: rgba(240,237,231,0.5); }
+.route-table tr.total-row td { font-weight: 500; background: rgba(94,130,160,0.08); border-top: 1px solid var(--slate); }
+.full-day-note { font-family: 'DM Sans', sans-serif; font-size: 13px; font-style: italic; color: var(--muted); margin-top: 8px; margin-bottom: 32px; }
+
+/* Map */
+.map-wrap { margin: 24px 0 8px; border-radius: 8px; overflow: hidden; border: 0.5px solid rgba(28,26,22,0.12); }
+.map-wrap iframe { display: block; }
+.map-link {
+  display: inline-flex; align-items: center; gap: 6px; margin: 10px 0 32px;
+  font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500;
+  color: var(--slate); text-decoration: none;
+}
+.map-link:hover { text-decoration: underline; }
+
+/* Stop section */
+.stop-section { margin-bottom: 52px; }
+.stop-header { display: flex; align-items: baseline; gap: 14px; margin-bottom: 4px; flex-wrap: wrap; }
+.stop-number { font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); flex-shrink: 0; }
+.stop-name { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 24px; font-weight: 400; color: var(--text); }
+.stop-time { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 300; font-style: italic; color: var(--muted); flex-shrink: 0; }
+.stop-tagline { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 300; font-style: italic; color: var(--muted); margin-bottom: 16px; padding-bottom: 14px; border-bottom: 0.5px solid rgba(28,26,22,0.12); }
+
+/* Parking box */
+.parking-box {
+  background: white; border: 0.5px solid rgba(28,26,22,0.12); border-radius: 6px;
+  padding: 14px 18px; margin: 16px 0;
+  font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 300; line-height: 1.6; color: var(--text);
+}
+.parking-box-label { font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 5px; }
+.parking-box a { color: var(--slate); text-decoration: none; font-weight: 500; font-size: 12px; }
+.parking-box a:hover { text-decoration: underline; }
+
+/* Phase headers (Polignano phases A / B / C) */
+.phase-header {
+  background: var(--slate); color: white;
+  border-radius: 6px 6px 0 0; padding: 10px 18px;
+  margin-top: 28px; margin-bottom: 0;
+}
+.phase-header-label { font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.8; }
+.phase-header-title { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 18px; font-weight: 400; }
+.phase-header-time { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 300; font-style: italic; opacity: 0.85; }
+.phase-body {
+  background: rgba(94,130,160,0.04); border: 0.5px solid rgba(94,130,160,0.15);
+  border-top: none; border-radius: 0 0 6px 6px; padding: 20px 22px 22px; margin-bottom: 24px;
+}
+
+/* Sub headings */
+.sub-head { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 18px; font-weight: 400; color: var(--text); margin: 22px 0 10px; }
+.sub-head-minor { font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin: 16px 0 6px; }
+
+/* Body text */
+.body-text { font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 300; line-height: 1.75; color: var(--text); margin-bottom: 14px; }
+
+/* Pro tip */
+.pro-tip {
+  background: white; border: 0.5px solid rgba(28,26,22,0.12); border-left: 3px solid var(--slate);
+  border-radius: 6px; padding: 14px 20px; margin: 16px 0;
+  font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 300; line-height: 1.65; color: var(--text);
+}
+.pro-tip-label { font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--slate); margin-bottom: 5px; }
+
+/* Warn tip */
+.warn-tip {
+  background: rgba(94,130,160,0.05); border: 0.5px solid rgba(94,130,160,0.15);
+  border-left: 3px solid var(--muted); border-radius: 6px;
+  padding: 14px 20px; margin: 14px 0;
+  font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 300; line-height: 1.65; color: var(--text);
+}
+
+/* Time table */
+.time-table-wrap { margin: 16px 0 20px; overflow-x: auto; }
+.time-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.time-table th { font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: white; background: var(--slate); padding: 7px 14px; text-align: left; }
+.time-table td { padding: 7px 14px; border-bottom: 0.5px solid rgba(28,26,22,0.12); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 300; }
+.time-table tr:nth-child(even) td { background: rgba(240,237,231,0.5); }
+
+/* Tips list */
+.tips-list { list-style: none; padding: 0; margin: 10px 0 20px; }
+.tips-list li { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 300; line-height: 1.65; color: var(--text); padding: 6px 0 6px 22px; border-bottom: 0.5px solid rgba(28,26,22,0.08); position: relative; }
+.tips-list li:last-child { border-bottom: none; }
+.tips-list li::before { content: '→'; position: absolute; left: 0; color: var(--slate); font-size: 13px; }
+
+/* Return box */
+.return-box { background: var(--text); color: white; border-radius: 8px; padding: 24px 28px; margin-bottom: 40px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+.return-box-icon { font-size: 28px; flex-shrink: 0; }
+.return-box-text { flex: 1; min-width: 200px; }
+.return-box-text p { font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 300; color: rgba(255,255,255,0.85); line-height: 1.6; margin-bottom: 8px; }
+.return-box-text p:last-child { margin-bottom: 0; }
+.return-box-text a { color: #8AAEC8; font-size: 13px; font-weight: 500; text-decoration: none; }
+.return-box-text a:hover { text-decoration: underline; }
+
+/* Note box */
+.note-box {
+  background: rgba(94,130,160,0.05); border: 0.5px solid rgba(94,130,160,0.2);
+  border-left: 3px solid var(--slate); border-radius: 6px;
+  padding: 18px 22px; margin-bottom: 40px;
+  font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 300; line-height: 1.75; color: var(--text);
+}
+.note-box-label { font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--slate); margin-bottom: 8px; }
+.note-box a { color: var(--slate); font-weight: 500; text-decoration: none; }
+
+/* Practical table */
+.practical-table-wrap { margin: 10px 0 40px; overflow-x: auto; }
+.practical-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.practical-table th { font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: white; background: var(--slate); padding: 8px 14px; text-align: left; }
+.practical-table td { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 300; padding: 10px 14px; border-bottom: 0.5px solid rgba(28,26,22,0.12); color: var(--text); vertical-align: top; }
+.practical-table td:first-child { font-weight: 500; white-space: nowrap; width: 160px; }
+.practical-table tr:nth-child(even) td { background: rgba(240,237,231,0.4); }
+
+/* Quick links */
+.quick-links { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; margin-bottom: 40px; }
+.quick-link-item { background: white; border: 0.5px solid rgba(28,26,22,0.12); border-radius: 6px; padding: 12px 16px; display: flex; align-items: center; gap: 10px; text-decoration: none; transition: border-color 0.2s, transform 0.2s; }
+.quick-link-item:hover { border-color: var(--slate); transform: translateY(-2px); }
+.quick-link-icon { font-size: 16px; flex-shrink: 0; }
+.quick-link-text { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 300; color: var(--text); line-height: 1.4; }
+.quick-link-text strong { display: block; font-size: 12px; color: var(--muted); font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; }
+
+/* Divider & footer note */
+.stop-divider { border: none; border-top: 0.5px solid rgba(28,26,22,0.12); margin: 48px 0; }
+.itinerary-footer-note { font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 300; color: var(--muted); font-style: italic; text-align: center; padding-top: 24px; border-top: 0.5px solid rgba(28,26,22,0.12); line-height: 1.8; }
+
+@media (max-width: 600px) {
+  .itinerary-meta { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="top-bar"></div>
+
+<header>
+  <a class="logo-wrap" href="https://daveandmike.net">
+    <img src="assets/dnm_logo.svg" alt="dave&amp;mike">
+  </a>
+  <div class="header-img-zone">
+    <img src="assets/italy-header.jpg" alt="">
+  </div>
+</header>
+
+<div class="back-bar">
+  <a class="back-link" href="excursions.html">← Excursions</a>
+</div>
+
+<main>
+
+  <div class="trip-header">
+    <div class="trip-eyebrow">Excursions</div>
+    <h1 class="trip-name">Polignano a Mare &amp; Conversano</h1>
+    <hr class="rule">
+  </div>
+
+  <div class="page-body">
+
+    <a href="excursions.html" class="back-link-page">← Back to Day Excursions</a>
+
+    <div class="host-badge">
+      <strong>Hosts Only</strong>
+      Dave M &amp; Mike — before the rest of the group arrives. Light and easy — a good meal, a swim, and a castle.
+    </div>
+
+    <!-- META -->
+    <div class="itinerary-meta">
+      <div><div class="meta-item-label">Date</div><div class="meta-item-value tbd">TBD — pre-group arrival</div></div>
+      <div><div class="meta-item-label">Travelers</div><div class="meta-item-value">Dave M &middot; Mike</div></div>
+      <div><div class="meta-item-label">Departure</div><div class="meta-item-value">8:30 AM</div></div>
+      <div><div class="meta-item-label">Base Villa</div><div class="meta-item-value">Ostuni (72017, BR)</div></div>
+      <div><div class="meta-item-label">Best For</div><div class="meta-item-value">May 11–20 window</div></div>
+      <div><div class="meta-item-label">Full Day</div><div class="meta-item-value">8:30 AM – 5:15 PM · ~8.5 hrs</div></div>
+    </div>
+
+    <!-- BOOKING WARNING -->
+    <div class="booking-warn">
+      <div class="booking-warn-label">⚠ Book Grotta Palazzese Before Anything Else</div>
+      <p>Grotta Palazzese — the restaurant built inside a sea cave at Polignano — is the centerpiece of this day. It books up quickly, even in May. <strong>Do this first, before the trip date is set.</strong></p>
+      <p>📞 <a href="https://www.grottapalazzese.it" target="_blank">grottapalazzese.it</a> — call or book online. Request a 1:00 PM slot. A table for two is far easier to get than a group table, but don't leave it to the last minute.</p>
+      <p>If Grotta Palazzese is full: <strong>Ristorante Il Bastione</strong> — terrace overlooking the sea from the old town walls. Excellent local seafood, much more casual, ~€40–50/pp.</p>
+    </div>
+
+    <!-- TRIP SUMMARY -->
+    <div class="trip-summary">
+      A pre-group day for Dave M and Mike. Begin in Conversano — a quiet medieval hilltop town with a Norman castle and almost no crowds — then head east to Polignano a Mare, perched dramatically over turquoise Adriatic coves. Lunch at Grotta Palazzese (book ahead), gelato on the sea wall, and a long unhurried afternoon in the old town. One of Puglia's most photographed coastlines, best seen before the rest of the group arrives.
+    </div>
+
+    <!-- ROUTE -->
+    <div class="section-eyebrow">Driving Loop</div>
+    <div class="section-title">Route at a Glance</div>
+    <div class="route-table-wrap">
+      <table class="route-table">
+        <thead><tr><th>Leg</th><th>From &rarr; To</th><th>Distance</th><th>Drive Time</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Ostuni Villa &rarr; Conversano</td><td>~30 km</td><td>~30 min</td></tr>
+          <tr><td>2</td><td>Conversano &rarr; Polignano a Mare</td><td>~20 km</td><td>~20 min</td></tr>
+          <tr><td>3</td><td>Polignano a Mare &rarr; Ostuni Villa</td><td>~40 km</td><td>~40 min</td></tr>
+          <tr class="total-row"><td colspan="2"><strong>Total</strong></td><td><strong>~90 km</strong></td><td><strong>~1h 30 min</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="full-day-note">Full day: 8:30 AM – 5:15 PM · ~8.5 hours at an easy pace</p>
+
+    <!-- MAP -->
+    <div class="section-eyebrow">Overview Map</div>
+    <div class="section-title">Ostuni &rarr; Conversano &rarr; Polignano</div>
+    <div class="map-wrap">
+      <iframe width="100%" height="360" frameborder="0" scrolling="no"
+        src="https://www.openstreetmap.org/export/embed.html?bbox=17.10%2C40.60%2C17.65%2C40.98&layer=mapnik"
+        style="display:block;"></iframe>
+    </div>
+    <a href="https://www.google.com/maps/dir/Ostuni,+BR,+Italy/Conversano,+BA,+Italy/Polignano+a+Mare,+BA,+Italy/Ostuni,+BR,+Italy" target="_blank" class="map-link">📍 Open Full Route in Google Maps →</a>
+
+    <hr class="stop-divider">
+
+    <!-- STOP 1 — CONVERSANO -->
+    <div class="stop-section">
+      <div class="stop-header">
+        <span class="stop-number">Stop 1</span>
+        <span class="stop-name">Conversano</span>
+        <span class="stop-time">9:00 AM – 10:30 AM · ~1h 30min</span>
+      </div>
+      <p class="stop-tagline">Medieval castle town — Puglia's best-kept hilltop secret</p>
+
+      <div class="map-wrap">
+        <iframe width="100%" height="260" frameborder="0" scrolling="no"
+          src="https://www.openstreetmap.org/export/embed.html?bbox=17.08%2C40.94%2C17.14%2C40.98&layer=mapnik&marker=40.9667%2C17.1167"
+          style="display:block;"></iframe>
+      </div>
+
+      <div class="parking-box">
+        <div class="parking-box-label">🅿 Parking</div>
+        <strong>Via Verdi / Piazza XX Settembre</strong> — Free parking just below the castle, 2-min walk to the main square.
+        &nbsp;<a href="https://www.google.com/maps/search/parcheggio+conversano+piazza+xx+settembre" target="_blank">Google Maps →</a>
+      </div>
+
+      <div class="sub-head-minor">Castello di Conversano</div>
+      <p class="body-text">A 14th-century castle that dominates the town from its highest point. Norman towers intact and impressive. The Museo Civico inside holds medieval and Baroque paintings — worth 30 minutes if you're in the mood, skippable if not. The exterior alone justifies the stop.</p>
+
+      <div class="sub-head-minor">Abbazia di Santo Stefano</div>
+      <p class="body-text">Attached to the castle — a Romanesque-Norman church, one of the best in the region. Cool, austere interior; a quiet contrast to the ornate Baroque elsewhere in Puglia.</p>
+
+      <div class="sub-head-minor">Piazza XX Settembre &amp; the Centro Storico</div>
+      <p class="body-text">The main square has a relaxed, locals-going-about-their-day energy — very different from the tourist towns. Good spot for a proper espresso before heading to the coast. The alleys north of the piazza are calm and worth a wander.</p>
+
+      <div class="sub-head">Time Allocation</div>
+      <div class="time-table-wrap">
+        <table class="time-table">
+          <thead><tr><th>Activity</th><th>Time</th></tr></thead>
+          <tbody>
+            <tr><td>Castello di Conversano (exterior + optional museum)</td><td>40 min</td></tr>
+            <tr><td>Abbazia di Santo Stefano</td><td>15 min</td></tr>
+            <tr><td>Piazza &amp; centro wander + espresso</td><td>35 min</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <ul class="tips-list">
+        <li>Conversano gets very few foreign tourists. You may be the only non-Italians in the piazza. Enjoy it.</li>
+        <li>The castle museum charges ~€3–5 entry. Good but not essential — decide on the day.</li>
+        <li>There's a good pasticceria near the main square — worth stopping for a cornetto if you missed breakfast at the villa.</li>
+      </ul>
+    </div>
+
+    <hr class="stop-divider">
+
+    <!-- STOP 2 — POLIGNANO -->
+    <div class="stop-section">
+      <div class="stop-header">
+        <span class="stop-number">Stop 2</span>
+        <span class="stop-name">Polignano a Mare</span>
+        <span class="stop-time">10:50 AM – 4:30 PM · ~5.5 hours</span>
+      </div>
+      <p class="stop-tagline">Clifftop town above the Adriatic — and one of the great lunch experiences in southern Italy</p>
+
+      <div class="map-wrap">
+        <iframe width="100%" height="260" frameborder="0" scrolling="no"
+          src="https://www.openstreetmap.org/export/embed.html?bbox=17.19%2C40.98%2C17.24%2C41.01&layer=mapnik&marker=40.9967%2C17.2167"
+          style="display:block;"></iframe>
+      </div>
+
+      <div class="parking-box">
+        <div class="parking-box-label">🅿 Parking</div>
+        <strong>Piazzale Aldo Moro</strong> — Large free parking just outside the centro storico walls. 5-min walk to everything. Arrive before noon for a good spot.
+        &nbsp;<a href="https://www.google.com/maps/search/parcheggio+polignano+a+mare+piazzale+aldo+moro" target="_blank">Google Maps →</a>
+      </div>
+
+      <!-- Phase A: Beach -->
+      <div class="phase-header">
+        <div class="phase-header-label">Phase A</div>
+        <div class="phase-header-title">Lama Monachile Beach</div>
+        <div class="phase-header-time">11:00 AM – 12:30 PM · ~1.5 hours</div>
+      </div>
+      <div class="phase-body">
+        <p class="body-text">Lama Monachile is the beach that made Polignano famous — a narrow inlet cut between soaring white limestone cliffs, with the ancient Roman bridge overhead and the centro storico perched at the rim. It is genuinely spectacular. It's also small, mostly pebbly, and packed by early afternoon.</p>
+        <p class="body-text"><strong>At 11:00 AM you'll have it at its best</strong> — bright morning light, a manageable number of people, warm but not scorching. Swim, take it in, get out before the midday surge.</p>
+
+        <div class="pro-tip">
+          <div class="pro-tip-label">What the Beach is Actually Like</div>
+          The water is the main event — clear, blue-green, warm from May onward. The "sand" is coarse pebbles and smooth stones, so water shoes are a nice-to-have. Steps cut into the cliff face lead down. No beach club, no sunbeds — free, first-come space on the rocks.
+        </div>
+        <div class="pro-tip">
+          <div class="pro-tip-label">What to Bring</div>
+          Towels · water shoes or sandals that can get wet · snorkel gear (the underwater formations are interesting) · sunscreen · water.
+        </div>
+      </div>
+
+      <!-- Phase B: Lunch -->
+      <div class="phase-header">
+        <div class="phase-header-label">Phase B</div>
+        <div class="phase-header-title">Lunch — Grotta Palazzese</div>
+        <div class="phase-header-time">1:00 PM – 3:00 PM · ~2 hours</div>
+      </div>
+      <div class="phase-body">
+        <p class="body-text">The restaurant is built inside a natural sea cave in the cliff face, with the dining room open to the sea on one side. The setting is unlike anywhere else you'll eat in Italy. The food is good Puglian seafood — not the point, but it holds up. This is about the place.</p>
+        <div class="warn-tip">
+          📌 <strong>Must book in advance.</strong> See booking notice at the top of this page. Request a table with a sea-facing position when you book.
+        </div>
+        <p class="body-text"><strong>What to expect:</strong> Formal-ish — not black tie, but collared shirt territory. Expect €80–120/pp all-in with wine. The cave keeps a natural cool temperature even on warm days.</p>
+        <p class="body-text">
+          📍 <a href="https://www.google.com/maps/search/Grotta+Palazzese+Polignano+a+Mare" target="_blank" style="color:var(--puglia);font-weight:500;">Grotta Palazzese on Google Maps</a>
+          &nbsp;·&nbsp;
+          <a href="https://www.grottapalazzese.it" target="_blank" style="color:var(--puglia);font-weight:500;">grottapalazzese.it</a>
+        </p>
+        <div class="pro-tip">
+          <div class="pro-tip-label">Backup if Fully Booked</div>
+          <strong>Ristorante Il Bastione</strong> — terrace overlooking the sea from the old town walls. Excellent fresh seafood, much more casual, ~€40–50/pp. No cave, but still a great lunch. &nbsp;<a href="https://www.google.com/maps/search/Il+Bastione+ristorante+Polignano+a+Mare" target="_blank" style="color:var(--puglia);">Google Maps →</a>
+        </div>
+      </div>
+
+      <!-- Phase C: Centro -->
+      <div class="phase-header">
+        <div class="phase-header-label">Phase C</div>
+        <div class="phase-header-title">Centro Storico</div>
+        <div class="phase-header-time">3:00 PM – 4:30 PM · ~1.5 hours</div>
+      </div>
+      <div class="phase-body">
+        <p class="body-text">Post-lunch, the town is yours at the best possible hour — the day-trippers are thinning out, the light is good, and after a long lunch you'll want to walk slowly. This is exactly the right pace for the centro storico.</p>
+
+        <div class="sub-head-minor">The Cliff Promenade (Lungomare)</div>
+        <p class="body-text">Walk to the south end of town and follow the cliff path. The views back along the coastline are the best in Polignano — white cliffs dropping straight into turquoise water as far as you can see. Stop at the statue of Domenico Modugno (the <em>Volare</em> guy — he was born here) with arms outstretched over the sea.</p>
+
+        <div class="sub-head-minor">The Vaulted Old Town Alleys</div>
+        <p class="body-text">The centro storico is compact, whitewashed, and filled with arched passageways. Some alleys lead to sudden cliff-edge viewpoints with no warning — very dramatic. Wander without a map.</p>
+
+        <div class="sub-head-minor">Grotta delle Rondinelle — Optional Kayak</div>
+        <p class="body-text">Accessible by kayak or boat from the small harbor (~45 min, €15–20/pp). If either of you wants a short sea cave excursion on the water, this is the afternoon for it. Guides usually operate from the harbor, no booking needed.</p>
+
+        <div class="sub-head-minor">Gelato</div>
+        <p class="body-text">There's a gelateria near the main entrance arch of the old town that locals queue for. Get one before you leave.</p>
+
+        <div class="time-table-wrap">
+          <table class="time-table">
+            <thead><tr><th>Activity</th><th>Time</th></tr></thead>
+            <tbody>
+              <tr><td>Cliff promenade + Modugno statue</td><td>30 min</td></tr>
+              <tr><td>Old town alleys + viewpoints</td><td>40 min</td></tr>
+              <tr><td>Optional kayak / sea cave excursion</td><td>45 min</td></tr>
+              <tr><td>Gelato + regroup at car</td><td>20 min</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <ul class="tips-list">
+        <li>The town entrance arch on Via Martina is how you get into the centro storico on foot from the car park.</li>
+        <li>Street parking inside the old town is non-existent. Don't try — use Piazzale Aldo Moro and walk in.</li>
+        <li>Kayak guides operate from the small beach near the harbor. Not worth it if the sea is choppy.</li>
+        <li>Polignano produces a local craft beer (Birrificio Lama Monachile). Worth trying at a bar before you leave.</li>
+      </ul>
+    </div>
+
+    <hr class="stop-divider">
+
+    <!-- RETURN -->
+    <div class="return-box">
+      <div class="return-box-icon">🏡</div>
+      <div class="return-box-text">
+        <p><strong style="color:white;">Return to Ostuni — 4:30 PM · ~40 min</strong></p>
+        <p>Straightforward coastal drive south on the SS16. Back at the villa by ~5:15 PM.</p>
+        <a href="https://www.google.com/maps/dir/Polignano+a+Mare,+BA,+Italy/Ostuni,+BR,+Italy" target="_blank">Directions: Polignano → Ostuni →</a>
+      </div>
+    </div>
+
+    <!-- BEACH ALTERNATIVE -->
+    <div class="note-box">
+      <div class="note-box-label">Beach Alternative — Savelletri di Fasano</div>
+      If you want a proper lie-on-the-sand morning without the drive to Polignano, <strong>Savelletri di Fasano</strong> is the answer — ~20 km from the villa, ~20-minute drive. Beautiful clear water, a pretty little harbor with fishing boats, mix of free beach and lido options. A relaxed separate half-day, not combined with this itinerary.
+      &nbsp;<a href="https://www.google.com/maps/search/Savelletri+di+Fasano,+BR,+Italy" target="_blank">Google Maps →</a>
+    </div>
+
+    <!-- PRACTICAL -->
+    <div class="section-eyebrow">Before You Go</div>
+    <div class="section-title">Practical Notes</div>
+    <div class="practical-table-wrap">
+      <table class="practical-table">
+        <thead><tr><th>Topic</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>Grotta Palazzese</td><td>Book immediately once the trip date is set. Request a table with sea view. Their website takes online reservations.</td></tr>
+          <tr><td>Beach Gear</td><td>Pack towels, water shoes, and sunscreen the night before — you won't want to rummage in the car at Lama Monachile.</td></tr>
+          <tr><td>Cash</td><td>Grotta Palazzese takes cards. Beach needs no money. Conversano museum and kayak guides may be cash-only.</td></tr>
+          <tr><td>Just Two People</td><td>No group herding, no waiting. You can linger wherever you like and move when you're ready. Enjoy it.</td></tr>
+          <tr><td>Weather</td><td>May averages 22–25°C with strong sun. Water temperature: ~18–20°C — refreshing but very swimmable.</td></tr>
+          <tr><td>Driving</td><td>Take turns so neither of you is stuck as driver all day.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- QUICK LINKS -->
+    <div class="section-eyebrow">Quick Access</div>
+    <div class="section-title">Links &amp; Navigation</div>
+    <div class="quick-links">
+      <a href="https://www.google.com/maps/dir/Ostuni,+BR,+Italy/Conversano,+BA,+Italy/Polignano+a+Mare,+BA,+Italy/Ostuni,+BR,+Italy" target="_blank" class="quick-link-item">
+        <span class="quick-link-icon">🗺️</span><span class="quick-link-text"><strong>Full Route</strong>Google Maps loop</span>
+      </a>
+      <a href="https://www.grottapalazzese.it" target="_blank" class="quick-link-item">
+        <span class="quick-link-icon">🍽️</span><span class="quick-link-text"><strong>Book Now</strong>Grotta Palazzese</span>
+      </a>
+      <a href="https://www.google.com/maps/search/parcheggio+conversano+piazza+xx+settembre" target="_blank" class="quick-link-item">
+        <span class="quick-link-icon">🅿️</span><span class="quick-link-text"><strong>Conversano Parking</strong>Piazza XX Settembre</span>
+      </a>
+      <a href="https://www.google.com/maps/search/parcheggio+polignano+a+mare+piazzale+aldo+moro" target="_blank" class="quick-link-item">
+        <span class="quick-link-icon">🅿️</span><span class="quick-link-text"><strong>Polignano Parking</strong>Piazzale Aldo Moro</span>
+      </a>
+      <a href="https://www.google.com/maps/search/Il+Bastione+ristorante+Polignano+a+Mare" target="_blank" class="quick-link-item">
+        <span class="quick-link-icon">🍽️</span><span class="quick-link-text"><strong>Il Bastione</strong>Backup lunch option</span>
+      </a>
+      <a href="https://www.google.com/maps/search/Savelletri+di+Fasano,+BR,+Italy" target="_blank" class="quick-link-item">
+        <span class="quick-link-icon">🏖️</span><span class="quick-link-text"><strong>Savelletri</strong>Beach alternative</span>
+      </a>
+    </div>
+
+    <p class="itinerary-footer-note">
+      Itinerary prepared for Dave &amp; Mike's Italy 2026 trip · Base: Ostuni, Puglia<br>
+      Distances and times are driving estimates — verify with Google Maps before departure.
+    </p>
+
+  </div><!-- /page-body -->
+
+</main>
+
+<footer>
+  <span class="footer-breadcrumb">
+    <a href="https://daveandmike.net/index.html">dave&amp;mike</a>
+    &nbsp;·&nbsp;
+    <a href="https://daveandmike.net/index.html" class="crumb-esperienze">esperienze</a>
+    &nbsp;·&nbsp;
+    <a href="https://travel.daveandmike.net">travel</a>
+    &nbsp;·&nbsp;
+    <a href="index.html">italy 2026</a>
+    &nbsp;·&nbsp;
+    <a href="excursions.html">excursions</a>
+    &nbsp;·&nbsp;
+    <span class="crumb-current">polignano</span>
+  </span>
+  <a class="footer-contact" href="mailto:services@musel.us">Contact Dave &amp; Mike</a>
+</footer>
+
+</body>
+</html>

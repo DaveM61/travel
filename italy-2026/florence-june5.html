@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Italy 2026 — Florence, June 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  :root {
+    --cream:      var(--bg);
+    --parchment:  var(--bg);
+    --warm-rule:  rgba(28,26,22,0.12);
+    --ink:        var(--text);
+    --gold:       var(--muted);
+    --terracotta: var(--muted);
+    --tuscany:    var(--slate);
+    --sage:       var(--slate);
+    --dusty-blue: var(--slate);
+  }
+
+  body { font-family: 'DM Sans', sans-serif; }
+
+  .trip-header { max-width: 860px; margin: 0 auto; padding-left: 0; }
+  .page-body   { max-width: 860px; margin: 0 auto; padding: 0 24px 80px; }
+
+  /* ─── META ─── */
+  .itinerary-meta { background: var(--bg); border: 1px solid var(--warm-rule); border-left: 4px solid var(--slate); border-radius: 8px; padding: 22px 28px; margin-bottom: 36px; display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 16px 24px; }
+  .meta-item-label { font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }
+  .meta-item-value { font-size: 14px; color: var(--text); line-height: 1.45; }
+  .meta-item-value em { color: var(--muted); }
+
+  /* ─── TRIP SUMMARY ─── */
+  .trip-summary { font-size: 15px; line-height: 1.8; color: var(--text); background: rgba(255,255,255,0.4); border: 1px solid var(--warm-rule); border-radius: 6px; padding: 20px 26px; margin-bottom: 36px; }
+
+  /* ─── SECTION HEADERS ─── */
+  .section-eyebrow { font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; font-style: italic; color: var(--text); margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid var(--warm-rule); }
+
+  /* ─── BOOKING WARNING ─── */
+  .booking-warn { background: var(--bg); border: 1px solid var(--warm-rule); border-left: 4px solid var(--muted); border-radius: 6px; padding: 18px 22px; margin-bottom: 36px; }
+  .booking-warn-label { font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  .booking-warn p { font-size: 14px; line-height: 1.7; color: var(--text); margin-bottom: 8px; }
+  .booking-warn p:last-child { margin-bottom: 0; }
+  .booking-warn a { color: var(--slate); font-weight: 500; }
+
+  /* ─── ROUTE TABLE ─── */
+  .route-table-wrap { margin-bottom: 12px; overflow-x: auto; }
+  .route-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .route-table th { background: var(--slate); color: white; font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; padding: 8px 14px; text-align: left; }
+  .route-table td { padding: 8px 14px; border-bottom: 1px solid var(--warm-rule); color: var(--text); }
+  .route-table tr:nth-child(even) td { background: rgba(192,186,178,0.12); }
+  .route-table tr.total-row td { font-weight: 600; background: rgba(122,116,108,0.08); border-top: 2px solid var(--faded); }
+  .full-day-note { font-size: 13px; font-style: italic; color: var(--muted); margin-top: 8px; margin-bottom: 32px; }
+
+  /* ─── MAP ─── */
+  .map-wrap { margin: 24px 0 8px; border-radius: 8px; overflow: hidden; border: 1px solid var(--warm-rule); }
+  .map-wrap iframe { display: block; }
+  .map-link { display: inline-flex; align-items: center; gap: 6px; margin: 10px 0 32px; font-size: 13px; color: var(--slate); text-decoration: none; font-weight: 500; }
+  .map-link:hover { text-decoration: underline; }
+
+  /* ─── TIME BLOCKS ─── */
+  .time-block { margin-bottom: 36px; }
+  .time-block-header { display: flex; align-items: baseline; gap: 14px; border-bottom: 1px solid var(--warm-rule); padding-bottom: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+  .time-label { font-family: 'Cormorant Garamond', serif; font-size: 15px; font-style: italic; color: var(--slate); font-weight: 400; flex-shrink: 0; }
+  .time-block-title { font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 500; color: var(--text); }
+  .time-block-sub { font-family: 'Cormorant Garamond', serif; font-size: 13px; font-style: italic; color: var(--muted); }
+
+  /* ─── PARKING BOX ─── */
+  .parking-box { background: var(--bg); border: 1px solid var(--warm-rule); border-radius: 6px; padding: 14px 18px; margin: 16px 0; font-size: 13px; line-height: 1.6; color: var(--text); }
+  .parking-box-label { font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 5px; }
+  .parking-box a { color: var(--slate); text-decoration: none; font-weight: 500; font-size: 12px; }
+
+  /* ─── ZTL WARNING ─── */
+  .ztl-warn { background: var(--bg); border: 1px solid var(--warm-rule); border-left: 4px solid var(--muted); border-radius: 5px; padding: 12px 16px; margin: 12px 0; font-size: 13px; line-height: 1.6; color: var(--text); }
+
+  /* ─── SUB HEADS ─── */
+  .sub-head { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 400; font-style: italic; color: var(--text); margin: 22px 0 10px; }
+  .sub-head-minor { font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin: 16px 0 6px; }
+
+  /* ─── BODY TEXT ─── */
+  .body-text { font-size: 14px; line-height: 1.75; color: var(--text); margin-bottom: 14px; }
+
+  /* ─── PRO TIP ─── */
+  .pro-tip { background: var(--bg); border: 1px solid var(--warm-rule); border-left: 4px solid var(--slate); border-radius: 6px; padding: 14px 20px; margin: 14px 0; font-size: 14px; line-height: 1.65; color: var(--text); }
+  .pro-tip-label { font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--slate); margin-bottom: 5px; }
+
+  /* ─── LUNCH OPTION CARDS ─── */
+  .lunch-options { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; margin: 16px 0 24px; }
+  .lunch-card { background: white; border: 1px solid var(--warm-rule); border-radius: 8px; overflow: hidden; }
+  .lunch-card-accent { height: 4px; background: var(--slate); }
+  .lunch-card-accent.alt { background: var(--muted); }
+  .lunch-card-body { padding: 18px 20px; }
+  .lunch-card-label { font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 5px; }
+  .lunch-card-name { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 400; font-style: italic; color: var(--text); margin-bottom: 4px; }
+  .lunch-card-type { font-size: 12px; color: var(--muted); margin-bottom: 10px; }
+  .lunch-card-desc { font-size: 14px; line-height: 1.6; color: var(--text); margin-bottom: 10px; }
+  .lunch-card-link { font-size: 12px; color: var(--slate); font-weight: 500; text-decoration: none; }
+
+  /* ─── TIPS LIST ─── */
+  .tips-list { list-style: none; padding: 0; margin: 10px 0 20px; }
+  .tips-list li { font-size: 14px; line-height: 1.65; color: var(--text); padding: 6px 0 6px 22px; border-bottom: 1px solid var(--warm-rule); position: relative; }
+  .tips-list li:last-child { border-bottom: none; }
+  .tips-list li::before { content: '→'; position: absolute; left: 0; color: var(--muted); font-size: 13px; }
+
+  /* ─── EVENING OPTIONS ─── */
+  .evening-options { display: flex; flex-direction: column; gap: 12px; margin: 16px 0 24px; }
+  .evening-option { background: white; border: 1px solid var(--warm-rule); border-radius: 6px; padding: 16px 20px; display: flex; gap: 14px; align-items: flex-start; }
+  .evening-option-num { font-family: 'Cormorant Garamond', serif; font-size: 20px; color: var(--muted); font-weight: 400; flex-shrink: 0; line-height: 1; margin-top: 2px; }
+  .evening-option-body { flex: 1; }
+  .evening-option-title { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 5px; }
+  .evening-option-desc { font-size: 13px; line-height: 1.6; color: var(--muted); }
+
+  /* ─── OVERNIGHT SECTION ─── */
+  .overnight-section { background: rgba(94,130,160,0.06); border: 1px solid rgba(94,130,160,0.2); border-radius: 8px; padding: 24px 28px; margin-bottom: 36px; }
+  .overnight-section-label { font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--slate); margin-bottom: 8px; }
+  .overnight-section h3 { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 400; font-style: italic; color: var(--text); margin-bottom: 14px; }
+  .luggage-warn { background: var(--bg); border: 1px solid var(--warm-rule); border-left: 4px solid var(--muted); border-radius: 5px; padding: 14px 18px; margin: 14px 0; font-size: 14px; line-height: 1.65; color: var(--text); }
+  .hotel-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; margin-top: 20px; }
+  .hotel-card { background: white; border: 1px solid var(--warm-rule); border-radius: 8px; overflow: hidden; }
+  .hotel-card-top { height: 4px; }
+  .hotel-card-top.recommended { background: var(--slate); }
+  .hotel-card-top.standard   { background: var(--faded); }
+  .hotel-card-top.transit    { background: var(--muted); }
+  .hotel-card-body { padding: 16px 18px; }
+  .hotel-card-label { font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+  .hotel-card-name { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 400; font-style: italic; color: var(--text); margin-bottom: 6px; }
+  .hotel-card-desc { font-size: 13px; line-height: 1.55; color: var(--muted); margin-bottom: 8px; }
+  .hotel-card-price { font-size: 13px; color: var(--text); margin-bottom: 4px; }
+  .hotel-card-link { font-size: 12px; color: var(--slate); font-weight: 500; text-decoration: none; }
+
+  /* ─── GUIDE SECTION ─── */
+  .guide-section { background: var(--bg); border: 1px solid var(--warm-rule); border-radius: 8px; padding: 22px 26px; margin-bottom: 36px; }
+  .guide-label { font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  .guide-name { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; font-style: italic; color: var(--text); margin-bottom: 4px; }
+  .guide-title-text { font-size: 13px; color: var(--muted); font-style: italic; margin-bottom: 16px; }
+  .guide-contact { display: grid; grid-template-columns: auto 1fr; gap: 6px 16px; font-size: 14px; margin-bottom: 14px; }
+  .guide-contact-label { font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); line-height: 1.8; }
+  .guide-contact-value { color: var(--text); line-height: 1.8; }
+  .guide-contact-value a { color: var(--slate); text-decoration: none; font-weight: 500; }
+  .guide-note { font-size: 14px; line-height: 1.65; color: var(--muted); border-top: 1px solid var(--warm-rule); padding-top: 12px; margin-top: 4px; }
+
+  /* ─── QUICK REFERENCE TABLE ─── */
+  .quick-ref-wrap { margin: 10px 0 40px; overflow-x: auto; }
+  .quick-ref { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .quick-ref th { background: var(--slate); color: white; font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; padding: 8px 14px; text-align: left; }
+  .quick-ref td { padding: 9px 14px; border-bottom: 1px solid var(--warm-rule); color: var(--text); vertical-align: top; }
+  .quick-ref tr:nth-child(even) td { background: rgba(192,186,178,0.12); }
+  .quick-ref td:first-child { font-weight: 500; white-space: nowrap; width: 200px; }
+  .quick-ref td strong { color: var(--text); }
+
+  .stop-divider { border: none; border-top: 1px solid var(--warm-rule); margin: 40px 0; }
+  .itinerary-footer-note { font-size: 12px; color: var(--muted); font-style: italic; text-align: center; padding-top: 24px; border-top: 1px solid var(--warm-rule); line-height: 1.8; }
+
+  @media (max-width: 600px) {
+    .itinerary-meta { grid-template-columns: 1fr 1fr; }
+    .lunch-options { grid-template-columns: 1fr; }
+    .hotel-cards { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- top bar -->
+<div class="top-bar"></div>
+
+<!-- header -->
+<header class="site-header">
+  <div class="site-header-inner">
+    <a href="index.html" class="site-logo">dave&amp;mike</a>
+  </div>
+  <div class="header-image-wrap">
+    <img src="italy-header.jpg" alt="Italy 2026" class="header-img">
+    <div class="header-img-fade"></div>
+  </div>
+  <div class="trip-header">
+    <div class="trip-eyebrow">June 5, 2026 · Tuscany</div>
+    <h1 class="trip-name">Firenze</h1>
+    <div class="trip-subtitle">Accademia · Oltrarno · Piazzale Michelangelo</div>
+  </div>
+</header>
+
+<!-- back bar -->
+<div class="back-bar">
+  <a href="excursions.html" class="back-link">← Excursions</a>
+</div>
+
+<div class="page-body">
+
+  <!-- META -->
+  <div class="itinerary-meta">
+    <div><div class="meta-item-label">Date</div><div class="meta-item-value">June 5, 2026</div></div>
+    <div><div class="meta-item-label">Travelers in Florence</div><div class="meta-item-value">Jane · Chuck · Dave W · Teresa</div></div>
+    <div><div class="meta-item-label">Departure</div><div class="meta-item-value">~7:30 AM</div></div>
+    <div><div class="meta-item-label">Base Villa</div><div class="meta-item-value">Arezzo Region (Pergine Valdarno)</div></div>
+    <div><div class="meta-item-label">Note</div><div class="meta-item-value"><em>Day 2 of back-to-back Firenze days</em></div></div>
+  </div>
+
+  <!-- BOOKING WARNING -->
+  <div class="booking-warn">
+    <div class="booking-warn-label">⚠ Book Before You Go</div>
+    <p><strong>Galleria dell'Accademia tickets must be reserved in advance.</strong> Walk-up queues in June can be 2–3 hours. Book via <a href="https://www.firenzemusei.it" target="_blank">firenzemusei.it</a> or <a href="https://www.b-ticket.com" target="_blank">b-ticket.com</a>. Target the <strong>9:30 AM entry slot</strong>. Cost: ~€12–16/pp + booking fee.</p>
+    <p><strong>Lunch reservation recommended.</strong> Both restaurants below fill quickly in June. Call or book a few days ahead.</p>
+  </div>
+
+  <!-- TRIP SUMMARY -->
+  <div class="trip-summary">
+    Jane, Chuck, Dave W, and Teresa head to Florence for the day: Michelangelo's David at the Accademia, lunch in the Oltrarno, an afternoon wander through one of the world's great cities, and a sunset at Piazzale Michelangelo. The evening is open — dinner in Florence and the drive back, or an optional overnight for Dave W and Teresa before their June 6 departure. (Mary departed the villa June 4 for her own Florence hotel and flies home from FLR the morning of the 5th — she's handling her own airport transport.)
+  </div>
+
+  <!-- ROUTE -->
+  <div class="section-eyebrow">Driving</div>
+  <div class="section-title">Route at a Glance</div>
+  <div class="route-table-wrap">
+    <table class="route-table">
+      <thead><tr><th>Leg</th><th>From → To</th><th>Distance</th><th>Drive Time</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Arezzo Villa → Parterre Parking, Firenze</td><td>~75 km</td><td>~1h 15 min</td></tr>
+        <tr><td>2</td><td>City Center → Piazzale Michelangelo</td><td>~3 km</td><td>~10 min drive</td></tr>
+        <tr><td>3</td><td>Piazzale Michelangelo → Arezzo Villa</td><td>~75 km</td><td>~1h 15 min</td></tr>
+        <tr class="total-row"><td colspan="2"><strong>Total</strong></td><td><strong>~153 km</strong></td><td><strong>~2h 40 min</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="full-day-note">Day window: ~7:30 AM – flexible · dinner in Florence optional before return</p>
+
+  <!-- MAP -->
+  <div class="section-eyebrow">Florence City Center</div>
+  <div class="section-title">Map</div>
+  <div class="map-wrap">
+    <iframe width="100%" height="360" frameborder="0" scrolling="no"
+      src="https://www.openstreetmap.org/export/embed.html?bbox=11.195%2C43.748%2C11.295%2C43.792&layer=mapnik&marker=43.7768%2C11.2597"
+      style="display:block;"></iframe>
+  </div>
+  <a href="https://www.google.com/maps/dir/Pergine+Valdarno,+AR/Galleria+dell'Accademia,+Firenze/Piazzale+Michelangelo,+Firenze/Pergine+Valdarno,+AR" target="_blank" class="map-link">📍 Open Full Route in Google Maps →</a>
+
+  <hr class="stop-divider">
+
+  <!-- MORNING -->
+  <div class="section-eyebrow">Morning</div>
+  <div class="section-title">Arrival in the City</div>
+
+  <div class="time-block">
+    <div class="time-block-header">
+      <span class="time-label">~7:30 AM</span>
+      <span class="time-block-title">Depart Arezzo Villa</span>
+    </div>
+    <p class="body-text">Four travelers — Jane, Chuck, Dave W, and Teresa. Straight shot west on the A1 to Florence. Coffee and snacks from the villa; arrival at parking by ~8:45 AM gives plenty of time before the Accademia slot.</p>
+  </div>
+
+  <div class="time-block">
+    <div class="time-block-header">
+      <span class="time-label">~8:45 AM</span>
+      <span class="time-block-title">City Center Parking</span>
+    </div>
+    <p class="body-text">Head directly to <strong>Parcheggio Parterre</strong> (Piazza della Libertà, 50129 FI) — just outside the ZTL restricted zone, affordable (€2–3/hr), flat 15-minute walk to the Accademia.</p>
+    <div class="ztl-warn">
+      <strong>⚠ ZTL Warning:</strong> Florence's zona a traffico limitato covers most of the historic center. Cameras enforce it automatically and fines arrive by post weeks later. Parterre keeps you safely outside.
+    </div>
+    <div class="parking-box">
+      <div class="parking-box-label">🅿 Parking</div>
+      <strong>Parcheggio Parterre</strong> · Piazza della Libertà, 50129 FI · ~€2–3/hr
+      &nbsp;<a href="https://www.google.com/maps/place/Parterre+Car+Park,+Firenze" target="_blank">Google Maps →</a>
+    </div>
+  </div>
+
+  <div class="time-block">
+    <div class="time-block-header">
+      <span class="time-label">~9:00 AM</span>
+      <span class="time-block-title">Coffee — Neighborhood Bar</span>
+    </div>
+    <p class="body-text">Find a neighborhood bar for a proper Italian breakfast: <em>espresso, cornetto, maybe a brioche con crema.</em> Avoid the tourist bars near the Duomo — anything along Viale Don Minzoni or Via XXVII Aprile will be authentic and cheap. Stand at the counter: faster, cheaper, and correct.</p>
+  </div>
+
+  <hr class="stop-divider">
+
+  <!-- ACCADEMIA -->
+  <div class="section-eyebrow">Mid-Morning</div>
+  <div class="section-title">Galleria dell'Accademia</div>
+
+  <div class="time-block">
+    <div class="time-block-header">
+      <span class="time-label">~9:20 AM</span>
+      <span class="time-block-title">Walk to the Accademia</span>
+    </div>
+    <p class="body-text">~15-minute walk from Parterre through <strong>Piazza SS. Annunziata</strong> — the approach matters here. Route through the piazza and take it in before turning onto Via Ricasoli toward the museum. Then at ~11:15 AM on the way out, pause for a few minutes in the piazza proper — Brunelleschi's <em>Spedale degli Innocenti</em> (world's first orphanage, 1419) lines the east side, and the equestrian Ferdinando I anchors the center. Most tourists skip it entirely. It costs nothing.</p>
+  </div>
+
+  <div class="time-block">
+    <div class="time-block-header">
+      <span class="time-label">9:30–11:15 AM</span>
+      <span class="time-block-title">Inside the Accademia</span>
+      <span class="time-block-sub">~1h 45min · Via Ricasoli 58-60, 50122 FI</span>
+    </div>
+
+    <div class="sub-head-minor">The David</div>
+    <p class="body-text">Michelangelo carved him from 1501–1504. At 5.17 meters, no photograph does justice to the scale — or to the detail of the hands, the neck veins, the slight turn of the head. Jane and Chuck have seen him before; this time they'll notice different things. Let Dave W and Teresa have the first quiet moment with him.</p>
+
+    <div class="sub-head-minor">The Prisoners (Prigioni) — Don't Skip This</div>
+    <p class="body-text">The four unfinished slaves lining the hall leading to David are, in many ways, more moving than the finished work. The figures struggling to emerge from the marble are exactly what Michelangelo meant by <em>liberating the form already inside the stone.</em></p>
+
+    <div class="sub-head-minor">Upper Galleries</div>
+    <p class="body-text">Musical instrument collection and plaster cast gallery — low-crowd, underrated, good for a slow walk if energy allows.</p>
+
+    <div class="pro-tip">
+      <div class="pro-tip-label">For Jane &amp; Chuck</div>
+      You've been here before — use that. Point things out. Show Dave W and Teresa the details most people walk past.
+    </div>
+  </div>
+
+  <hr class="stop-divider">
+
+  <!-- LUNCH -->
+  <div class="section-eyebrow">Lunch · ~12:00–2:00 PM</div>
+  <div class="section-title">Two Options — Reserve in Advance</div>
+  <p class="body-text">Depart SS. Annunziata by ~12:00 PM. Choose one — both are excellent, but they shape the afternoon differently.</p>
+
+  <div class="lunch-options">
+    <div class="lunch-card">
+      <div class="lunch-card-accent"></div>
+      <div class="lunch-card-body">
+        <div class="lunch-card-label">Option A</div>
+        <div class="lunch-card-name">Cantinetta dei Verrazzano</div>
+        <div class="lunch-card-type">Wine bar · schiacciata lunch · near Piazza della Signoria</div>
+        <div class="lunch-card-desc">The Florentine outpost of Castello di Verrazzano — the same estate as the planned winery dinner. Specialty: <em>schiacciata</em> (Florentine flatbread) with salumi, cheese, and a glass of estate Chianti. Light, relaxed, no tablecloths. Good choice if the group wants to save appetite. A nice narrative thread — "we had lunch here, now we're having dinner at the actual castle."</div>
+        <div class="lunch-card-desc" style="color:var(--muted);font-size:13px;">Via dei Tavolini 18-20r · Mon–Sat ~11:30 AM–4 PM</div>
+        <a href="https://www.google.com/maps/place/Cantinetta+dei+Verrazzano,+Via+dei+Tavolini,+Firenze" target="_blank" class="lunch-card-link">Navigate →</a>
+      </div>
+    </div>
+    <div class="lunch-card">
+      <div class="lunch-card-accent alt"></div>
+      <div class="lunch-card-body">
+        <div class="lunch-card-label">Option B</div>
+        <div class="lunch-card-name">Cinghiale Bianco</div>
+        <div class="lunch-card-type">Classic Tuscan trattoria · Oltrarno</div>
+        <div class="lunch-card-desc">A proper sit-down Florentine lunch on the Oltrarno side of the Arno. <em>Cinghiale</em> (wild boar) ragù is the house signature — pappardelle al cinghiale is the move. Solid wine list, unhurried service. Choosing this option naturally pulls the afternoon into the Oltrarno, which shapes the rest of the day nicely.</div>
+        <div class="lunch-card-desc" style="color:var(--muted);font-size:13px;">Borgo San Jacopo 43r, 50125 FI · from ~12:00 PM</div>
+        <a href="https://www.google.com/maps/search/Cinghiale+Bianco+Firenze+Borgo+San+Jacopo" target="_blank" class="lunch-card-link">Navigate →</a>
+      </div>
+    </div>
+  </div>
+
+  <hr class="stop-divider">
+
+  <!-- AFTERNOON -->
+  <div class="section-eyebrow">Afternoon</div>
+  <div class="section-title">Oltrarno &amp; The View</div>
+
+  <div class="time-block">
+    <div class="time-block-header">
+      <span class="time-label">~2:00 PM</span>
+      <span class="time-block-title">Piazza della Signoria &amp; Ponte Vecchio</span>
+      <span class="time-block-sub">if Option A lunch</span>
+    </div>
+    <p class="body-text">From Via dei Tavolini you're steps from Piazza della Signoria. Walk through — the <strong>Loggia dei Lanzi</strong> is a free open-air sculpture gallery: Perseus holding Medusa's head, the Rape of the Sabine Women. No entry, no queue. Then cross the Ponte Vecchio into Oltrarno. Touristy, but the goldsmiths' shops are the real thing.</p>
+  </div>
+
+  <div class="time-block">
+    <div class="time-block-header">
+      <span class="time-label">~2:00 PM</span>
+      <span class="time-block-title">Piazza Santo Spirito</span>
+      <span class="time-block-sub">Oltrarno · the real Florence</span>
+    </div>
+    <p class="body-text">A large, quiet piazza with neighborhood bars and Brunelleschi's Basilica di Santo Spirito on the far end. Less photographed, more lived-in. Sit for a gelato or a coffee if needed.</p>
+    <div class="parking-box" style="margin-top:0;">
+      Piazza di Santo Spirito, 50125 FI &nbsp;·&nbsp; <a href="https://www.google.com/maps/place/Piazza+di+Santo+Spirito,+Firenze" target="_blank">Navigate →</a>
+    </div>
+  </div>
+
+  <div class="time-block">
+    <div class="time-block-header">
+      <span class="time-label">~3:30 PM</span>
+      <span class="time-block-title">Piazzale Michelangelo</span>
+      <span class="time-block-sub">The view that defines the city</span>
+    </div>
+    <p class="body-text">Drive or walk up. From Santo Spirito it's ~25 minutes on foot through the Oltrarno and up the hillside steps — rewarding, not strenuous. Driving takes 10 minutes; parking available above the piazza.</p>
+    <p class="body-text">Duomo, Palazzo Vecchio, the Arno, the hills beyond. Every photographer has taken this shot; take it anyway. Best light is late afternoon — which works in your favor. Bronze copies of Michelangelo's works stand in the piazza. Note the difference between standing with a copy here and having stood with the original this morning.</p>
+    <div class="parking-box" style="margin-top:0;">
+      Piazzale Michelangelo, 50125 FI &nbsp;·&nbsp; <a href="https://www.google.com/maps/place/Piazzale+Michelangelo,+Firenze" target="_blank">Navigate →</a>
+    </div>
+  </div>
+
+  <hr class="stop-divider">
+
+  <!-- EVENING DECISION -->
+  <div class="section-eyebrow">Evening</div>
+  <div class="section-title">Decision Point — ~5:00 PM</div>
+
+  <div class="evening-options">
+    <div class="evening-option">
+      <div class="evening-option-num">1</div>
+      <div class="evening-option-body">
+        <div class="evening-option-title">Dinner in Florence, then all return to Arezzo</div>
+        <div class="evening-option-desc">Head back down into the Oltrarno or centro for dinner (~6:30–7:30 PM) and return to Arezzo by ~9:30 PM. This is also Teresa and Dave W's last evening with the villa crew before departing June 6.</div>
+      </div>
+    </div>
+    <div class="evening-option">
+      <div class="evening-option-num">2</div>
+      <div class="evening-option-body">
+        <div class="evening-option-title">Return to Arezzo for dinner at the villa</div>
+        <div class="evening-option-desc">Depart by ~5:00 PM, arrive villa ~6:30 PM. Dave M and Mike will still be there — a quieter last evening together before Teresa and Dave W leave the next morning.</div>
+      </div>
+    </div>
+    <div class="evening-option">
+      <div class="evening-option-num">3</div>
+      <div class="evening-option-body">
+        <div class="evening-option-title">Dave W &amp; Teresa stay overnight in Florence</div>
+        <div class="evening-option-desc">Jane and Chuck drive back to Arezzo; Dave W and Teresa check in to a hotel for a proper Florentine evening on their own terms before departing June 6. See overnight section below.</div>
+      </div>
+    </div>
+  </div>
+  <p class="body-text" style="font-size:13px; color:var(--muted);">Drive back to Arezzo: Via A1 Autostrada · ~1h 15min · straightforward.</p>
+
+  <hr class="stop-divider">
+
+  <!-- OVERNIGHT OPTION -->
+  <div class="overnight-section">
+    <div class="overnight-section-label">Optional — Dave W &amp; Teresa</div>
+    <h3>Overnight in Florence</h3>
+    <p class="body-text">Since they depart June 6 and this is already their last full day with the group, staying in Florence overnight is a natural option — skip a second late-night drive on the A1, get a proper Florentine evening on their own terms, leave directly from Florence on the 6th.</p>
+
+    <div class="luggage-warn">
+      <strong>⚠ Luggage note:</strong> If Dave W and Teresa plan to stay overnight, their <strong>full luggage must be in the car for the June 5 drive</strong> — not just day bags. Four travelers plus luggage for two should be manageable.
+    </div>
+    <p class="body-text"><strong>Transport out on June 6:</strong> Garibaldi Blu is a short walk from Santa Maria Novella station, where the <strong>T2 tram runs directly to FLR airport</strong> in ~20 minutes. No taxi or car needed.</p>
+
+    <div class="hotel-cards">
+      <div class="hotel-card">
+        <div class="hotel-card-top recommended"></div>
+        <div class="hotel-card-body">
+          <div class="hotel-card-label">Recommended · Oltrarno</div>
+          <div class="hotel-card-name">Soprarno Suites</div>
+          <div class="hotel-card-desc">Steps from Piazza Santo Spirito and Cinghiale Bianco. Stylish, well-priced, perfectly placed for an evening in the neighborhood you've spent the afternoon exploring.</div>
+          <div class="hotel-card-price">Via Maggio 35, 50125 FI · ~€180–240/night</div>
+          <a href="https://www.soprarnosuites.com" target="_blank" class="hotel-card-link">soprarnosuites.com →</a>
+        </div>
+      </div>
+      <div class="hotel-card">
+        <div class="hotel-card-top standard"></div>
+        <div class="hotel-card-body">
+          <div class="hotel-card-label">Central · Mid-Range</div>
+          <div class="hotel-card-name">Hotel Davanzati</div>
+          <div class="hotel-card-desc">Family-run, consistently well-reviewed. Near Piazza della Repubblica — good if they want to be in the middle of things.</div>
+          <div class="hotel-card-price">Via Porta Rossa 5, 50123 FI · ~€150–210/night</div>
+          <a href="https://www.hoteldavanzati.it" target="_blank" class="hotel-card-link">hoteldavanzati.it →</a>
+        </div>
+      </div>
+      <div class="hotel-card">
+        <div class="hotel-card-top transit"></div>
+        <div class="hotel-card-body">
+          <div class="hotel-card-label">Best for June 6 Departure</div>
+          <div class="hotel-card-name">Garibaldi Blu</div>
+          <div class="hotel-card-desc">Near SMN station — short walk to the T2 tram that runs directly to FLR airport in ~20 min. On June 6 morning: walk, tram, done.</div>
+          <div class="hotel-card-price">Via dei Banchi 1, 50123 FI · ~€130–180/night</div>
+          <a href="https://www.hotelgaribaldiblu.com" target="_blank" class="hotel-card-link">hotelgaribaldiblu.com →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GUIDE -->
+  <div class="guide-section">
+    <div class="guide-label">Optional — Private Guide</div>
+    <div class="guide-name">Francesca Ermini</div>
+    <div class="guide-title-text">Firenze Tour Guide</div>
+    <div class="guide-contact">
+      <span class="guide-contact-label">Phone</span>
+      <span class="guide-contact-value"><a href="tel:+393381282084">+39 338 128 2084</a></span>
+      <span class="guide-contact-label">Email</span>
+      <span class="guide-contact-value"><a href="mailto:fraermin@tin.it">fraermin@tin.it</a></span>
+    </div>
+    <div class="guide-note">Dave M arranged a private guided tour with Francesca last September that was a highlight of that trip. If Jane and Chuck want that experience again — or if Dave W and Teresa would benefit from it — she's the one to call. A private Florence guide typically runs €150–200 for 3–4 hours covering the Accademia + city walk. <strong>Book at least 2–3 weeks out — June fills quickly.</strong></div>
+  </div>
+
+  <!-- QUICK REFERENCE -->
+  <div class="section-eyebrow">Quick Reference</div>
+  <div class="section-title">All Stops &amp; Contacts</div>
+  <div class="quick-ref-wrap">
+    <table class="quick-ref">
+      <thead><tr><th>Stop / Contact</th><th>Address</th><th>Notes</th></tr></thead>
+      <tbody>
+        <!-- Mary handles her own FLR transport from Florence hotel -->
+        <tr><td>Parterre Parking</td><td>Piazza della Libertà, 50129 FI</td><td>Outside ZTL · ~€2–3/hr</td></tr>
+        <tr><td>Accademia</td><td>Via Ricasoli 58-60, 50122 FI</td><td><strong>Pre-book tickets</strong></td></tr>
+        <tr><td>Piazza SS. Annunziata</td><td>50122 Firenze</td><td>Free · 10 min detour</td></tr>
+        <tr><td>Cantinetta Verrazzano</td><td>Via dei Tavolini 18-20r, 50122 FI</td><td>Light lunch · wine bar</td></tr>
+        <tr><td>Cinghiale Bianco</td><td>Borgo San Jacopo 43r, 50125 FI</td><td>Full lunch · reserve ahead</td></tr>
+        <tr><td>Piazza Santo Spirito</td><td>50125 Firenze</td><td>Oltrarno · relaxed afternoon</td></tr>
+        <tr><td>Piazzale Michelangelo</td><td>50125 Firenze</td><td>Best view in Florence</td></tr>
+        <tr><td><strong>Tour Guide</strong></td><td>Francesca Ermini · fraermin@tin.it</td><td>+39 338 128 2084 · book 2–3 wks out</td></tr>
+        <tr><td><strong>Hotel – Soprarno</strong></td><td>Via Maggio 35, 50125 FI</td><td>Oltrarno boutique · ~€180–240</td></tr>
+        <tr><td><strong>Hotel – Garibaldi Blu</strong></td><td>Via dei Banchi 1, 50123 FI</td><td>Walk to SMN → T2 tram to FLR · ~€130–180</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="itinerary-footer-note">
+    Itinerary prepared for Dave &amp; Mike's Italy 2026 group trip · Base: Pergine Valdarno, Arezzo<br>
+    Distances and times are driving estimates — verify with Google Maps before departure.
+  </p>
+
+</div>
+
+<footer class="site-footer">
+  <span class="footer-breadcrumb">dave&amp;mike · esperienze · travel · italy 2026 · excursions · <strong>florence june 5</strong></span>
+  <span class="footer-contact"><a href="mailto:services@musel.us">services@musel.us</a></span>
+</footer>
+
+</body>
+</html>

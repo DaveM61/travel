@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Italy 2026 — Living Like an Italian</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  :root {
+    --cream:      var(--bg);
+    --parchment:  var(--bg);
+    --warm-rule:  rgba(28,26,22,0.12);
+    --rule:       rgba(28,26,22,0.12);
+    --ink:        var(--text);
+    --gold:       var(--muted);
+    --terracotta: var(--muted);
+    --tuscany:    var(--slate);
+    --puglia:     var(--slate);
+    --sage:       var(--slate);
+    --dusty-blue: var(--faded);
+    --warm-bg:    var(--bg);
+  }
+
+  body { font-family: 'DM Sans', sans-serif; }
+
+  /* ─── INTRO ─── */
+  .intro {
+    background: var(--bg);
+    border-bottom: 1px solid var(--warm-rule);
+    padding: 36px 24px;
+  }
+  .intro p {
+    max-width: 700px; margin: 0 auto;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px; font-weight: 300; font-style: italic;
+    color: var(--text); text-align: center; line-height: 1.8;
+  }
+
+  /* ─── PART TABS ─── */
+  .part-tabs {
+    display: flex;
+    background: var(--text);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .part-tab {
+    flex: 1;
+    padding: 16px 20px;
+    text-align: center;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px; font-weight: 400; letter-spacing: 0.08em;
+    color: rgba(240,237,231,0.5);
+    border-bottom: 3px solid transparent;
+    transition: color 0.25s, border-color 0.25s;
+    user-select: none;
+  }
+  .part-tab:hover { color: rgba(240,237,231,0.85); }
+  .part-tab.active { color: white; border-bottom-color: var(--slate); }
+
+  /* ─── PART PANELS ─── */
+  .part-panel { display: none; }
+  .part-panel.active { display: block; }
+
+  /* ─── PART HEADER STRIP ─── */
+  .part-header {
+    padding: 36px 24px 0;
+    text-align: center;
+  }
+  .part-header .part-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 6px;
+  }
+  .part-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(24px, 3.5vw, 36px);
+    font-weight: 400; font-style: italic;
+    color: var(--text); margin-bottom: 6px;
+  }
+  .part-header .part-dates {
+    font-size: 14px; color: var(--muted); margin-bottom: 24px;
+  }
+  .part-rule {
+    width: 48px; height: 1px;
+    background: var(--warm-rule);
+    margin: 0 auto 32px;
+  }
+
+  /* ─── LAYOUT ─── */
+  .wrap { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+
+  /* ─── INTRO BODY TEXT ─── */
+  .part-intro {
+    background: white;
+    border: 1px solid var(--warm-rule);
+    border-radius: 6px;
+    padding: 28px 32px;
+    margin-bottom: 40px;
+    font-size: 15px; line-height: 1.8;
+    color: var(--text);
+  }
+
+  /* ─── SECTION HEADERS ─── */
+  .section-block { margin-bottom: 44px; }
+
+  .section-eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px; font-weight: 500;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 6px;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 400; font-style: italic;
+    color: var(--text); margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--warm-rule);
+  }
+
+  /* ─── CARDS ─── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+  }
+  .card-grid.two-col { grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); }
+
+  .info-card {
+    background: white;
+    border: 1px solid var(--warm-rule);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .card-stripe { height: 3px; }
+  .stripe-puglia  { background: linear-gradient(to right, var(--slate), var(--faded)); }
+  .stripe-tuscany { background: linear-gradient(to right, var(--slate), var(--muted)); }
+  .stripe-sage    { background: linear-gradient(to right, var(--slate), var(--faded)); }
+  .stripe-gold    { background: var(--muted); }
+  .stripe-wine    { background: linear-gradient(to right, #7a2535, #9e7040); }
+
+  .card-body { padding: 18px 20px; }
+  .card-name {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px; font-weight: 500;
+    color: var(--text); margin-bottom: 4px;
+    display: flex; align-items: flex-start; gap: 6px;
+  }
+  .card-name .star { color: var(--muted); font-size: 13px; flex-shrink: 0; margin-top: 2px; }
+  .card-detail {
+    font-size: 13px; color: var(--muted);
+    line-height: 1.6; margin-bottom: 6px;
+  }
+  .card-address {
+    font-size: 12px; font-style: italic;
+    color: var(--slate);
+    border-top: 1px solid var(--warm-rule);
+    padding-top: 8px; margin-top: 8px;
+  }
+
+  /* ─── TRIP LIST ─── */
+  .trip-list { display: flex; flex-direction: column; gap: 12px; }
+  .trip-item {
+    background: white;
+    border: 1px solid var(--warm-rule);
+    border-radius: 6px;
+    padding: 16px 20px;
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 16px;
+    align-items: start;
+  }
+  @media (max-width: 580px) {
+    .trip-item { grid-template-columns: 1fr; gap: 6px; }
+  }
+  /* Override style.css .trip-name (which is 2.8rem Cormorant for page h1) */
+  .trip-item .trip-name {
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 14px !important; font-weight: 500 !important;
+    font-style: normal !important;
+    color: var(--text) !important;
+  }
+  .trip-distance {
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--muted); margin-top: 3px;
+  }
+  .trip-desc { font-size: 13px; color: var(--text); line-height: 1.6; }
+
+  /* ─── HIGHLIGHT BOX ─── */
+  .highlight-box {
+    background: var(--text);
+    color: var(--bg);
+    border-radius: 8px;
+    padding: 32px 36px;
+    margin-bottom: 44px;
+  }
+  .highlight-box .hl-eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--faded); margin-bottom: 8px;
+  }
+  .highlight-box h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 400; font-style: italic;
+    color: white; margin-bottom: 14px;
+  }
+  .highlight-box p {
+    font-size: 15px;
+    color: rgba(240,237,231,0.82); line-height: 1.75;
+    margin-bottom: 20px;
+  }
+  .hl-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px; margin-top: 16px;
+  }
+  .hl-item {
+    background: rgba(255,255,255,0.07);
+    border-radius: 4px;
+    padding: 12px 16px;
+  }
+  .hl-item-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--faded); margin-bottom: 4px;
+  }
+  .hl-item-val { font-size: 13px; color: rgba(240,237,231,0.85); line-height: 1.5; }
+
+  /* ─── RHYTHM NOTE ─── */
+  .rhythm-note {
+    background: var(--bg);
+    border-left: 3px solid var(--muted);
+    border-radius: 0 6px 6px 0;
+    padding: 18px 24px;
+    margin-bottom: 32px;
+    font-size: 14px; font-style: italic;
+    color: var(--muted); line-height: 1.7;
+  }
+
+  @media (max-width: 600px) {
+    .part-tab { font-size: 11px; padding: 14px 12px; }
+    .card-grid.two-col { grid-template-columns: 1fr; }
+    .highlight-box { padding: 24px 20px; }
+    .part-intro { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- top bar -->
+<div class="top-bar"></div>
+
+<!-- header -->
+<header class="site-header">
+  <div class="site-header-inner">
+    <a href="index.html" class="site-logo">dave&amp;mike</a>
+  </div>
+  <div class="header-image-wrap">
+    <img src="italy-header.jpg" alt="Italy 2026" class="header-img">
+    <div class="header-img-fade"></div>
+  </div>
+  <div class="trip-header">
+    <div class="trip-eyebrow">Italy 2026 · Local Life Guide</div>
+    <h1 class="trip-name">Living Like an Italian</h1>
+    <div class="trip-subtitle">food, wine, markets &amp; the slow life</div>
+  </div>
+</header>
+
+<!-- back bar -->
+<div class="back-bar">
+  <a href="index.html" class="back-link">← Home</a>
+</div>
+
+<!-- INTRO -->
+<div class="intro">
+  <p>Three weeks at each villa gives you the rare luxury of becoming a temporary local &mdash; shopping at the same stalls, greeting the same baristas, and knowing which lane to take for the best evening light. This guide leans into that rhythm.</p>
+</div>
+
+<!-- PART TABS -->
+<div class="part-tabs">
+  <div class="part-tab active" onclick="switchPart('puglia')">🌊 Part One &nbsp;&middot;&nbsp; Ostuni, Puglia</div>
+  <div class="part-tab" onclick="switchPart('tuscany')">🏛 Part Two &nbsp;&middot;&nbsp; Pergine Valdarno / Arezzo</div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- PART ONE: PUGLIA                        -->
+<!-- ═══════════════════════════════════════ -->
+<div id="panel-puglia" class="part-panel active">
+  <div class="wrap">
+
+    <div class="part-header">
+      <div class="part-label">Part One</div>
+      <h2>Ostuni, Puglia</h2>
+      <div class="part-dates">May 11 – June 1 &nbsp;·&nbsp; Villa Saracena</div>
+      <div class="part-rule"></div>
+    </div>
+
+    <div class="part-intro">
+      Arriving before peak summer means May and June give you warm weather, open restaurants, the sea just reaching swimmable temperatures, and a town that still belongs to the people who live in it. The <em>centro storico</em> is entirely whitewashed and best explored on foot in the early morning or around the <em>passeggiata</em> hour (18:00–20:00). The countryside around the villa &mdash; ancient dry-stone walls, trulli-style structures, olive groves up to 1,000 years old &mdash; is made for slow exploration.
+    </div>
+
+    <!-- Beaches -->
+    <div class="section-block">
+      <div class="section-eyebrow">15–20 min drive</div>
+      <div class="section-title">🏖 Nearby Beaches</div>
+      <div class="trip-list">
+        <div class="trip-item">
+          <div><div class="trip-name">Torre Guaceto</div><div class="trip-distance">~12 km</div></div>
+          <div class="trip-desc">A protected marine and nature reserve. Gorgeous clear water, walking trails through dunes and wetlands. One of the finest beaches in all of Puglia — strict protections keep it pristine.</div>
+        </div>
+        <div class="trip-item">
+          <div><div class="trip-name">Rosa Marina / Torre Canne</div><div class="trip-distance">~15 km</div></div>
+          <div class="trip-desc">Gentle sandy beaches in a pine-shaded resort village. Calm water, easygoing atmosphere, good for long lazy afternoons.</div>
+        </div>
+        <div class="trip-item">
+          <div><div class="trip-name">Costa Merlata</div><div class="trip-distance">~18 km</div></div>
+          <div class="trip-desc">Rocky coves north of Ostuni with crystal water. Less developed, more local feel — bring a snorkel.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Local Experiences -->
+    <div class="section-block">
+      <div class="section-eyebrow">Not Tourism — Living</div>
+      <div class="section-title">✨ Local Experiences</div>
+      <div class="card-grid two-col">
+        <div class="info-card">
+          <div class="card-stripe stripe-puglia"></div>
+          <div class="card-body">
+            <div class="card-name">Olive Oil Tasting</div>
+            <div class="card-detail">Masseria Il Frantoio, 10 min from the villa on SP 29. Working olive oil press, tastings, and dinner in the garden. Genuinely local, not staged. Reservations helpful.</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="card-stripe stripe-sage"></div>
+          <div class="card-body">
+            <div class="card-name">Bio Solequo Coop</div>
+            <div class="card-detail">A historic vegetable garden restored to its original purpose. Open Thursday mornings — walk the garden and buy their seasonal organic produce directly. A quiet, beautiful ritual.</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="card-stripe stripe-gold"></div>
+          <div class="card-body">
+            <div class="card-name">Saturday Market</div>
+            <div class="card-detail">Via Nino Sansone, 08:00–12:00. Clothes, housewares, fruits, vegetables, cheeses. Go early. This is where Ostuni actually shops.</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="card-stripe stripe-puglia"></div>
+          <div class="card-body">
+            <div class="card-name">Valle d'Itria Drive</div>
+            <div class="card-detail">Any afternoon — take the car south. The landscape of trulli, vineyards and whitewashed villages is unlike anywhere else in Europe. Stop whenever something catches your eye.</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="card-stripe stripe-sage"></div>
+          <div class="card-body">
+            <div class="card-name">Pasta / Cooking Class</div>
+            <div class="card-detail">Several masserias near Ostuni offer half-day pasta-making experiences. Good rainy-morning activity and you eat what you make. Ask host Andrea for a local recommendation.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- E-Bikes -->
+    <div class="section-block">
+      <div class="section-eyebrow">Multi-week rates available</div>
+      <div class="section-title">🚲 E-Bike Rentals</div>
+      <div class="rhythm-note">For a 3-week stay, contact each shop directly — all are open to multi-week arrangements and will negotiate a flat rate. Delivery to the villa is available from most operators.</div>
+      <div class="card-grid">
+        <div class="info-card">
+          <div class="card-stripe stripe-sage"></div>
+          <div class="card-body">
+            <div class="card-name">Cristal E-Bike</div>
+            <div class="card-detail">E-bikes and mountain bikes for Valle d'Itria and Salento. From €10/day — contact for 3-week flat rate. English spoken.</div>
+            <div class="card-address">Piazza della Libertà 14 · +39 368 347 3242 · bikecristalostuni.it</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="card-stripe stripe-sage"></div>
+          <div class="card-body">
+            <div class="card-name">Martino Bike Ostuni</div>
+            <div class="card-detail">Wide range including e-bikes, mountain bikes, and children's bikes. Offers delivery directly to the villa. Contact for multi-week pricing.</div>
+            <div class="card-address">martinobike.it</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="card-stripe stripe-sage"></div>
+          <div class="card-body">
+            <div class="card-name">CCT Bike Rental</div>
+            <div class="card-detail">E-bikes, trekking and road bikes. Delivery to Ostuni €40. Explicitly offers discounted rates for rentals over 1 week — email for a 3-week quote. Book at least 3 days ahead.</div>
+            <div class="card-address">cctbikerental.com</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="card-stripe stripe-sage"></div>
+          <div class="card-body">
+            <div class="card-name">Apulia Bike Rental</div>
+            <div class="card-detail">Operates across Valle d'Itria including Ostuni. Good for renting multiple bikes at once (group of 8). "For rental requests of more than a week, contact us for a discounted quote."</div>
+            <div class="card-address">apuliabikerental.com</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Wine -->
+    <div class="section-block">
+      <div class="section-eyebrow">Primitivo · Negroamaro · Ostuni DOC</div>
+      <div class="section-title">🍷 Wine — Enoteca &amp; Local Wineries</div>
+      <div class="rhythm-note">Puglia produces some of Italy's most characterful wines. Expect €5–12 for excellent everyday bottles. Two enotecas in town for daily bottles; two local wineries for buying direct from the producer.</div>
+      <div class="card-grid two-col">
+        <div class="info-card">
+          <div class="card-stripe stripe-wine"></div>
+          <div class="card-body">
+            <div class="card-name">Enoteca Vini di Puglia</div>
+            <div class="card-detail">Best dedicated wine shop near the villa. Excellent range of Pugliese labels — Primitivo, Negroamaro, Nero di Troia, passito — plus local olive oil, pasta, and taralli. Staff know their wines. Can arrange shipping. <em>Closed during afternoon pausa.</em></div>
+            <div class="card-address">Via Cav. di Vitt. Veneto 61 · near Famila supermarket</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="card-stripe stripe-wine"></div>
+          <div class="card-body">
+            <div class="card-name">Le Bontà di Bacco</div>
+            <div class="card-detail">One of Ostuni's most established enotecas, right in the old town. Good selection of regional bottles including less-common local labels. Worth a visit on an Ostuni centro storico walk.</div>
+            <div class="card-address">Corso Vittorio Emanuele II 230/D · Mon–Sat 8:00–13:00 &amp; 16:00–20:00 · Sun 9:00–17:00</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="card-stripe stripe-wine"></div>
+          <div class="card-body">
+            <div class="card-name"><span class="star">★</span> Amalberga Winery</div>
+            <div class="card-detail">Local winery making wines under the rare Ostuni DOC — white Bianchetto Gentile and red Ottavianello (Cinsault). Tasting room in an ancient trullo open every day 9:30–22:30. Natural wine ethos, very local.</div>
+            <div class="card-address">Contrada Vallegna S.N. · +39 328 316 0853 · amalberga.it</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="card-stripe stripe-wine"></div>
+          <div class="card-body">
+            <div class="card-name">Tagaro (Masseria Tagaro)</div>
+            <div class="card-detail">Family winery in the Valle d'Itria hills between Fasano and Ostuni, growing Primitivo, Negroamaro, Verdeca, and Fiano Minutolo. Wines available direct at the cantina. Contact via website to arrange a visit.</div>
+            <div class="card-address">Contrada Sant'Angelo, Fasano (BR) · tagaro.it</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Groceries -->
+    <div class="section-block">
+      <div class="section-eyebrow">Burrata · Orecchiette · Fresh Fish · Olive Oil</div>
+      <div class="section-title">🛒 Groceries &amp; Fresh Produce</div>
+      <div class="card-grid">
+        <div class="info-card">
+          <div class="card-stripe stripe-gold"></div>
+          <div class="card-body">
+            <div class="card-name">Famila Supermarket</div>
+            <div class="card-detail">The largest supermarket, a genuine local favourite. Good range of regional products, well-stocked deli and cheese counters.</div>
+            <div class="card-address">Via Pietro de Laurentis (main Ostuni ring road)</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="card-stripe stripe-gold"></div>
+          <div class="card-body">
+            <div class="card-name">Carrefour Market</div>
+            <div class="card-detail">Spacious, good fresh seafood counter and deli. Reliable for everyday needs.</div>
+            <div class="card-address">Multiple locations including Piazza Italia</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="card-stripe stripe-gold"></div>
+          <div class="card-body">
+            <div class="card-name">Saturday Mercato</div>
+            <div class="card-detail">Vegetables and fruit here will be fresher and cheaper than any supermarket. Make it a Saturday morning habit.</div>
+            <div class="card-address">Via Nino Sansone · 08:00–12:00 weekly</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="card-stripe stripe-sage"></div>
+          <div class="card-body">
+            <div class="card-name">Bottega Italiana</div>
+            <div class="card-detail">Local shop selling km0 (zero-kilometre) products — local olive oils, pastas, preserves, cheeses. Worth exploring for quality ingredients and gifts.</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="card-stripe stripe-sage"></div>
+          <div class="card-body">
+            <div class="card-name">Bio Solequo Coop</div>
+            <div class="card-detail">Thursday mornings — organic seasonal vegetables direct from their garden. Exceptional quality.</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="card-stripe stripe-gold"></div>
+          <div class="card-body">
+            <div class="card-name">Local Butcher / Macelleria</div>
+            <div class="card-detail">Ask host Andrea for the nearest macelleria. Local Puglian sausages and cuts are excellent and worth seeking out.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cafés & Eateries -->
+    <div class="section-block">
+      <div class="section-eyebrow">Where locals eat</div>
+      <div class="section-title">☕ Cafés &amp; Local Eateries</div>
+      <div class="rhythm-note">Ostuni has good restaurants but also its share of tourist-facing places. The following are where the town's own people eat and drink.</div>
+      <div class="card-grid two-col">
+        <div class="info-card">
+          <div class="card-stripe" style="height:3px;background:linear-gradient(to right,var(--muted),var(--faded));"></div>
+          <div class="card-body">
+            <div class="card-name">Osteria CasaCiaccia</div>
+            <div class="card-detail">One of those places that feels like a local secret. Home-style Puglian cooking: handmade pastas, fresh seasonal vegetables, no frills. The kind of table you return to every few days.</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="card-stripe" style="height:3px;background:linear-gradient(to right,var(--muted),var(--faded));"></div>
+          <div class="card-body">
+            <div class="card-name">Osteria Monacelle</div>
+            <div class="card-detail">A dependable dinner choice, nestled in the old town. Classic regional dishes done consistently well. Locals eat here without fanfare — which is the best recommendation.</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="card-stripe" style="height:3px;background:linear-gradient(to right,var(--muted),var(--faded));"></div>
+          <div class="card-body">
+            <div class="card-name">Osteria Cattedrale</div>
+            <div class="card-detail">Tiny — just six tables — run by a husband and wife duo. Set menus from ~€30 for three generous courses. <strong>Book ahead.</strong></div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="card-stripe" style="height:3px;background:linear-gradient(to right,var(--muted),var(--faded));"></div>
+          <div class="card-body">
+            <div class="card-name">Il Gatto Rosso</div>
+            <div class="card-detail">Fills up with locals ordering their usuals, chatting to friends at the next table. Relaxed, local, honest. No website needed — just show up.</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="card-stripe" style="height:3px;background:linear-gradient(to right,var(--muted),var(--faded));"></div>
+          <div class="card-body">
+            <div class="card-name">Ostuni Bistrot</div>
+            <div class="card-detail">On the piazza. Good value lunch spot popular with locals throughout the week. Friendly service and solid local cooking.</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="card-stripe" style="height:3px;background:linear-gradient(to right,var(--muted),var(--faded));"></div>
+          <div class="card-body">
+            <div class="card-name">Trattoria Il Cortiletto — Speziale</div>
+            <div class="card-detail">A personal recommendation from Dave's Italian tutor's family — about as local as it gets. Authentic Puglian cooking driven by the season and the land: orecchiette, burnt wheat pasta, cicoria e fave, lamb in foil. Dine in the courtyard or, best of all, in the orange grove under the stars. About 20 minutes from Ostuni. Closed Monday and Sunday evenings. <strong><a href="https://trattoriailcortiletto.it/en/" target="_blank" style="color:inherit;">trattoriailcortiletto.it</a></strong> &nbsp;·&nbsp; +39 080 4810 758</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="card-stripe stripe-gold"></div>
+          <div class="card-body">
+            <div class="card-name">☕ Morning Bar Ritual</div>
+            <div class="card-detail">Pick any bar in the old town that looks full of Italians at 08:00. Order a cornetto and cappuccino standing at the counter. This is the best €2 you will spend in Italy.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /wrap -->
+</div><!-- /panel-puglia -->
+
+
+<!-- ═══════════════════════════════════════ -->
+<!-- PART TWO: TUSCANY                       -->
+<!-- ═══════════════════════════════════════ -->
+<div id="panel-tuscany" class="part-panel">
+  <div class="wrap">
+
+    <div class="part-header">
+      <div class="part-label">Part Two</div>
+      <h2>Pergine Valdarno / Arezzo</h2>
+      <div class="part-dates">June 1 – 22 &nbsp;·&nbsp; Villa, Pergine Valdarno</div>
+      <div class="part-rule"></div>
+    </div>
+
+    <div class="part-intro">
+      This is arguably the most unrushed, genuinely local part of Tuscany — the Valdarno and Valdichiana valleys sit between the big-name tourist circuits (Florence, Siena, Chianti) without being reached by the tour buses. Pergine Valdarno itself is a tiny medieval hilltop village — the villa, the pool, the views, and the quiet are the point. After a few days you will know the bar owner, the baker, and the woman who runs the fruit stall.
+    </div>
+
+    <!-- Local Experiences -->
+    <div class="section-block">
+      <div class="section-eyebrow">Not Tourism — Living</div>
+      <div class="section-title">✨ Local Experiences</div>
+      <div class="card-grid two-col">
+        <div class="info-card">
+          <div class="card-stripe stripe-tuscany"></div>
+          <div class="card-body">
+            <div class="card-name">Piero della Francesca Frescoes</div>
+            <div class="card-detail">Basilica of San Francesco, Arezzo. The Legend of the True Cross cycle is stunning and undervisited. Book timed entry (€8) in advance — groups kept small. Allow an hour minimum. Among the greatest cycles of Renaissance painting in Italy.</div>
+            <div class="card-address">Arezzo, 15 km from villa</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="card-stripe stripe-gold"></div>
+          <div class="card-body">
+            <div class="card-name">Arezzo Antique Market</div>
+            <div class="card-detail">First weekend of every month, Piazza Grande. One of Italy's best antique markets spreads across the piazza and medieval streets. Arrive early, leave late — ideal for a full Saturday.</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="card-stripe stripe-sage"></div>
+          <div class="card-body">
+            <div class="card-name">Pratomagno Ridge Drive</div>
+            <div class="card-detail">The Pratomagno mountain ridge runs along the eastern edge of the Valdarno. Take the road up through chestnut and beech forest for panoramic views over both valleys and the Apennines. Perfect for a morning drive or bike ride.</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="card-stripe stripe-tuscany"></div>
+          <div class="card-body">
+            <div class="card-name">Loro Ciuffenna</div>
+            <div class="card-detail">A beautiful small town 10 km from Pergine, set above a rushing stream. Medieval mill still working. Small caffè, slow pace. The drive there through vineyards and olive groves is half the pleasure.</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="card-stripe stripe-gold"></div>
+          <div class="card-body">
+            <div class="card-name">Walking the Village</div>
+            <div class="card-detail">Pergine Valdarno itself is worth exploring thoroughly. The church of San Michele Arcangelo has a frescoed barrel-vault ceiling; the castle ruins give views over the Valdarno. The locals are genuinely welcoming — buongiorno counts for a lot.</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="card-stripe stripe-sage"></div>
+          <div class="card-body">
+            <div class="card-name">Cycling / E-Bike</div>
+            <div class="card-detail">Rent an e-bike in Montevarchi or San Giovanni Valdarno and take the riverside route along the Arno. Flat, scenic, and peaceful.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- E-Bikes -->
+    <div class="section-block">
+      <div class="section-eyebrow">Multi-week rates available</div>
+      <div class="section-title">🚲 E-Bike Rentals</div>
+      <div class="rhythm-note">The closest rental shop is just 10 km away in Loro Ciuffenna. Contact each shop in advance to arrange a 3-week flat rate — most offer delivery to your accommodation.</div>
+      <div class="card-grid">
+        <div class="info-card">
+          <div class="card-stripe stripe-sage"></div>
+          <div class="card-body">
+            <div class="card-name"><span class="star">★</span> Energy E-Bike</div>
+            <div class="card-detail">Dedicated e-bike shop — sales, rentals, and guided tours. Also listed on the Valdarno Bike Road cycling network. The natural starting point for a 3-week arrangement; email or call in advance.</div>
+            <div class="card-address">Via Giuseppe Saragat 9, Loro Ciuffenna · ~10 km from villa · +39 389 001 0667 · energyebike.it</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="card-stripe stripe-sage"></div>
+          <div class="card-body">
+            <div class="card-name">On the Tuscan Bike</div>
+            <div class="card-detail">Rents classic mountain bikes and e-bikes for Tuscan countryside exploration. Based in the Valdarno. Contact for multi-week rates.</div>
+            <div class="card-address">Via G. Dal Borro 14B, San Giustino Valdarno · onthetuscanbike.it</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="card-stripe stripe-sage"></div>
+          <div class="card-body">
+            <div class="card-name">Veloce Bike Rental</div>
+            <div class="card-detail">Regional operator serving Arezzo, Loro Ciuffenna, Montevarchi and surrounding towns. Delivers and collects at your accommodation — will bring bikes to the villa. Advance booking discounts available.</div>
+            <div class="card-address">rentalbikeitaly.com</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Wine -->
+    <div class="section-block">
+      <div class="section-eyebrow">Chianti Colli Aretini · Valdarno di Sopra DOC</div>
+      <div class="section-title">🍷 Wine — Enoteca &amp; Local Wineries</div>
+      <div class="rhythm-note">Remarkable find: Vini Guerrini is at Via Querceto 24 — literally next door to the villa at Via Querceto 26.</div>
+      <div class="card-grid two-col">
+        <div class="info-card">
+          <div class="card-stripe stripe-wine"></div>
+          <div class="card-body">
+            <div class="card-name"><span class="star">★</span> Vini Guerrini — Next Door</div>
+            <div class="card-detail">The villa is at Via Querceto 26 — this producer is literally next door. Makes wine, extra virgin olive oil, pecorino, and cured meats from their own land. Buy direct; online shop also available. An exceptional convenience — knock on the door for local Sangiovese and olive oil.</div>
+            <div class="card-address">Via Querceto 24, Pergine Valdarno · viniguerrini.it</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="card-stripe stripe-wine"></div>
+          <div class="card-body">
+            <div class="card-name">Cantine Terredagoli</div>
+            <div class="card-detail">Family winery in business since 1915, right in the same municipality. Makes Chianti DOCG, Chianti Riserva DOCG, and Chianti Classico Riserva DOCG. Wine shop inside the winery — buy direct. Call ahead to confirm a visit.</div>
+            <div class="card-address">Via Cinchio Berti 18, Laterina-Pergine Valdarno · Mon–Thu 8:30–17:00 · Fri 8:30–16:00 · cantineterredagoli.it</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="card-stripe stripe-wine"></div>
+          <div class="card-body">
+            <div class="card-name">Poggio Molina</div>
+            <div class="card-detail">Beautiful estate in the Val d'Ambra (~15–20 min). Valdarno di Sopra DOC and Chianti DOCG. The Bossini-Gori family welcome visitors for tastings, cellar tours, and direct purchase. Book in advance for a sommelier-guided tasting with a charcuterie board.</div>
+            <div class="card-address">Loc. Poggio Molina, Bucine (AR) · poggiomolina.it</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="card-stripe stripe-wine"></div>
+          <div class="card-body">
+            <div class="card-name">Nettare di Vino</div>
+            <div class="card-detail">A proper bulk-wine enoteca (vini sfusi) — bring your own bottle or buy a container there. Excellent everyday Tuscan table wine at very low prices. Also carries labelled bottles, sparkling wine, and grappa. Perfect for stocking the villa on a market-day trip.</div>
+            <div class="card-address">Via Roma, San Giovanni Valdarno · ~20 min from villa</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Groceries -->
+    <div class="section-block">
+      <div class="section-eyebrow">Chianina beef · Pecorino · Porcini · Tuscan wine</div>
+      <div class="section-title">🛒 Groceries &amp; Fresh Produce</div>
+      <div class="card-grid">
+        <div class="info-card">
+          <div class="card-stripe stripe-gold"></div>
+          <div class="card-body">
+            <div class="card-name">Pergine Valdarno Village</div>
+            <div class="card-detail">The village itself has a supermarket, butcher, bakery, and fruit &amp; vegetable stall. For daily needs this is perfect — and shopping here keeps your money in the village.</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="card-stripe stripe-gold"></div>
+          <div class="card-body">
+            <div class="card-name">Friday Market — Pergine</div>
+            <div class="card-detail">Every Friday morning. Fresh produce, cheese, local specialties, and crafts. Small but authentic. Make it a weekly ritual.</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="card-stripe stripe-gold"></div>
+          <div class="card-body">
+            <div class="card-name">Mercato Coperto — Montevarchi</div>
+            <div class="card-detail">Covered market open Mon–Sat 08:30. Local produce, vegetables, Valdarno cheeses, typical cold cuts, and a wide selection of regional wines and extra-virgin olive oil. Excellent quality.</div>
+            <div class="card-address">Via Trieste 30, Montevarchi (~8 km)</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="card-stripe stripe-sage"></div>
+          <div class="card-body">
+            <div class="card-name">Slow Food Earth Market — Montevarchi</div>
+            <div class="card-detail">Artisan and small-producer market. Seasonal, curated — the kind of place where you discover a local honey or cheese you will try to import for years afterwards.</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="card-stripe stripe-gold"></div>
+          <div class="card-body">
+            <div class="card-name">Saturday Market — Arezzo</div>
+            <div class="card-detail">Big weekly market in Arezzo city. Combine with an early morning visit and a coffee at Caffè dei Bastioni.</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="card-stripe stripe-gold"></div>
+          <div class="card-body">
+            <div class="card-name">Saturday Market — San Giovanni Valdarno</div>
+            <div class="card-detail">Another big weekly market close by. Good for produce, clothing, and housewares.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cafés & Eateries -->
+    <div class="section-block">
+      <div class="section-eyebrow">Where locals eat</div>
+      <div class="section-title">☕ Cafés &amp; Local Eateries</div>
+      <div class="rhythm-note">Arezzo has a very local food culture — not Florence, not Chianti — and is all the better for it. Many are simply where people eat on a Tuesday.</div>
+      <div class="card-grid two-col">
+        <div class="info-card">
+          <div class="card-stripe" style="height:3px;background:linear-gradient(to right,var(--slate),var(--muted));"></div>
+          <div class="card-body">
+            <div class="card-name">Caffè dei Bastioni — Arezzo</div>
+            <div class="card-detail">Historic café dating to 1804 on the ancient city walls. Excellent cappuccino, cornetto, and atmosphere. This is where Arezzo has its morning. No website — just walk in.</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="card-stripe" style="height:3px;background:linear-gradient(to right,var(--slate),var(--muted));"></div>
+          <div class="card-body">
+            <div class="card-name">Pasticceria Filli Bruschi — Arezzo</div>
+            <div class="card-detail">Family-run since 1937. Come for pastries, local cakes, and a coffee at the counter. A proper neighbourhood pasticceria.</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="card-stripe" style="height:3px;background:linear-gradient(to right,var(--slate),var(--muted));"></div>
+          <div class="card-body">
+            <div class="card-name">Osteria dell'Acquolina — Arezzo</div>
+            <div class="card-detail">Owner Paolo Tizzanini's commitment to authentic Tuscan cuisine is total — nothing imported, everything regional. Ribollita, pappardelle al cinghiale, bistecca. <strong>Reserve for dinner.</strong></div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="card-stripe" style="height:3px;background:linear-gradient(to right,var(--slate),var(--muted));"></div>
+          <div class="card-body">
+            <div class="card-name">Osteria del Borghicciolo — Arezzo</div>
+            <div class="card-detail">Rich soups, handmade pasta, Tuscan wines by the glass. Reliable local trattoria where you feel the rhythm of ordinary Arezzo life.</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="card-stripe" style="height:3px;background:linear-gradient(to right,var(--slate),var(--muted));"></div>
+          <div class="card-body">
+            <div class="card-name"><span class="star">★</span> Castellucci — Montevarchi</div>
+            <div class="card-detail">Widely regarded as the best place in the Valdarno for bistecca alla Fiorentina — the great Tuscan T-bone from Chianina cattle. Go once for the full experience. <strong>Reserve ahead.</strong></div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="card-stripe" style="height:3px;background:linear-gradient(to right,var(--slate),var(--muted));"></div>
+          <div class="card-body">
+            <div class="card-name">La Tua Piadina — Arezzo</div>
+            <div class="card-detail">A sandwich shop perpetually full of locals. Piadine (flatbread wraps) stuffed with local ingredients, fast and delicious. No tourists. Zero fuss. Excellent lunch.</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="card-stripe stripe-gold"></div>
+          <div class="card-body">
+            <div class="card-name">☕ Bar in Pergine Village</div>
+            <div class="card-detail">The village caffè is your daily anchor. Walk in, learn the barista's name by day two, and let this become your morning.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /wrap -->
+</div><!-- /panel-tuscany -->
+
+<footer class="site-footer">
+  <span class="footer-breadcrumb">dave&amp;mike · esperienze · travel · italy 2026 · <strong>living like an italian</strong></span>
+  <span class="footer-contact"><a href="mailto:services@musel.us">services@musel.us</a></span>
+</footer>
+
+<script>
+  function switchPart(part) {
+    document.querySelectorAll('.part-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.part-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('panel-' + part).classList.add('active');
+    event.currentTarget.classList.add('active');
+    window.scrollTo({ top: document.querySelector('.part-tabs').offsetTop - 60, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
