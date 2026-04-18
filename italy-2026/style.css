@@ -361,4 +361,10 @@ footer {
   :root { --h-pad: 20px; }
   main { padding: 28px var(--h-pad) 40px var(--h-pad); }
   .card-grid { grid-template-columns: 1fr; }
+  .header-img-zone {
+    -webkit-mask-image: linear-gradient(to right,
+      transparent 0%, transparent 55%, black 75%, black 100%);
+    mask-image: linear-gradient(to right,
+      transparent 0%, transparent 55%, black 75%, black 100%);
+  }
 }
