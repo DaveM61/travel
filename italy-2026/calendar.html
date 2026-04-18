@@ -233,6 +233,9 @@
   }
   .excur-item.empty .excur-name { color: #ccc5b8; font-weight: 400; }
 
+  /* Override main padding — cal-outer handles its own spacing */
+  main { padding: 0; }
+
   @media (max-width: 600px) {
     .cal-outer { padding: 28px 12px 48px; }
     .cal-grid, .cal-dow-row { gap: 2px; }
@@ -241,31 +244,22 @@
 </head>
 <body>
 
-<!-- top bar -->
 <div class="top-bar"></div>
 
-<!-- header -->
-<header class="site-header">
-  <div class="site-header-inner">
-    <a href="index.html" class="site-logo">dave&amp;mike</a>
-  </div>
-  <div class="header-image-wrap">
-    <img src="italy-header.jpg" alt="Italy 2026" class="header-img">
-    <div class="header-img-fade"></div>
-  </div>
-  <div class="trip-header">
-    <div class="trip-eyebrow">Italy 2026 · May – June</div>
-    <h1 class="trip-name">Trip Calendar</h1>
-    <div class="trip-subtitle">May 11 – June 22, 2026</div>
+<header>
+  <a class="logo-wrap" href="https://daveandmike.net">
+    <img src="assets/dnm_logo.svg" alt="dave&amp;mike">
+  </a>
+  <div class="header-img-zone">
+    <img src="assets/italy-header.jpg" alt="">
   </div>
 </header>
 
-<!-- back bar -->
 <div class="back-bar">
-  <a href="index.html" class="back-link">← Home</a>
+  <a class="back-link" href="index.html">← Home</a>
 </div>
 
-<!-- CALENDAR -->
+<main>
 <div class="cal-outer">
 
   <!-- Legend -->
@@ -343,9 +337,21 @@
 
 </div>
 
-<footer class="site-footer">
-  <span class="footer-breadcrumb">dave&amp;mike · esperienze · travel · italy 2026 · <strong>calendar</strong></span>
-  <span class="footer-contact"><a href="mailto:services@musel.us">services@musel.us</a></span>
+</main>
+
+<footer>
+  <span class="footer-breadcrumb">
+    <a href="https://daveandmike.net/index.html">dave&amp;mike</a>
+    &nbsp;&middot;&nbsp;
+    <a href="https://daveandmike.net/index.html" class="crumb-esperienze">esperienze</a>
+    &nbsp;&middot;&nbsp;
+    <a href="https://travel.daveandmike.net">travel</a>
+    &nbsp;&middot;&nbsp;
+    <a href="index.html">italy 2026</a>
+    &nbsp;&middot;&nbsp;
+    <span class="crumb-current">calendar</span>
+  </span>
+  <a class="footer-contact" href="mailto:services@musel.us">Contact Dave &amp; Mike</a>
 </footer>
 
 <script>
