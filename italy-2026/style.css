@@ -73,16 +73,40 @@ header {
   overflow: hidden;
   -webkit-mask-image: linear-gradient(to right,
     transparent 0%,
-    transparent 55%,
-    black 50%,
+    transparent 15%,
+    black 38%,
     black 100%
   );
   mask-image: linear-gradient(to right,
     transparent 0%,
-    transparent 9%,
-    black 20%,
+    transparent 15%,
+    black 38%,
     black 100%
   );
+}
+
+/* ── Header title block ── */
+.header-title-block {
+  position: relative;
+  z-index: 2;
+  margin-left: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.header-title-block .trip-eyebrow {
+  margin-bottom: 0.25rem;
+}
+
+.header-title-block .trip-name {
+  font-size: 2rem;
+  margin-bottom: 0.2rem;
+}
+
+.header-title-block .trip-dates {
+  font-size: 13px;
+  margin-bottom: 0;
 }
 
 .header-img-zone img {
