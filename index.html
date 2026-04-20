@@ -183,6 +183,26 @@
       margin-bottom: 1.5rem;
     }
 
+    /* ── Two-column trips grid ── */
+    .trips-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 48px;
+      max-width: 640px;
+    }
+
+    .col-header {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--slate);
+      padding-bottom: 10px;
+      border-bottom: 0.5px solid rgba(28,26,22,0.15);
+      margin-bottom: 14px;
+    }
+
     /* ── Link list ── */
     .link-list {
       list-style: none;
@@ -195,7 +215,7 @@
       font-family: 'DM Sans', sans-serif;
       font-size: 12px;
       font-weight: 500;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
       color: var(--text);
       text-decoration: none;
@@ -210,10 +230,20 @@
     .link-list .coming-soon {
       font-family: 'DM Sans', sans-serif;
       font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.1em;
+      font-weight: 400;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
       color: var(--faded);
+    }
+
+    .link-list .inactive-link {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--faded);
+      cursor: default;
     }
 
     /* ── Footer ── */
@@ -302,10 +332,21 @@
 
   <main>
     <div class="content">
-      <ul class="link-list">
-        <li><a href="italy-2026/index.html">Italy 2026 <span class="arrow">→</span></a></li>
-        <li><span class="coming-soon">Past trips</span></li>
-      </ul>
+      <div class="trips-grid">
+        <div class="trips-col">
+          <div class="col-header">Active Trips &amp; Planning</div>
+          <ul class="link-list">
+            <li><a href="italy-2026/index.html">Italy 2026 | May 11 &ndash; Jun 22 <span class="arrow">→</span></a></li>
+            <li><span class="inactive-link">Ski / Ride 2027 &mdash; Park City | Feb 12 &ndash; 26 →</span></li>
+          </ul>
+        </div>
+        <div class="trips-col">
+          <div class="col-header">Trip Archive</div>
+          <ul class="link-list">
+            <li><span class="coming-soon">Coming Soon</span></li>
+          </ul>
+        </div>
+      </div>
     </div>
   </main>
 
