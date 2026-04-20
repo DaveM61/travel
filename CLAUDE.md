@@ -14,6 +14,9 @@ See ~/Documents/Git/CLAUDE.md for the full dave&mike visual system.
 - Header structure: eyebrow "Italy 2026" · h1 [page title] · subtitle [descriptor]
 - Gradient override is in style.css `@media (max-width: 600px)` block
 
+## italy.daveandmike.net redirect
+The standalone `italy-2026` repo (`~/Documents/Git/italy-2026/italy-2026/`) now serves only as a redirect shim. Its `index.html` does a meta-refresh to `https://travel.daveandmike.net/italy-2026/`. The CNAME file (`italy.daveandmike.net`) must stay in place — removing it breaks the domain mapping. Old content is archived within that repo but not served.
+
 ## Known decisions
 - All black (`var(--text)`) backgrounds replaced with `var(--slate)` site-wide
 - `italy-2026/index.html` back-link points to `https://travel.daveandmike.net` (not a subdomain)
