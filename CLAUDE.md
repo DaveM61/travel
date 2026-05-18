@@ -33,6 +33,11 @@ The standalone `italy-2026` repo (`~/Documents/Git/italy-2026/italy-2026/`) now 
 - Jun 3 was Montepulciano; replaced with Pienza (Gattavecchi no longer under Luca's ownership). `montepulciano.html` still exists but is unlinked — do not delete without confirming.
 - Florence file remains `florence-june5.html` (filename not changed despite date correction to Jun 4)
 
+## italy-2026/calendar.html — data structure
+- `bedDefs` uses a **multi-period format**: `{ label, periods: [{ name, start, end }, …] }` — each bed can have multiple occupants across different date ranges (e.g. BD4: Sabrina May 22–23, then Dave & Teresa May 29–Jun 6)
+- Do NOT revert to the old single-period format `{ label, name, start, end }` — the forEach in buildMonth now iterates `bed.periods`
+- `excurDefs` maps dates to `{ date, name, href }` — June 3 is Pienza / pienza.html
+
 ## Known decisions
 - All black (`var(--text)`) backgrounds replaced with `var(--slate)` site-wide
 - `italy-2026/index.html` back-link points to `https://travel.daveandmike.net` (not a subdomain)
