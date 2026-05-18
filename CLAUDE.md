@@ -29,7 +29,8 @@ The standalone `italy-2026` repo (`~/Documents/Git/italy-2026/italy-2026/`) now 
 - Link titles are bold (font-weight 700) and blue (var(--slate))
 - Confirmed trips listed with "Name — Date" format above a `.itin-divider` rule
 - Undated/unscheduled trips listed below the divider without dates
-- Confirmed schedule: Matera May 21–22 · Itria Valley May 30 · Montepulciano Jun 3 · Firenze Jun 4 · Castello di Verrazzano Jun 6–7
+- Confirmed schedule: Matera May 21–22 · Itria Valley May 30 · Pienza Jun 3 · Firenze Jun 4 · Castello di Verrazzano Jun 6–7
+- Jun 3 was Montepulciano; replaced with Pienza (Gattavecchi no longer under Luca's ownership). `montepulciano.html` still exists but is unlinked — do not delete without confirming.
 - Florence file remains `florence-june5.html` (filename not changed despite date correction to Jun 4)
 
 ## Known decisions

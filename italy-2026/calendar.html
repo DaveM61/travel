@@ -360,10 +360,13 @@
 
 <script>
   const bedDefs = [
-    { label: 'Bd1', name: 'Dave & Mike',   start: new Date(2026, 4, 11), end: new Date(2026, 5, 21) },
-    { label: 'Bd2', name: 'Mary',          start: new Date(2026, 4, 22), end: new Date(2026, 5,  3) },
-    { label: 'Bd3', name: 'Jane & Chuck',  start: new Date(2026, 4, 21), end: new Date(2026, 5, 10) },
-    { label: 'Bd4', name: 'Dave & Teresa', start: new Date(2026, 4, 29), end: new Date(2026, 5,  6) },
+    { label: 'Bd1', periods: [{ name: 'Dave & Mike',   start: new Date(2026, 4, 11), end: new Date(2026, 5, 21) }] },
+    { label: 'Bd2', periods: [{ name: 'Mary',          start: new Date(2026, 4, 22), end: new Date(2026, 5,  3) }] },
+    { label: 'Bd3', periods: [{ name: 'Jane & Chuck',  start: new Date(2026, 4, 21), end: new Date(2026, 5, 10) }] },
+    { label: 'Bd4', periods: [
+      { name: 'Sabrina',       start: new Date(2026, 4, 22), end: new Date(2026, 4, 23) },
+      { name: 'Dave & Teresa', start: new Date(2026, 4, 29), end: new Date(2026, 5,  6) },
+    ]},
   ];
 
   // Excursion definitions: each entry maps a date to a name and optional link
@@ -373,7 +376,7 @@
     { date: new Date(2026, 4, 26), name: 'Cooking Class' },
     { date: new Date(2026, 4, 28), name: 'E-Bike Tour' },
     { date: new Date(2026, 4, 30), name: 'Itria Valley',    href: 'itria-valley.html' },
-    { date: new Date(2026, 5,  3), name: 'Montepulciano',   href: 'montepulciano.html' },
+    { date: new Date(2026, 5,  3), name: 'Pienza',           href: 'pienza.html' },
     { date: new Date(2026, 5,  6), name: 'Verrazzano',      href: 'verrazano.html' },
     { date: new Date(2026, 5,  7), name: 'Verrazzano',      href: 'verrazano.html' },
     { date: new Date(2026, 5, 13), name: 'Forte di Marmi' },
@@ -441,12 +444,18 @@
         const bedList = document.createElement('div');
         bedList.className = 'bed-list';
         bedDefs.forEach(function(bed) {
-          const occ  = inRange(date, bed.start, bed.end);
+          var occupant = null;
+          for (var p = 0; p < bed.periods.length; p++) {
+            if (inRange(date, bed.periods[p].start, bed.periods[p].end)) {
+              occupant = bed.periods[p].name;
+              break;
+            }
+          }
           const item = document.createElement('div');
-          item.className = 'bed-item ' + (occ ? 'occupied' : 'vacant');
+          item.className = 'bed-item ' + (occupant ? 'occupied' : 'vacant');
           item.innerHTML =
             '<span class="bed-label">' + bed.label + '</span>' +
-            '<span class="bed-name">'  + (occ ? bed.name : '\u2014') + '</span>';
+            '<span class="bed-name">'  + (occupant ? occupant : '\u2014') + '</span>';
           bedList.appendChild(item);
         });
         cell.appendChild(bedList);
