@@ -1,90 +1,90 @@
 {
   "tripName": "Italy 2026",
-  "lastUpdated": "2026-04-04T17:47:55.875Z",
+  "lastUpdated": "2026-05-19T07:37:34.492Z",
   "participants": [
     {
       "name": "Dave M",
       "lodging": 0,
       "groceries": 0,
       "alcohol": 0,
-      "restaurants": 0,
+      "restaurants": 40.87,
       "other": 0,
-      "totalOwed": 0,
-      "paid": 0,
+      "totalOwed": -245.24,
+      "paid": 286.11,
       "paymentsMade": 0,
-      "balanceDue": 0
+      "balanceDue": -245.24
     },
     {
       "name": "Mike",
       "lodging": 0,
       "groceries": 0,
       "alcohol": 0,
-      "restaurants": 0,
+      "restaurants": 40.87,
       "other": 0,
-      "totalOwed": 0,
+      "totalOwed": 40.87,
       "paid": 0,
       "paymentsMade": 0,
-      "balanceDue": 0
+      "balanceDue": 40.87
     },
     {
       "name": "Mary",
       "lodging": 0,
       "groceries": 0,
       "alcohol": 0,
-      "restaurants": 0,
+      "restaurants": 40.87,
       "other": 0,
-      "totalOwed": 0,
+      "totalOwed": 40.87,
       "paid": 0,
       "paymentsMade": 0,
-      "balanceDue": 0
+      "balanceDue": 40.87
     },
     {
       "name": "Jane",
       "lodging": 0,
       "groceries": 0,
       "alcohol": 0,
-      "restaurants": 0,
+      "restaurants": 40.87,
       "other": 0,
-      "totalOwed": 0,
+      "totalOwed": 40.87,
       "paid": 0,
       "paymentsMade": 0,
-      "balanceDue": 0
+      "balanceDue": 40.87
     },
     {
       "name": "Chuck",
       "lodging": 0,
       "groceries": 0,
       "alcohol": 0,
-      "restaurants": 0,
+      "restaurants": 40.87,
       "other": 0,
-      "totalOwed": 0,
+      "totalOwed": 40.87,
       "paid": 0,
       "paymentsMade": 0,
-      "balanceDue": 0
+      "balanceDue": 40.87
     },
     {
       "name": "Teresa",
       "lodging": 0,
       "groceries": 0,
       "alcohol": 0,
-      "restaurants": 0,
+      "restaurants": 40.87,
       "other": 0,
-      "totalOwed": 0,
+      "totalOwed": 40.87,
       "paid": 0,
       "paymentsMade": 0,
-      "balanceDue": 0
+      "balanceDue": 40.87
     },
     {
       "name": "Dave W",
       "lodging": 0,
       "groceries": 0,
       "alcohol": 0,
-      "restaurants": 0,
+      "restaurants": 40.87,
       "other": 0,
-      "totalOwed": 0,
+      "totalOwed": 40.87,
       "paid": 0,
       "paymentsMade": 0,
-      "balanceDue": 0
+      "balanceDue": 40.87
     }
   ]
 }
