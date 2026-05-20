@@ -1,6 +1,6 @@
 {
   "tripName": "Italy 2026",
-  "lastUpdated": "2026-05-19T08:12:28.920Z",
+  "lastUpdated": "2026-05-20T12:12:05.273Z",
   "participants": [
     {
       "name": "Dave M",
@@ -8,11 +8,11 @@
       "groceries": 0,
       "alcohol": 0,
       "restaurants": 40.87,
-      "other": 0,
-      "totalOwed": -245.24,
+      "other": 174.97,
+      "totalOwed": -70.27,
       "paid": 286.11,
       "paymentsMade": 0,
-      "balanceDue": -245.24
+      "balanceDue": -70.27
     },
     {
       "name": "Mike",
@@ -20,11 +20,11 @@
       "groceries": 0,
       "alcohol": 0,
       "restaurants": 40.87,
-      "other": 0,
-      "totalOwed": 40.87,
-      "paid": 0,
+      "other": 174.97,
+      "totalOwed": -484.04,
+      "paid": 699.88,
       "paymentsMade": 0,
-      "balanceDue": 40.87
+      "balanceDue": -484.04
     },
     {
       "name": "Mary",
@@ -44,11 +44,11 @@
       "groceries": 0,
       "alcohol": 0,
       "restaurants": 40.87,
-      "other": 0,
-      "totalOwed": 40.87,
+      "other": 174.97,
+      "totalOwed": 215.84,
       "paid": 0,
       "paymentsMade": 0,
-      "balanceDue": 40.87
+      "balanceDue": 215.84
     },
     {
       "name": "Chuck",
@@ -56,11 +56,11 @@
       "groceries": 0,
       "alcohol": 0,
       "restaurants": 40.87,
-      "other": 0,
-      "totalOwed": 40.87,
+      "other": 174.97,
+      "totalOwed": 215.84,
       "paid": 0,
       "paymentsMade": 0,
-      "balanceDue": 40.87
+      "balanceDue": 215.84
     },
     {
       "name": "Teresa",
