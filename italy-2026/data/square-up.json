@@ -1,66 +1,66 @@
 {
   "tripName": "Italy 2026",
-  "lastUpdated": "2026-05-20T12:12:05.273Z",
+  "lastUpdated": "2026-05-24T09:33:47.520Z",
   "participants": [
     {
       "name": "Dave M",
       "lodging": 0,
-      "groceries": 0,
+      "groceries": 42.44,
       "alcohol": 0,
-      "restaurants": 40.87,
-      "other": 174.97,
-      "totalOwed": -70.27,
-      "paid": 286.11,
+      "restaurants": 163.89,
+      "other": 78.61,
+      "totalOwed": -694.03,
+      "paid": 978.97,
       "paymentsMade": 0,
-      "balanceDue": -70.27
+      "balanceDue": -694.03
     },
     {
       "name": "Mike",
       "lodging": 0,
-      "groceries": 0,
+      "groceries": 42.44,
       "alcohol": 0,
-      "restaurants": 40.87,
-      "other": 174.97,
-      "totalOwed": -484.04,
-      "paid": 699.88,
+      "restaurants": 163.89,
+      "other": 78.61,
+      "totalOwed": 3.1,
+      "paid": 281.84,
       "paymentsMade": 0,
-      "balanceDue": -484.04
+      "balanceDue": 3.1
     },
     {
       "name": "Mary",
       "lodging": 0,
-      "groceries": 0,
+      "groceries": 42.44,
       "alcohol": 0,
-      "restaurants": 40.87,
+      "restaurants": 70.33,
       "other": 0,
-      "totalOwed": 40.87,
+      "totalOwed": 112.77,
       "paid": 0,
       "paymentsMade": 0,
-      "balanceDue": 40.87
+      "balanceDue": 112.77
     },
     {
       "name": "Jane",
       "lodging": 0,
-      "groceries": 0,
+      "groceries": 42.44,
       "alcohol": 0,
-      "restaurants": 40.87,
-      "other": 174.97,
-      "totalOwed": 215.84,
-      "paid": 0,
+      "restaurants": 163.89,
+      "other": 78.61,
+      "totalOwed": 252.33,
+      "paid": 32.61,
       "paymentsMade": 0,
-      "balanceDue": 215.84
+      "balanceDue": 252.33
     },
     {
       "name": "Chuck",
       "lodging": 0,
-      "groceries": 0,
+      "groceries": 42.44,
       "alcohol": 0,
-      "restaurants": 40.87,
-      "other": 174.97,
-      "totalOwed": 215.84,
-      "paid": 0,
+      "restaurants": 163.89,
+      "other": 78.61,
+      "totalOwed": -16.48,
+      "paid": 301.42,
       "paymentsMade": 0,
-      "balanceDue": 215.84
+      "balanceDue": -16.48
     },
     {
       "name": "Teresa",
