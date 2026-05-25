@@ -1,6 +1,6 @@
 {
   "tripName": "Italy 2026",
-  "lastUpdated": "2026-05-25T14:15:02.827Z",
+  "lastUpdated": "2026-05-25T14:17:03.556Z",
   "participants": [
     {
       "name": "Dave M",
@@ -32,11 +32,11 @@
       "groceries": 42.44,
       "alcohol": 0,
       "restaurants": 70.33,
-      "other": 0,
-      "totalOwed": 112.77,
+      "other": 8.13,
+      "totalOwed": 120.9,
       "paid": 0,
       "paymentsMade": 0,
-      "balanceDue": 112.77
+      "balanceDue": 120.9
     },
     {
       "name": "Jane",
