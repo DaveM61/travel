@@ -1,30 +1,30 @@
 {
   "tripName": "Italy 2026",
-  "lastUpdated": "2026-05-24T09:33:47.520Z",
+  "lastUpdated": "2026-05-25T14:15:02.827Z",
   "participants": [
     {
       "name": "Dave M",
       "lodging": 0,
       "groceries": 42.44,
-      "alcohol": 0,
+      "alcohol": 40.24,
       "restaurants": 163.89,
-      "other": 78.61,
-      "totalOwed": -694.03,
+      "other": 148.23,
+      "totalOwed": -584.17,
       "paid": 978.97,
       "paymentsMade": 0,
-      "balanceDue": -694.03
+      "balanceDue": -584.17
     },
     {
       "name": "Mike",
       "lodging": 0,
       "groceries": 42.44,
-      "alcohol": 0,
+      "alcohol": 40.24,
       "restaurants": 163.89,
-      "other": 78.61,
-      "totalOwed": 3.1,
-      "paid": 281.84,
+      "other": 148.23,
+      "totalOwed": -173.65,
+      "paid": 568.45,
       "paymentsMade": 0,
-      "balanceDue": 3.1
+      "balanceDue": -173.65
     },
     {
       "name": "Mary",
@@ -42,25 +42,25 @@
       "name": "Jane",
       "lodging": 0,
       "groceries": 42.44,
-      "alcohol": 0,
+      "alcohol": 40.24,
       "restaurants": 163.89,
-      "other": 78.61,
-      "totalOwed": 252.33,
+      "other": 148.23,
+      "totalOwed": 362.19,
       "paid": 32.61,
       "paymentsMade": 0,
-      "balanceDue": 252.33
+      "balanceDue": 362.19
     },
     {
       "name": "Chuck",
       "lodging": 0,
       "groceries": 42.44,
-      "alcohol": 0,
+      "alcohol": 40.24,
       "restaurants": 163.89,
-      "other": 78.61,
-      "totalOwed": -16.48,
+      "other": 148.23,
+      "totalOwed": 93.38,
       "paid": 301.42,
       "paymentsMade": 0,
-      "balanceDue": -16.48
+      "balanceDue": 93.38
     },
     {
       "name": "Teresa",
