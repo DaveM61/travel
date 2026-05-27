@@ -1,66 +1,66 @@
 {
   "tripName": "Italy 2026",
-  "lastUpdated": "2026-05-26T14:03:34.668Z",
+  "lastUpdated": "2026-05-27T16:11:01.656Z",
   "participants": [
     {
       "name": "Dave M",
       "lodging": 0,
-      "groceries": 69.02,
+      "groceries": 72.44,
       "alcohol": 0,
       "restaurants": 174.37,
-      "other": 148.23,
-      "totalOwed": -616.2,
-      "paid": 1007.83,
+      "other": 78.61,
+      "totalOwed": -812.75,
+      "paid": 1138.18,
       "paymentsMade": 0,
-      "balanceDue": -616.2
+      "balanceDue": -812.75
     },
     {
       "name": "Mike",
       "lodging": 0,
-      "groceries": 69.02,
+      "groceries": 72.44,
       "alcohol": 0,
       "restaurants": 174.37,
-      "other": 148.23,
-      "totalOwed": -176.82,
+      "other": 78.61,
+      "totalOwed": -243.02,
       "paid": 568.45,
       "paymentsMade": 0,
-      "balanceDue": -176.82
+      "balanceDue": -243.02
     },
     {
       "name": "Mary",
       "lodging": 0,
-      "groceries": 69.02,
+      "groceries": 72.44,
       "alcohol": 0,
       "restaurants": 70.33,
       "other": 12.28,
-      "totalOwed": 151.63,
+      "totalOwed": 155.05,
       "paid": 0,
       "paymentsMade": 0,
-      "balanceDue": 151.63
+      "balanceDue": 155.05
     },
     {
       "name": "Jane",
       "lodging": 0,
-      "groceries": 69.02,
+      "groceries": 72.44,
       "alcohol": 0,
       "restaurants": 174.37,
-      "other": 148.23,
-      "totalOwed": 359.02,
+      "other": 78.61,
+      "totalOwed": 292.82,
       "paid": 32.61,
       "paymentsMade": 0,
-      "balanceDue": 359.02
+      "balanceDue": 292.82
     },
     {
       "name": "Chuck",
       "lodging": 0,
-      "groceries": 69.02,
+      "groceries": 72.44,
       "alcohol": 0,
       "restaurants": 174.37,
-      "other": 148.23,
-      "totalOwed": -198.99,
+      "other": 78.61,
+      "totalOwed": -265.19,
       "paid": 590.62,
       "paymentsMade": 0,
-      "balanceDue": -198.99
+      "balanceDue": -265.19
     },
     {
       "name": "Teresa",
