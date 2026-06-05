@@ -1,90 +1,90 @@
 {
   "tripName": "Italy 2026",
-  "lastUpdated": "2026-06-05T06:05:57.762Z",
+  "lastUpdated": "2026-06-05T09:41:14.932Z",
   "participants": [
     {
       "name": "Dave M",
       "lodging": 0,
       "groceries": 117.74,
       "alcohol": 0,
-      "restaurants": 243.27,
-      "other": 271.89,
-      "totalOwed": -2164.33,
+      "restaurants": 295.24,
+      "other": 237.53,
+      "totalOwed": -2146.72,
       "paid": 2834.46,
       "paymentsMade": 0,
-      "balanceDue": -2201.56
+      "balanceDue": -2183.95
     },
     {
       "name": "Mike",
       "lodging": 0,
       "groceries": 117.74,
       "alcohol": 0,
-      "restaurants": 243.27,
-      "other": 271.89,
-      "totalOwed": -146.42,
+      "restaurants": 295.24,
+      "other": 237.53,
+      "totalOwed": -128.81,
       "paid": 779.32,
       "paymentsMade": 0,
-      "balanceDue": -146.42
+      "balanceDue": -128.81
     },
     {
       "name": "Mary",
       "lodging": 0,
       "groceries": 103.73,
       "alcohol": 0,
-      "restaurants": 104.22,
-      "other": 62.88,
-      "totalOwed": 270.83,
+      "restaurants": 173.84,
+      "other": 28.52,
+      "totalOwed": 306.09,
       "paid": 0,
       "paymentsMade": 0,
-      "balanceDue": 270.83
+      "balanceDue": 306.09
     },
     {
       "name": "Jane",
       "lodging": 0,
       "groceries": 117.74,
       "alcohol": 0,
-      "restaurants": 243.27,
-      "other": 271.89,
-      "totalOwed": 600.29,
+      "restaurants": 312.89,
+      "other": 237.53,
+      "totalOwed": 635.55,
       "paid": 32.61,
       "paymentsMade": 0,
-      "balanceDue": 600.29
+      "balanceDue": 635.55
     },
     {
       "name": "Chuck",
       "lodging": 0,
       "groceries": 117.74,
       "alcohol": 0,
-      "restaurants": 243.27,
-      "other": 271.89,
-      "totalOwed": -155.6,
+      "restaurants": 312.89,
+      "other": 237.53,
+      "totalOwed": -120.34,
       "paid": 788.5,
       "paymentsMade": 0,
-      "balanceDue": -155.6
+      "balanceDue": -120.34
     },
     {
       "name": "Teresa",
       "lodging": 0,
       "groceries": 52.85,
       "alcohol": 0,
-      "restaurants": 82.36,
-      "other": 50.6,
-      "totalOwed": 85.68,
+      "restaurants": 151.99,
+      "other": 16.24,
+      "totalOwed": 120.95,
       "paid": 100.13,
       "paymentsMade": 0,
-      "balanceDue": 85.68
+      "balanceDue": 120.95
     },
     {
       "name": "Dave W",
       "lodging": 0,
       "groceries": 52.85,
       "alcohol": 0,
-      "restaurants": 82.36,
-      "other": 50.6,
-      "totalOwed": 185.81,
+      "restaurants": 151.99,
+      "other": 16.24,
+      "totalOwed": 221.08,
       "paid": 0,
       "paymentsMade": 0,
-      "balanceDue": 185.81
+      "balanceDue": 221.08
     }
   ]
 }
