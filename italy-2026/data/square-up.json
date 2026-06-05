@@ -1,6 +1,6 @@
 {
   "tripName": "Italy 2026",
-  "lastUpdated": "2026-06-05T09:41:14.932Z",
+  "lastUpdated": "2026-06-05T09:42:06.817Z",
   "participants": [
     {
       "name": "Dave M",
@@ -9,7 +9,7 @@
       "alcohol": 0,
       "restaurants": 295.24,
       "other": 237.53,
-      "totalOwed": -2146.72,
+      "totalOwed": -2046.72,
       "paid": 2834.46,
       "paymentsMade": 0,
       "balanceDue": -2183.95
@@ -33,7 +33,7 @@
       "alcohol": 0,
       "restaurants": 173.84,
       "other": 28.52,
-      "totalOwed": 306.09,
+      "totalOwed": 206.09,
       "paid": 0,
       "paymentsMade": 0,
       "balanceDue": 306.09
