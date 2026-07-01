@@ -144,6 +144,36 @@ header {
 
 .back-link:hover { text-decoration: underline; }
 
+/* ── Page nav — tab links under back-bar (retrospective pages) ── */
+.page-nav {
+  background: var(--bg);
+  border-bottom: 0.5px solid rgba(28, 26, 22, 0.15);
+  border-top: 0.5px solid rgba(28, 26, 22, 0.10);
+  padding: 0 var(--h-pad);
+  display: flex;
+  gap: 0;
+  flex-shrink: 0;
+}
+
+.page-nav a {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  padding: 12px 18px;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.page-nav a:hover,
+.page-nav a.active {
+  color: var(--slate);
+  border-bottom-color: var(--slate);
+}
+
 /* ── Main ── */
 main {
   flex: 1;
@@ -312,6 +342,95 @@ div.plan-card .card-desc {
 a.plan-card:hover .card-arrow {
   transform: translateX(3px);
 }
+
+/* ── Content card — lodging / restaurant / excursion write-ups ── */
+.content-card {
+  background: white;
+  border: 0.5px solid rgba(28, 26, 22, 0.12);
+  border-radius: 8px;
+  overflow: hidden;
+  color: var(--text);
+}
+
+.content-card-photo {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+}
+
+.content-card-body {
+  padding: 20px 22px 22px;
+}
+
+.content-card-eyebrow {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--slate);
+  margin-bottom: 6px;
+}
+
+.content-card-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500;
+  font-size: 1.15rem;
+  color: var(--text);
+  margin-bottom: 4px;
+  line-height: 1.25;
+}
+
+.content-card-meta {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+.content-card-meta a { color: var(--muted); }
+
+.content-card-desc {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13.5px;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+/* Lodging — single full-width feature card */
+.lodging-card {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+}
+
+.lodging-card .content-card-photo {
+  height: 100%;
+  min-height: 200px;
+}
+
+.lodging-card .content-card-body { padding: 22px 24px; }
+
+@media (max-width: 600px) {
+  .lodging-card { grid-template-columns: 1fr; }
+  .lodging-card .content-card-photo { height: 180px; }
+}
+
+/* ── Wine note — simple accented block, no card ── */
+.wine-note {
+  background: rgba(240, 237, 231, 0.6);
+  border-left: 3px solid var(--slate);
+  border-radius: 0 8px 8px 0;
+  padding: 16px 22px;
+}
+
+.wine-note .content-card-title { font-size: 1.05rem; }
+
+/* ── Content section spacing ── */
+.content-section { max-width: 720px; margin: 0 auto 2.5rem; }
+.content-section:last-child { margin-bottom: 0; }
 
 /* ── Footer ── */
 footer {

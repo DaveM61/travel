@@ -1,182 +1,300 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Italy 2026 — dave&amp;mike</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  <style>
-    /* ── Header title block ── */
-    .header-title-block {
-      position: relative;
-      z-index: 2;
-      margin-left: 28px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Italy 2026 — dave&amp;mike</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  /* ── Header title block (compact, inline-in-header variant) ── */
+  .header-title-block {
+    position: relative;
+    z-index: 2;
+    margin-left: 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .header-title-block .trip-eyebrow { margin-bottom: 0.25rem; }
+  .header-title-block .trip-name { font-size: 2rem; margin-bottom: 0.2rem; }
+  .header-title-block .trip-dates { font-size: 13px; margin-bottom: 0; }
 
-    .header-title-block .trip-eyebrow {
-      margin-bottom: 0.25rem;
-    }
+  .header-img-zone {
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, transparent 15%, black 38%, black 100%);
+    mask-image: linear-gradient(to right, transparent 0%, transparent 15%, black 38%, black 100%);
+  }
 
-    .header-title-block .trip-name {
-      font-size: 2rem;
-      margin-bottom: 0.2rem;
-    }
-
-    .header-title-block .trip-dates {
-      font-size: 13px;
-      margin-bottom: 0;
-    }
-
-    /* ── Extend gradient further right for title legibility ── */
+  @media (max-width: 600px) {
     .header-img-zone {
-      -webkit-mask-image: linear-gradient(to right,
-        transparent 0%,
-        transparent 15%,
-        black 38%,
-        black 100%
-      );
-      mask-image: linear-gradient(to right,
-        transparent 0%,
-        transparent 15%,
-        black 38%,
-        black 100%
-      );
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, transparent 55%, black 75%, black 100%);
+      mask-image: linear-gradient(to right, transparent 0%, transparent 55%, black 75%, black 100%);
     }
+  }
 
-    /* ── Mobile: push gradient right so title stays in cream zone ── */
-    @media (max-width: 600px) {
-      .header-img-zone {
-        -webkit-mask-image: linear-gradient(to right,
-          transparent 0%,
-          transparent 55%,
-          black 75%,
-          black 100%
-        );
-        mask-image: linear-gradient(to right,
-          transparent 0%,
-          transparent 55%,
-          black 75%,
-          black 100%
-        );
-      }
-    }
-  </style>
+  /* ── Timeline ── */
+  .tl-wrap { max-width: 640px; margin: 0 auto; }
+
+  .tl { position: relative; padding-left: 32px; }
+  .tl::before {
+    content: '';
+    position: absolute;
+    left: 7px; top: 10px; bottom: 10px;
+    width: 0.5px;
+    background: rgba(94, 130, 160, 0.4);
+  }
+
+  .tl-stop { position: relative; margin-bottom: 2.25rem; }
+  .tl-dot {
+    position: absolute;
+    left: -32px; top: 5px;
+    width: 15px; height: 15px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 1.5px solid var(--slate);
+    z-index: 1;
+  }
+  .tl-dot.anchor { background: var(--slate); }
+
+  .tl-date {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--slate);
+    margin-bottom: 4px;
+  }
+  .tl-head {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 0.4rem;
+    line-height: 1.25;
+  }
+  .tl-body {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13.5px;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.75;
+    margin-bottom: 0.5rem;
+  }
+  .tl-photo {
+    width: 100%;
+    max-height: 220px;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+    margin: 0.65rem 0 0.75rem;
+    border: 0.5px solid rgba(28, 26, 22, 0.10);
+  }
+  .tl-link {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--slate);
+    text-decoration: none;
+  }
+  .tl-link:hover { text-decoration: underline; }
+
+  .tl-break {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0.5rem 0 2rem -32px;
+  }
+  .tl-break-line { flex: 1; height: 0.5px; background: rgba(28, 26, 22, 0.2); }
+  .tl-break-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-style: italic;
+    color: var(--muted);
+    white-space: nowrap;
+    letter-spacing: 0.04em;
+  }
+</style>
 </head>
 <body>
 
-  <div class="top-bar"></div>
+<div class="top-bar"></div>
 
-  <header>
-    <a class="logo-wrap" href="https://daveandmike.net">
-      <img src="assets/dnm_logo.svg" alt="dave&amp;mike">
-    </a>
-    <div class="header-title-block">
-      <div class="trip-eyebrow">Travel</div>
-      <h1 class="trip-name">Italy 2026</h1>
-      <p class="trip-dates">May 11 – June 22, 2026</p>
-    </div>
-    <div class="header-img-zone">
-      <img src="assets/italy-header.jpg" alt="">
-    </div>
-  </header>
+<header>
+  <a class="logo-wrap" href="https://daveandmike.net">
+    <img src="assets/dnm_logo.svg" alt="dave&amp;mike">
+  </a>
+  <div class="header-title-block">
+    <div class="trip-eyebrow">Where we've been</div>
+    <h1 class="trip-name">Italy 2026</h1>
+    <p class="trip-dates">May 10 – June 22, 2026</p>
+  </div>
+  <div class="header-img-zone">
+    <img src="assets/italy-header.jpg" alt="">
+  </div>
+</header>
 
-  <div class="back-bar">
-    <a class="back-link" href="https://travel.daveandmike.net">← Travel</a>
+<div class="back-bar">
+  <a class="back-link" href="https://travel.daveandmike.net">&#8592; Travel</a>
+</div>
+
+<nav class="page-nav">
+  <a href="ostuni.html">Ostuni</a>
+  <a href="pergine-valdarno.html">Pergine Valdarno</a>
+  <a href="photos.html">Photos</a>
+</nav>
+
+<main>
+
+  <div class="welcome-block">
+    <h2>Six weeks in Italy<br>Puglia, Tuscany &amp; beyond</h2>
+    <p>Six weeks to kick off Mike&#8217;s retirement &#8212; three weeks in Puglia near Ostuni, then north to Tuscany&#8217;s eastern Valdarno. Our first trip where we truly lived like Italians. Come explore some highlights.</p>
   </div>
 
-  <main>
+  <div class="tl-wrap">
 
-    <div class="welcome-block">
-      <h2>Six weeks in Italy<br>Puglia, Tuscany &amp; beyond</h2>
-      <p>Everything you need for the trip in one place.<br>Pages will fill in as planning progresses — check back for updates.</p>
-    </div>
+    <div class="section-label">Puglia &nbsp;&#183;&nbsp; May 10 &#8211; June 1</div>
 
-    <!-- DECISION: Card accent — 3px --slate left border on hover, or no accent? -->
-    <div class="card-section">
-    <div class="section-label">Planning Pages</div>
-    <div class="card-grid">
+    <div class="tl">
 
-      <!-- Flights -->
-      <a href="flights.html" class="plan-card">
-        <span class="card-icon">✈</span>
-        <div class="card-title">Flight Information</div>
-        <div class="card-desc">Outbound, return, and intercity transfer flights for all seven travelers.</div>
-        <div class="card-arrow">→</div>
-      </a>
+      <div class="tl-stop">
+        <div class="tl-dot anchor"></div>
+        <div class="tl-date">May 10, 2026</div>
+        <div class="tl-head">Arrive Ostuni &#8212; Villa Saracena</div>
+        <img class="tl-photo" src="assets/TL1.jpg" alt="Villa Saracena at night, private pool lit up">
+        <p class="tl-body">Flew into Bari and drove 90 minutes to our villa &#8212; a masseria in an ancient olive grove with a private pool, outdoor kitchen, and the kind of property that makes leaving feel like a mistake. Three weeks here.</p>
+        <a class="tl-link" href="ostuni.html">Ostuni &#8212; restaurants, wine &amp; excursions &#8594;</a>
+      </div>
 
-      <!-- Calendar -->
-      <a href="calendar.html" class="plan-card">
-        <span class="card-icon">📅</span>
-        <div class="card-title">Trip Calendar</div>
-        <div class="card-desc">Month-by-month view of May and June — who's there, when, and where.</div>
-        <div class="card-arrow">→</div>
-      </a>
+      <div class="tl-stop">
+        <div class="tl-dot"></div>
+        <div class="tl-date">May 21, 2026</div>
+        <div class="tl-head">Matera, Basilicata</div>
+        <img class="tl-photo" src="assets/TL3.jpg" alt="Matera cave dwellings">
+        <p class="tl-body">A UNESCO World Heritage Site known for its ancient cave dwellings &#8212; otherworldly and beautiful. One overnight at Le Malve Cave Retreat is exactly right. Don&#8217;t miss dinner at Osteria al Casale.</p>
+      </div>
 
-      <!-- Accommodations -->
-      <a href="accommodations.html" class="plan-card">
-        <span class="card-icon">🏡</span>
-        <div class="card-title">Accommodations</div>
-        <div class="card-desc">Both villas — Ostuni and Pergine Valdarno — with photos and Airbnb links.</div>
-        <div class="card-arrow">→</div>
-      </a>
+      <div class="tl-stop">
+        <div class="tl-dot"></div>
+        <div class="tl-date">May 26, 2026</div>
+        <div class="tl-head">Orecchiette Pasta Class, Masseria Casina Vitale</div>
+        <img class="tl-photo" src="assets/TL4.jpg" alt="Orecchiette pasta with tomato sauce">
+        <p class="tl-body">A fun half-day out to Ceglie Messapica &#8212; 20 minutes from the villa &#8212; to make Puglia&#8217;s signature pasta by hand. We ate what we made. Highly recommend.</p>
+      </div>
 
-      <!-- Living Like an Italian -->
-      <a href="living.html" class="plan-card">
-        <span class="card-icon">🍷</span>
-        <div class="card-title">Living Like an Italian</div>
-        <div class="card-desc">Food, wine, markets, e-bikes, and local life in Puglia and Tuscany.</div>
-        <div class="card-arrow">→</div>
-      </a>
-
-      <!-- Day Excursion Options -->
-      <a href="excursions.html" class="plan-card">
-        <span class="card-icon">🗺</span>
-        <div class="card-title">Day Excursion Options</div>
-        <div class="card-desc">Day trips from Ostuni and Pergine Valdarno, plus a special Chianti overnight at Castello di Verrazzano.</div>
-        <div class="card-arrow">→</div>
-      </a>
-
-      <!-- Trip Costs -->
-      <a href="trip-costs.html" class="plan-card">
-        <span class="card-icon">💶</span>
-        <div class="card-title">Trip Costs</div>
-        <div class="card-desc">Shared expenses, cost splits, and the fair share breakdown.</div>
-        <div class="card-arrow">→</div>
-      </a>
-
-      <!-- Medical Reference -->
-      <a href="medical.html" class="plan-card">
-        <svg class="card-icon-cross" width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
-          <rect x="11" y="0" width="8" height="30" rx="2" fill="#2A8C4A"/>
-          <rect x="0" y="11" width="30" height="8" rx="2" fill="#2A8C4A"/>
-        </svg>
-        <div class="card-title">Medical Reference</div>
-        <div class="card-desc">Farmacia, walk-in doctor, emergency contacts, and an Italian symptom card. Save directly to your iPhone home screen.</div>
-        <div class="card-arrow">→</div>
-      </a>
+      <div class="tl-stop">
+        <div class="tl-dot"></div>
+        <div class="tl-date">May 30, 2026</div>
+        <div class="tl-head">Itria Valley &#8212; Alberobello, Locorotondo &amp; Martina Franca</div>
+        <img class="tl-photo" src="assets/TL2.jpg" alt="Alberobello trulli rooftops">
+        <p class="tl-body">The iconic trulli of Alberobello, a lunch stop in Locorotondo, and our favorite small town of Martina Franca for an afternoon spritz.</p>
+      </div>
 
     </div>
-    </div><!-- /.card-section -->
-  </main>
 
-  <footer>
-    <span class="footer-breadcrumb">
-      <a href="https://daveandmike.net/index.html">dave&amp;mike</a>
-      &nbsp;·&nbsp;
-      <a href="https://daveandmike.net/index.html" class="crumb-esperienze">esperienze</a>
-      &nbsp;·&nbsp;
-      <a href="https://travel.daveandmike.net">travel</a>
-      &nbsp;·&nbsp;
-      <a href="index.html" class="crumb-current">italy 2026</a>
-    </span>
-    <a class="footer-contact" href="mailto:services@musel.us">Contact Dave &amp; Mike</a>
-  </footer>
+    <div class="tl-break">
+      <div class="tl-break-line"></div>
+      <div class="tl-break-label">Bari &#8594; Rome &#8594; Florence &nbsp;&#183;&nbsp; June 1</div>
+      <div class="tl-break-line"></div>
+    </div>
+
+    <div class="section-label">Tuscany &nbsp;&#183;&nbsp; June 1 &#8211; 22</div>
+
+    <div class="tl">
+
+      <div class="tl-stop">
+        <div class="tl-dot anchor"></div>
+        <div class="tl-date">June 1, 2026</div>
+        <div class="tl-head">Arrive Pergine Valdarno &#8212; Villa Pergine</div>
+        <img class="tl-photo" src="assets/TL6.jpg" alt="Sunset over the Valdarno valley">
+        <p class="tl-body">A hilltop villa in a tiny medieval village in the Valdarno, between Florence and Arezzo &#8212; with a working winery literally next door. Eastern Tuscany, which we&#8217;d never explored before.</p>
+        <a class="tl-link" href="pergine-valdarno.html">Pergine Valdarno &#8212; restaurants, wine &amp; day trips &#8594;</a>
+      </div>
+
+      <div class="tl-stop">
+        <div class="tl-dot"></div>
+        <div class="tl-date">June 3, 2026</div>
+        <div class="tl-head">Pienza &amp; Podere Spedalone</div>
+        <img class="tl-photo" src="assets/TL7.jpg" alt="Val d'Orcia landscape near Pienza">
+        <p class="tl-body">An hour&#8217;s drive for some of the most beautiful vistas in Italy &#8212; the Val d&#8217;Orcia from Pienza. Lunch at La Pecora Bianca at Podere Spedalone. Splurge on the Bistecca Fiorentina add-on.</p>
+      </div>
+
+      <div class="tl-stop">
+        <div class="tl-dot"></div>
+        <div class="tl-date">June 4, 2026</div>
+        <div class="tl-head">San Gimignano</div>
+        <img class="tl-photo" src="assets/TL8.jpg" alt="San Gimignano towers">
+        <p class="tl-body">Lunch with Dave&#8217;s Italian tutor Alic and her partner Jiri in the city of towers. Ristorante La Mandragola &#8212; a lovely afternoon in a remarkable medieval town.</p>
+      </div>
+
+      <div class="tl-stop">
+        <div class="tl-dot"></div>
+        <div class="tl-date">June 6 &#8211; 7, 2026</div>
+        <div class="tl-head">Greve in Chianti &amp; Castello di Verrazzano</div>
+        <img class="tl-photo" src="assets/TL9.jpg" alt="Castello di Verrazzano on the hilltop">
+        <p class="tl-body">Greve is the heart of Chianti &#8212; home to Giovanni Verrazzano, the first European to map the Atlantic coast of North America. Saturday market, a walk in the hills, lunch and aperitivo, an overnight, then a tour and wine-tasting dinner at the castello.</p>
+      </div>
+
+      <div class="tl-stop">
+        <div class="tl-dot"></div>
+        <div class="tl-date">June 8, 2026</div>
+        <div class="tl-head">Arezzo</div>
+        <img class="tl-photo" src="assets/TL10.jpg" alt="Loggia and bell tower in Arezzo">
+        <p class="tl-body">Twenty minutes from the villa. Lunch at Essenza on Piazza Grande &#8212; excellent. Easy to get to and well worth it.</p>
+      </div>
+
+      <div class="tl-stop">
+        <div class="tl-dot"></div>
+        <div class="tl-date">June 10, 2026</div>
+        <div class="tl-head">Gargonza &amp; Lucignano</div>
+        <img class="tl-photo" src="assets/TL11.jpg" alt="Medieval borgo street in Gargonza">
+        <p class="tl-body">Gargonza is a beautifully preserved 13th-century fortified borgo between Arezzo and Siena. Then on to Lucignano &#8212; the &#8220;pearl of Valdichiana&#8221; &#8212; a hilltop village whose unique elliptical layout has been unchanged for centuries.</p>
+      </div>
+
+      <div class="tl-stop">
+        <div class="tl-dot"></div>
+        <div class="tl-date">June 13 &#8211; 15, 2026</div>
+        <div class="tl-head">Querceta &#8212; Casa di Nonni</div>
+        <img class="tl-photo" src="assets/TL12.jpg" alt="Aperitivi with the Moriconi family">
+        <p class="tl-body">The Moriconi family &#8212; dear friends we visit every time we&#8217;re in Italy. Two nights, lunches at the house of the grandparents, aperitivi, and a final dinner at Ristorante il Centauro in Pietrasanta.</p>
+      </div>
+
+      <div class="tl-stop">
+        <div class="tl-dot"></div>
+        <div class="tl-date">June 16, 2026</div>
+        <div class="tl-head">Chiusi &#8212; Etruscan History</div>
+        <p class="tl-body">An hour from the villa. The Etruscan Museum of Chiusi is one of the most important repositories of Etruscan remains in Italy. Lunch at La Solita Zuppa &#8212; highly recommended.</p>
+      </div>
+
+      <div class="tl-stop">
+        <div class="tl-dot anchor"></div>
+        <div class="tl-date">June 22, 2026</div>
+        <div class="tl-head">Fly home &#8212; Florence &#8594; Zurich &#8594; Washington Dulles</div>
+        <p class="tl-body">Six weeks. Every minute of it worth it.</p>
+      </div>
+
+    </div>
+
+  </div>
+
+</main>
+
+<footer>
+  <span class="footer-breadcrumb">
+    <a href="https://daveandmike.net/index.html">dave&amp;mike</a>
+    &nbsp;&#183;&nbsp;
+    <a href="https://daveandmike.net/index.html" class="crumb-esperienze">esperienze</a>
+    &nbsp;&#183;&nbsp;
+    <a href="https://travel.daveandmike.net">travel</a>
+    &nbsp;&#183;&nbsp;
+    <a href="index.html" class="crumb-current">italy 2026</a>
+  </span>
+  <a class="footer-contact" href="mailto:services@musel.us">Contact Dave &amp; Mike</a>
+</footer>
 
 </body>
 </html>
