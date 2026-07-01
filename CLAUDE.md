@@ -10,35 +10,30 @@ See ~/Documents/Git/CLAUDE.md for the full dave&mike visual system.
   - All other .html files are content pages that link to style.css
 
 ## italy-2026 content pages
-- All use `.header-title-block` (defined in style.css)
-- Header structure: eyebrow "Italy 2026" · h1 [page title] · subtitle [descriptor]
+- All use `.header-title-block` (defined in style.css, compact "in-header" variant re-declared per-page in a `<style>` override — same pattern as `matrix.html` used historically)
+- Header structure: eyebrow "Italy 2026" (or location name) · h1 [page title] · subtitle [descriptor]
 - Gradient override is in style.css `@media (max-width: 600px)` block
+- Shared component classes added to style.css: `.page-nav` (tab nav under back-bar, used on index/ostuni/pergine-valdarno/photos), `.content-card` / `.lodging-card` / `.wine-note` (location-page write-ups — reuse `.card-grid`/`.card-section` for layout)
+
+## italy-2026 — retrospective site (rebuilt 2026-07-01, replaced the planning site)
+Trip is over; the old planning pages (flights, calendar, accommodations, living, excursions, trip-costs, medical, plus ~13 day-trip detail pages) were deleted and archived to SD (`Travel/2026/Trip1 2026-05-11_Italy/2026_07_01_PlanningWebSite/`). Current pages:
+- `index.html` — vertical scrolling timeline (`.tl-wrap`/`.tl-stop` classes, page-specific, not in style.css), Puglia leg then Tuscany leg
+- `ostuni.html`, `pergine-valdarno.html` — location pages: lodging card, restaurant cards, wine note, excursion/day-trip cards
+- `photos.html` — full-trip photo gallery, all 169 dated originals from SD `Journal/` folder (filenames like `20260511-233.jpg`). Two asset variants: `assets/photos/thumb/` (~600px, grid) and `assets/photos/full/` (~1600px, lightbox). Vanilla JS lightbox (click thumbnail, arrow keys/buttons to navigate, Esc/backdrop-click to close) — no external libraries. This is the reusable pattern for any future trip's all-photos page.
+- **TL-numbered hero photos** (`assets/TL1.jpg`–`TL12.jpg`): curated shots assigned sequentially in chronological stop order (TL1 = Ostuni arrival … TL12 = Chiusi). The authoritative source for which TL# belongs to which stop is the inline `(TLn)` tags in Dave's SD narrative doc (`Journal/Italy 2026 Narrative.docx`) — a separately-typed "photo assignment table" in an earlier decision doc had the numbering wrong and cost a correction round; trust the narrative doc's inline tags first.
+- TL1 needed `style="object-position: top;"` (portrait shot, default center-crop cut off the top) — pattern for fixing other over-cropped portrait photos: adjust the vertical % in that same inline `object-position` (0% = top, 50% = center, 100% = bottom).
 
 ## italy.daveandmike.net redirect
 The standalone `italy-2026` repo (`~/Documents/Git/italy-2026/italy-2026/`) now serves only as a redirect shim. Its `index.html` does a meta-refresh to `https://travel.daveandmike.net/italy-2026/`. The CNAME file (`italy.daveandmike.net`) must stay in place — removing it breaks the domain mapping. Old content is archived within that repo but not served.
 
 ## travel/index.html — trip listing layout
-- 2-column `.trips-grid` layout: "Active Trips & Planning" | "Trip Archive"
+- 2-column `.trips-grid` layout: "Where We're Going" | "Where We've Been" (renamed 2026-07-01 from "Active Trips & Planning" / "Trip Archive")
 - Column headers use slate eyebrow style with a thin border-bottom rule
-- Active trips: Italy 2026 (May 11–Jun 22), Ski/Ride 2027–Park City (Feb 12–26, inactive)
+- Where We're Going: Ski/Ride 2027–Park City (Feb 12–26, inactive). Where We've Been: Italy 2026 (May 10–Jun 22) — moved here once the trip concluded and the retrospective site went live
 - `.inactive-link` class: faded (var(--faded)), no href, cursor default — for planned trips without pages yet
-- Trip Archive column: "Coming Soon" in `.coming-soon` style
-
-## italy-2026/excursions.html — itinerary list
-- List is in chronological order by confirmed date
-- Link titles are bold (font-weight 700) and blue (var(--slate))
-- Confirmed trips listed with "Name — Date" format above a `.itin-divider` rule
-- Undated/unscheduled trips listed below the divider without dates
-- Confirmed schedule: Matera May 21–22 · Itria Valley May 30 · Pienza Jun 3 · Firenze Jun 4 · Castello di Verrazzano Jun 6–7
-- Jun 3 was Montepulciano; replaced with Pienza (Gattavecchi no longer under Luca's ownership). `montepulciano.html` still exists but is unlinked — do not delete without confirming.
-- Florence file remains `florence-june5.html` (filename not changed despite date correction to Jun 4)
-
-## italy-2026/calendar.html — data structure
-- `bedDefs` uses a **multi-period format**: `{ label, periods: [{ name, start, end }, …] }` — each bed can have multiple occupants across different date ranges (e.g. BD4: Sabrina May 22–23, then Dave & Teresa May 29–Jun 6)
-- Do NOT revert to the old single-period format `{ label, name, start, end }` — the forEach in buildMonth now iterates `bed.periods`
-- `excurDefs` maps dates to `{ date, name, href }` — June 3 is Pienza / pienza.html
+- When a trip wraps, move its link from "Where We're Going" to "Where We've Been"
 
 ## Known decisions
 - All black (`var(--text)`) backgrounds replaced with `var(--slate)` site-wide
-- `italy-2026/index.html` back-link points to `https://travel.daveandmike.net` (not a subdomain)
-- Header photo: `assets/italy-header.jpg`
+- `italy-2026/index.html` back-link points to `https://travel.daveandmike.net`; `ostuni.html`/`pergine-valdarno.html`/`photos.html` back-links point to `index.html` (one level up within the site, not the travel root)
+- Header photo: `assets/italy-header.jpg` on `index.html`; location pages (`ostuni.html`, `pergine-valdarno.html`) use their own TL-numbered hero photo instead
