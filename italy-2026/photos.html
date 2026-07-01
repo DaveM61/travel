@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Photos — Italy 2026 — dave&amp;mike</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .header-title-block {
+    position: relative;
+    z-index: 2;
+    margin-left: 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .header-title-block .trip-eyebrow { margin-bottom: 0.25rem; }
+  .header-title-block .trip-name { font-size: 2rem; margin-bottom: 0.2rem; }
+  .header-title-block .trip-dates { font-size: 13px; margin-bottom: 0; }
+
+  .header-img-zone {
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, transparent 15%, black 38%, black 100%);
+    mask-image: linear-gradient(to right, transparent 0%, transparent 15%, black 38%, black 100%);
+  }
+
+  @media (max-width: 600px) {
+    .header-img-zone {
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, transparent 55%, black 75%, black 100%);
+      mask-image: linear-gradient(to right, transparent 0%, transparent 55%, black 75%, black 100%);
+    }
+  }
+
+  /* ── Photo grid ── */
+  .photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 6px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .photo-item {
+    display: block;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: 4px;
+  }
+
+  .photo-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  .photo-item:hover img {
+    transform: scale(1.05);
+  }
+
+  .photo-count {
+    text-align: center;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 24px;
+  }
+
+  /* ── Lightbox ── */
+  .lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(28, 26, 22, 0.94);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .lightbox.open { display: flex; }
+
+  .lightbox-img-wrap {
+    max-width: 92vw;
+    max-height: 82vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .lightbox-img-wrap img {
+    max-width: 92vw;
+    max-height: 82vh;
+    object-fit: contain;
+    border-radius: 4px;
+    box-shadow: 0 12px 48px rgba(0,0,0,0.5);
+  }
+
+  .lightbox-caption {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    letter-spacing: 0.04em;
+    color: rgba(240,237,231,0.85);
+    margin-top: 16px;
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 28px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--bg);
+    background: none;
+    border: none;
+    cursor: pointer;
+    line-height: 1;
+  }
+
+  .lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 32px;
+    font-weight: 300;
+    color: var(--bg);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 20px;
+    opacity: 0.75;
+    transition: opacity 0.2s;
+  }
+
+  .lightbox-nav:hover { opacity: 1; }
+  .lightbox-prev { left: 8px; }
+  .lightbox-next { right: 8px; }
+
+  @media (max-width: 600px) {
+    .photo-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 4px; }
+    .lightbox-nav { font-size: 24px; padding: 12px; }
+    .lightbox-close { top: 14px; right: 18px; font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="top-bar"></div>
+
+<header>
+  <a class="logo-wrap" href="https://daveandmike.net">
+    <img src="assets/dnm_logo.svg" alt="dave&amp;mike">
+  </a>
+  <div class="header-title-block">
+    <div class="trip-eyebrow">Italy 2026</div>
+    <h1 class="trip-name">Photos</h1>
+    <p class="trip-dates">May 10 &#8211; June 22, 2026</p>
+  </div>
+  <div class="header-img-zone">
+    <img src="assets/italy-header.jpg" alt="">
+  </div>
+</header>
+
+<div class="back-bar">
+  <a class="back-link" href="index.html">&#8592; Italy 2026</a>
+</div>
+
+<nav class="page-nav">
+  <a href="ostuni.html">Ostuni</a>
+  <a href="pergine-valdarno.html">Pergine Valdarno</a>
+  <a href="photos.html" class="active">Photos</a>
+</nav>
+
+<main>
+
+  <div class="welcome-block">
+    <h2>Six weeks, one album</h2>
+  </div>
+
+  <div class="photo-count">169 photos &nbsp;&#183;&nbsp; chronological, May 10 &#8211; June 22</div>
+
+  <div class="photo-grid">
+      <button class="photo-item" data-full="assets/photos/full/20260511-233.jpg" data-caption="May 11, 2026">
+        <img src="assets/photos/thumb/20260511-233.jpg" alt="May 11, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260512-242.jpg" data-caption="May 12, 2026">
+        <img src="assets/photos/thumb/20260512-242.jpg" alt="May 12, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260512-262.jpg" data-caption="May 12, 2026">
+        <img src="assets/photos/thumb/20260512-262.jpg" alt="May 12, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260514-134.jpg" data-caption="May 14, 2026">
+        <img src="assets/photos/thumb/20260514-134.jpg" alt="May 14, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260514-135.jpg" data-caption="May 14, 2026">
+        <img src="assets/photos/thumb/20260514-135.jpg" alt="May 14, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260514-136.jpg" data-caption="May 14, 2026">
+        <img src="assets/photos/thumb/20260514-136.jpg" alt="May 14, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260514-138.jpg" data-caption="May 14, 2026">
+        <img src="assets/photos/thumb/20260514-138.jpg" alt="May 14, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260514-141.jpg" data-caption="May 14, 2026">
+        <img src="assets/photos/thumb/20260514-141.jpg" alt="May 14, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260514-142.jpg" data-caption="May 14, 2026">
+        <img src="assets/photos/thumb/20260514-142.jpg" alt="May 14, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260515-144.jpg" data-caption="May 15, 2026">
+        <img src="assets/photos/thumb/20260515-144.jpg" alt="May 15, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260515-148.jpg" data-caption="May 15, 2026">
+        <img src="assets/photos/thumb/20260515-148.jpg" alt="May 15, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260517-153.jpg" data-caption="May 17, 2026">
+        <img src="assets/photos/thumb/20260517-153.jpg" alt="May 17, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260517-156.jpg" data-caption="May 17, 2026">
+        <img src="assets/photos/thumb/20260517-156.jpg" alt="May 17, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260517-157.jpg" data-caption="May 17, 2026">
+        <img src="assets/photos/thumb/20260517-157.jpg" alt="May 17, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260517-158.jpg" data-caption="May 17, 2026">
+        <img src="assets/photos/thumb/20260517-158.jpg" alt="May 17, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260517-160.jpg" data-caption="May 17, 2026">
+        <img src="assets/photos/thumb/20260517-160.jpg" alt="May 17, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260517-163.jpg" data-caption="May 17, 2026">
+        <img src="assets/photos/thumb/20260517-163.jpg" alt="May 17, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260517-165.jpg" data-caption="May 17, 2026">
+        <img src="assets/photos/thumb/20260517-165.jpg" alt="May 17, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260517-169.jpg" data-caption="May 17, 2026">
+        <img src="assets/photos/thumb/20260517-169.jpg" alt="May 17, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260517-175.jpg" data-caption="May 17, 2026">
+        <img src="assets/photos/thumb/20260517-175.jpg" alt="May 17, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260517-177.jpg" data-caption="May 17, 2026">
+        <img src="assets/photos/thumb/20260517-177.jpg" alt="May 17, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260517-178.jpg" data-caption="May 17, 2026">
+        <img src="assets/photos/thumb/20260517-178.jpg" alt="May 17, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260519-183.jpg" data-caption="May 19, 2026">
+        <img src="assets/photos/thumb/20260519-183.jpg" alt="May 19, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260521-186.jpg" data-caption="May 21, 2026">
+        <img src="assets/photos/thumb/20260521-186.jpg" alt="May 21, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260521-191.jpg" data-caption="May 21, 2026">
+        <img src="assets/photos/thumb/20260521-191.jpg" alt="May 21, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260521-192.jpg" data-caption="May 21, 2026">
+        <img src="assets/photos/thumb/20260521-192.jpg" alt="May 21, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260521-196.jpg" data-caption="May 21, 2026">
+        <img src="assets/photos/thumb/20260521-196.jpg" alt="May 21, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260521-198.jpg" data-caption="May 21, 2026">
+        <img src="assets/photos/thumb/20260521-198.jpg" alt="May 21, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260521-199.jpg" data-caption="May 21, 2026">
+        <img src="assets/photos/thumb/20260521-199.jpg" alt="May 21, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260521-201.jpg" data-caption="May 21, 2026">
+        <img src="assets/photos/thumb/20260521-201.jpg" alt="May 21, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260521-206.jpg" data-caption="May 21, 2026">
+        <img src="assets/photos/thumb/20260521-206.jpg" alt="May 21, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260521-207.jpg" data-caption="May 21, 2026">
+        <img src="assets/photos/thumb/20260521-207.jpg" alt="May 21, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260521-208.jpg" data-caption="May 21, 2026">
+        <img src="assets/photos/thumb/20260521-208.jpg" alt="May 21, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260521-210.jpg" data-caption="May 21, 2026">
+        <img src="assets/photos/thumb/20260521-210.jpg" alt="May 21, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260521-213.jpg" data-caption="May 21, 2026">
+        <img src="assets/photos/thumb/20260521-213.jpg" alt="May 21, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260521-216.jpg" data-caption="May 21, 2026">
+        <img src="assets/photos/thumb/20260521-216.jpg" alt="May 21, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260521-219.jpg" data-caption="May 21, 2026">
+        <img src="assets/photos/thumb/20260521-219.jpg" alt="May 21, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260521-225.jpg" data-caption="May 21, 2026">
+        <img src="assets/photos/thumb/20260521-225.jpg" alt="May 21, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260521-232.jpg" data-caption="May 21, 2026">
+        <img src="assets/photos/thumb/20260521-232.jpg" alt="May 21, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260521-235.jpg" data-caption="May 21, 2026">
+        <img src="assets/photos/thumb/20260521-235.jpg" alt="May 21, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260521-243.jpg" data-caption="May 21, 2026">
+        <img src="assets/photos/thumb/20260521-243.jpg" alt="May 21, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260521-247.jpg" data-caption="May 21, 2026">
+        <img src="assets/photos/thumb/20260521-247.jpg" alt="May 21, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260521-253.jpg" data-caption="May 21, 2026">
+        <img src="assets/photos/thumb/20260521-253.jpg" alt="May 21, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260521-256.jpg" data-caption="May 21, 2026">
+        <img src="assets/photos/thumb/20260521-256.jpg" alt="May 21, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260521-268.jpg" data-caption="May 21, 2026">
+        <img src="assets/photos/thumb/20260521-268.jpg" alt="May 21, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260521-279.jpg" data-caption="May 21, 2026">
+        <img src="assets/photos/thumb/20260521-279.jpg" alt="May 21, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260521-281.jpg" data-caption="May 21, 2026">
+        <img src="assets/photos/thumb/20260521-281.jpg" alt="May 21, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260521-283.jpg" data-caption="May 21, 2026">
+        <img src="assets/photos/thumb/20260521-283.jpg" alt="May 21, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260521-285.jpg" data-caption="May 21, 2026">
+        <img src="assets/photos/thumb/20260521-285.jpg" alt="May 21, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260521-288.jpg" data-caption="May 21, 2026">
+        <img src="assets/photos/thumb/20260521-288.jpg" alt="May 21, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260521-291.jpg" data-caption="May 21, 2026">
+        <img src="assets/photos/thumb/20260521-291.jpg" alt="May 21, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260521-293.jpg" data-caption="May 21, 2026">
+        <img src="assets/photos/thumb/20260521-293.jpg" alt="May 21, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260521-294.jpg" data-caption="May 21, 2026">
+        <img src="assets/photos/thumb/20260521-294.jpg" alt="May 21, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260521-296.jpg" data-caption="May 21, 2026">
+        <img src="assets/photos/thumb/20260521-296.jpg" alt="May 21, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260521-298.jpg" data-caption="May 21, 2026">
+        <img src="assets/photos/thumb/20260521-298.jpg" alt="May 21, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260522-302.jpg" data-caption="May 22, 2026">
+        <img src="assets/photos/thumb/20260522-302.jpg" alt="May 22, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260523-306.jpg" data-caption="May 23, 2026">
+        <img src="assets/photos/thumb/20260523-306.jpg" alt="May 23, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260523-311.jpg" data-caption="May 23, 2026">
+        <img src="assets/photos/thumb/20260523-311.jpg" alt="May 23, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260524-313.jpg" data-caption="May 24, 2026">
+        <img src="assets/photos/thumb/20260524-313.jpg" alt="May 24, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260524-315.jpg" data-caption="May 24, 2026">
+        <img src="assets/photos/thumb/20260524-315.jpg" alt="May 24, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260524-321.jpg" data-caption="May 24, 2026">
+        <img src="assets/photos/thumb/20260524-321.jpg" alt="May 24, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260524-324.jpg" data-caption="May 24, 2026">
+        <img src="assets/photos/thumb/20260524-324.jpg" alt="May 24, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260526-339.jpg" data-caption="May 26, 2026">
+        <img src="assets/photos/thumb/20260526-339.jpg" alt="May 26, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260526-341.jpg" data-caption="May 26, 2026">
+        <img src="assets/photos/thumb/20260526-341.jpg" alt="May 26, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260526-345.jpg" data-caption="May 26, 2026">
+        <img src="assets/photos/thumb/20260526-345.jpg" alt="May 26, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260526-347.jpg" data-caption="May 26, 2026">
+        <img src="assets/photos/thumb/20260526-347.jpg" alt="May 26, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260526-348.jpg" data-caption="May 26, 2026">
+        <img src="assets/photos/thumb/20260526-348.jpg" alt="May 26, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260526-349.jpg" data-caption="May 26, 2026">
+        <img src="assets/photos/thumb/20260526-349.jpg" alt="May 26, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260526-350.jpg" data-caption="May 26, 2026">
+        <img src="assets/photos/thumb/20260526-350.jpg" alt="May 26, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260526-351.jpg" data-caption="May 26, 2026">
+        <img src="assets/photos/thumb/20260526-351.jpg" alt="May 26, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260527-357.jpg" data-caption="May 27, 2026">
+        <img src="assets/photos/thumb/20260527-357.jpg" alt="May 27, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260529-358.jpg" data-caption="May 29, 2026">
+        <img src="assets/photos/thumb/20260529-358.jpg" alt="May 29, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260530-363.jpg" data-caption="May 30, 2026">
+        <img src="assets/photos/thumb/20260530-363.jpg" alt="May 30, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260530-366.jpg" data-caption="May 30, 2026">
+        <img src="assets/photos/thumb/20260530-366.jpg" alt="May 30, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260530-368.jpg" data-caption="May 30, 2026">
+        <img src="assets/photos/thumb/20260530-368.jpg" alt="May 30, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260530-374.jpg" data-caption="May 30, 2026">
+        <img src="assets/photos/thumb/20260530-374.jpg" alt="May 30, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260530-375.jpg" data-caption="May 30, 2026">
+        <img src="assets/photos/thumb/20260530-375.jpg" alt="May 30, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260530-381.jpg" data-caption="May 30, 2026">
+        <img src="assets/photos/thumb/20260530-381.jpg" alt="May 30, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260530-386.jpg" data-caption="May 30, 2026">
+        <img src="assets/photos/thumb/20260530-386.jpg" alt="May 30, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260530-388.jpg" data-caption="May 30, 2026">
+        <img src="assets/photos/thumb/20260530-388.jpg" alt="May 30, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260530-390.jpg" data-caption="May 30, 2026">
+        <img src="assets/photos/thumb/20260530-390.jpg" alt="May 30, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260530-391.jpg" data-caption="May 30, 2026">
+        <img src="assets/photos/thumb/20260530-391.jpg" alt="May 30, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260530-393.jpg" data-caption="May 30, 2026">
+        <img src="assets/photos/thumb/20260530-393.jpg" alt="May 30, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260530-402.jpg" data-caption="May 30, 2026">
+        <img src="assets/photos/thumb/20260530-402.jpg" alt="May 30, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260530-408.jpg" data-caption="May 30, 2026">
+        <img src="assets/photos/thumb/20260530-408.jpg" alt="May 30, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260530-410.jpg" data-caption="May 30, 2026">
+        <img src="assets/photos/thumb/20260530-410.jpg" alt="May 30, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260530-416.jpg" data-caption="May 30, 2026">
+        <img src="assets/photos/thumb/20260530-416.jpg" alt="May 30, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260530-417.jpg" data-caption="May 30, 2026">
+        <img src="assets/photos/thumb/20260530-417.jpg" alt="May 30, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260530-418.jpg" data-caption="May 30, 2026">
+        <img src="assets/photos/thumb/20260530-418.jpg" alt="May 30, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260530-423.jpg" data-caption="May 30, 2026">
+        <img src="assets/photos/thumb/20260530-423.jpg" alt="May 30, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260530-425.jpg" data-caption="May 30, 2026">
+        <img src="assets/photos/thumb/20260530-425.jpg" alt="May 30, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260530-427.jpg" data-caption="May 30, 2026">
+        <img src="assets/photos/thumb/20260530-427.jpg" alt="May 30, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260530-428.jpg" data-caption="May 30, 2026">
+        <img src="assets/photos/thumb/20260530-428.jpg" alt="May 30, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260530-435.jpg" data-caption="May 30, 2026">
+        <img src="assets/photos/thumb/20260530-435.jpg" alt="May 30, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260530-437.jpg" data-caption="May 30, 2026">
+        <img src="assets/photos/thumb/20260530-437.jpg" alt="May 30, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260530-444.jpg" data-caption="May 30, 2026">
+        <img src="assets/photos/thumb/20260530-444.jpg" alt="May 30, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260601-108.jpg" data-caption="June 1, 2026">
+        <img src="assets/photos/thumb/20260601-108.jpg" alt="June 1, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260601-110.jpg" data-caption="June 1, 2026">
+        <img src="assets/photos/thumb/20260601-110.jpg" alt="June 1, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260602-117.jpg" data-caption="June 2, 2026">
+        <img src="assets/photos/thumb/20260602-117.jpg" alt="June 2, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260603-119.jpg" data-caption="June 3, 2026">
+        <img src="assets/photos/thumb/20260603-119.jpg" alt="June 3, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260603-122.jpg" data-caption="June 3, 2026">
+        <img src="assets/photos/thumb/20260603-122.jpg" alt="June 3, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260603-123.jpg" data-caption="June 3, 2026">
+        <img src="assets/photos/thumb/20260603-123.jpg" alt="June 3, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260603-125.jpg" data-caption="June 3, 2026">
+        <img src="assets/photos/thumb/20260603-125.jpg" alt="June 3, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260603-127.jpg" data-caption="June 3, 2026">
+        <img src="assets/photos/thumb/20260603-127.jpg" alt="June 3, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260603-130.jpg" data-caption="June 3, 2026">
+        <img src="assets/photos/thumb/20260603-130.jpg" alt="June 3, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260603-132.jpg" data-caption="June 3, 2026">
+        <img src="assets/photos/thumb/20260603-132.jpg" alt="June 3, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260603-134.jpg" data-caption="June 3, 2026">
+        <img src="assets/photos/thumb/20260603-134.jpg" alt="June 3, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260603-137.jpg" data-caption="June 3, 2026">
+        <img src="assets/photos/thumb/20260603-137.jpg" alt="June 3, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260603-138.jpg" data-caption="June 3, 2026">
+        <img src="assets/photos/thumb/20260603-138.jpg" alt="June 3, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260603-142.jpg" data-caption="June 3, 2026">
+        <img src="assets/photos/thumb/20260603-142.jpg" alt="June 3, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260603-147.jpg" data-caption="June 3, 2026">
+        <img src="assets/photos/thumb/20260603-147.jpg" alt="June 3, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260603-156.jpg" data-caption="June 3, 2026">
+        <img src="assets/photos/thumb/20260603-156.jpg" alt="June 3, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260603-160.jpg" data-caption="June 3, 2026">
+        <img src="assets/photos/thumb/20260603-160.jpg" alt="June 3, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260603-164.jpg" data-caption="June 3, 2026">
+        <img src="assets/photos/thumb/20260603-164.jpg" alt="June 3, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260603-167.jpg" data-caption="June 3, 2026">
+        <img src="assets/photos/thumb/20260603-167.jpg" alt="June 3, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260603-171.jpg" data-caption="June 3, 2026">
+        <img src="assets/photos/thumb/20260603-171.jpg" alt="June 3, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260603-174.jpg" data-caption="June 3, 2026">
+        <img src="assets/photos/thumb/20260603-174.jpg" alt="June 3, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260603-177.jpg" data-caption="June 3, 2026">
+        <img src="assets/photos/thumb/20260603-177.jpg" alt="June 3, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260603-180.jpg" data-caption="June 3, 2026">
+        <img src="assets/photos/thumb/20260603-180.jpg" alt="June 3, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260603-181.jpg" data-caption="June 3, 2026">
+        <img src="assets/photos/thumb/20260603-181.jpg" alt="June 3, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260603-182.jpg" data-caption="June 3, 2026">
+        <img src="assets/photos/thumb/20260603-182.jpg" alt="June 3, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260603-184.jpg" data-caption="June 3, 2026">
+        <img src="assets/photos/thumb/20260603-184.jpg" alt="June 3, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260604-185.jpg" data-caption="June 4, 2026">
+        <img src="assets/photos/thumb/20260604-185.jpg" alt="June 4, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260604-187.jpg" data-caption="June 4, 2026">
+        <img src="assets/photos/thumb/20260604-187.jpg" alt="June 4, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260605-193.jpg" data-caption="June 5, 2026">
+        <img src="assets/photos/thumb/20260605-193.jpg" alt="June 5, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260605-194.jpg" data-caption="June 5, 2026">
+        <img src="assets/photos/thumb/20260605-194.jpg" alt="June 5, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260605-199.jpg" data-caption="June 5, 2026">
+        <img src="assets/photos/thumb/20260605-199.jpg" alt="June 5, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260606-217.jpg" data-caption="June 6, 2026">
+        <img src="assets/photos/thumb/20260606-217.jpg" alt="June 6, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260606-218.jpg" data-caption="June 6, 2026">
+        <img src="assets/photos/thumb/20260606-218.jpg" alt="June 6, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260606-221.jpg" data-caption="June 6, 2026">
+        <img src="assets/photos/thumb/20260606-221.jpg" alt="June 6, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260606-222.jpg" data-caption="June 6, 2026">
+        <img src="assets/photos/thumb/20260606-222.jpg" alt="June 6, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260606-229.jpg" data-caption="June 6, 2026">
+        <img src="assets/photos/thumb/20260606-229.jpg" alt="June 6, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260607-239.jpg" data-caption="June 7, 2026">
+        <img src="assets/photos/thumb/20260607-239.jpg" alt="June 7, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260607-240.jpg" data-caption="June 7, 2026">
+        <img src="assets/photos/thumb/20260607-240.jpg" alt="June 7, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260608-245.jpg" data-caption="June 8, 2026">
+        <img src="assets/photos/thumb/20260608-245.jpg" alt="June 8, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260608-251.jpg" data-caption="June 8, 2026">
+        <img src="assets/photos/thumb/20260608-251.jpg" alt="June 8, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260608-254.jpg" data-caption="June 8, 2026">
+        <img src="assets/photos/thumb/20260608-254.jpg" alt="June 8, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260608-257.jpg" data-caption="June 8, 2026">
+        <img src="assets/photos/thumb/20260608-257.jpg" alt="June 8, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260608-259.jpg" data-caption="June 8, 2026">
+        <img src="assets/photos/thumb/20260608-259.jpg" alt="June 8, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260608-264.jpg" data-caption="June 8, 2026">
+        <img src="assets/photos/thumb/20260608-264.jpg" alt="June 8, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260608-268.jpg" data-caption="June 8, 2026">
+        <img src="assets/photos/thumb/20260608-268.jpg" alt="June 8, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260608-269.jpg" data-caption="June 8, 2026">
+        <img src="assets/photos/thumb/20260608-269.jpg" alt="June 8, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260608-276.jpg" data-caption="June 8, 2026">
+        <img src="assets/photos/thumb/20260608-276.jpg" alt="June 8, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260610-290.jpg" data-caption="June 10, 2026">
+        <img src="assets/photos/thumb/20260610-290.jpg" alt="June 10, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260610-292.jpg" data-caption="June 10, 2026">
+        <img src="assets/photos/thumb/20260610-292.jpg" alt="June 10, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260610-294.jpg" data-caption="June 10, 2026">
+        <img src="assets/photos/thumb/20260610-294.jpg" alt="June 10, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260610-298.jpg" data-caption="June 10, 2026">
+        <img src="assets/photos/thumb/20260610-298.jpg" alt="June 10, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260610-302.jpg" data-caption="June 10, 2026">
+        <img src="assets/photos/thumb/20260610-302.jpg" alt="June 10, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260610-308.jpg" data-caption="June 10, 2026">
+        <img src="assets/photos/thumb/20260610-308.jpg" alt="June 10, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260610-312.jpg" data-caption="June 10, 2026">
+        <img src="assets/photos/thumb/20260610-312.jpg" alt="June 10, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260610-317.jpg" data-caption="June 10, 2026">
+        <img src="assets/photos/thumb/20260610-317.jpg" alt="June 10, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260610-323.jpg" data-caption="June 10, 2026">
+        <img src="assets/photos/thumb/20260610-323.jpg" alt="June 10, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260610-325.jpg" data-caption="June 10, 2026">
+        <img src="assets/photos/thumb/20260610-325.jpg" alt="June 10, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260611-327.jpg" data-caption="June 11, 2026">
+        <img src="assets/photos/thumb/20260611-327.jpg" alt="June 11, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260611-328.jpg" data-caption="June 11, 2026">
+        <img src="assets/photos/thumb/20260611-328.jpg" alt="June 11, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260612-331.jpg" data-caption="June 12, 2026">
+        <img src="assets/photos/thumb/20260612-331.jpg" alt="June 12, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260613-335.jpg" data-caption="June 13, 2026">
+        <img src="assets/photos/thumb/20260613-335.jpg" alt="June 13, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260614-336.jpg" data-caption="June 14, 2026">
+        <img src="assets/photos/thumb/20260614-336.jpg" alt="June 14, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260614-342.jpg" data-caption="June 14, 2026">
+        <img src="assets/photos/thumb/20260614-342.jpg" alt="June 14, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260614-353.jpg" data-caption="June 14, 2026">
+        <img src="assets/photos/thumb/20260614-353.jpg" alt="June 14, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260617-361.jpg" data-caption="June 17, 2026">
+        <img src="assets/photos/thumb/20260617-361.jpg" alt="June 17, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260617-365.jpg" data-caption="June 17, 2026">
+        <img src="assets/photos/thumb/20260617-365.jpg" alt="June 17, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260617-369.jpg" data-caption="June 17, 2026">
+        <img src="assets/photos/thumb/20260617-369.jpg" alt="June 17, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260617-371.jpg" data-caption="June 17, 2026">
+        <img src="assets/photos/thumb/20260617-371.jpg" alt="June 17, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260617-372.jpg" data-caption="June 17, 2026">
+        <img src="assets/photos/thumb/20260617-372.jpg" alt="June 17, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260617-373.jpg" data-caption="June 17, 2026">
+        <img src="assets/photos/thumb/20260617-373.jpg" alt="June 17, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260618-374.jpg" data-caption="June 18, 2026">
+        <img src="assets/photos/thumb/20260618-374.jpg" alt="June 18, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260621-376.jpg" data-caption="June 21, 2026">
+        <img src="assets/photos/thumb/20260621-376.jpg" alt="June 21, 2026 — Italy 2026" loading="lazy">
+      </button>
+      <button class="photo-item" data-full="assets/photos/full/20260622-999.jpg" data-caption="June 22, 2026">
+        <img src="assets/photos/thumb/20260622-999.jpg" alt="June 22, 2026 — Italy 2026" loading="lazy">
+      </button>
+  </div>
+
+</main>
+
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous">&#8249;</button>
+  <div class="lightbox-img-wrap">
+    <img id="lightboxImg" src="" alt="">
+  </div>
+  <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next">&#8250;</button>
+  <div class="lightbox-caption" id="lightboxCaption"></div>
+</div>
+
+<footer>
+  <span class="footer-breadcrumb">
+    <a href="https://daveandmike.net/index.html">dave&amp;mike</a>
+    &nbsp;&#183;&nbsp;
+    <a href="https://daveandmike.net/index.html" class="crumb-esperienze">esperienze</a>
+    &nbsp;&#183;&nbsp;
+    <a href="https://travel.daveandmike.net">travel</a>
+    &nbsp;&#183;&nbsp;
+    <a href="index.html">italy 2026</a>
+    &nbsp;&#183;&nbsp;
+    <span class="crumb-current">photos</span>
+  </span>
+  <a class="footer-contact" href="mailto:services@musel.us">Contact Dave &amp; Mike</a>
+</footer>
+
+<script>
+  (function() {
+    var items = Array.prototype.slice.call(document.querySelectorAll('.photo-item'));
+    var lightbox = document.getElementById('lightbox');
+    var lightboxImg = document.getElementById('lightboxImg');
+    var lightboxCaption = document.getElementById('lightboxCaption');
+    var currentIndex = 0;
+
+    function show(index) {
+      currentIndex = (index + items.length) % items.length;
+      var item = items[currentIndex];
+      lightboxImg.src = item.getAttribute('data-full');
+      lightboxImg.alt = item.getAttribute('data-caption') || '';
+      lightboxCaption.textContent = item.getAttribute('data-caption') || '';
+    }
+
+    function open(index) {
+      show(index);
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function close() {
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    items.forEach(function(item, i) {
+      item.addEventListener('click', function() { open(i); });
+    });
+
+    document.getElementById('lightboxClose').addEventListener('click', close);
+    document.getElementById('lightboxPrev').addEventListener('click', function() { show(currentIndex - 1); });
+    document.getElementById('lightboxNext').addEventListener('click', function() { show(currentIndex + 1); });
+
+    lightbox.addEventListener('click', function(e) {
+      if (e.target === lightbox) close();
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (!lightbox.classList.contains('open')) return;
+      if (e.key === 'Escape') close();
+      if (e.key === 'ArrowLeft') show(currentIndex - 1);
+      if (e.key === 'ArrowRight') show(currentIndex + 1);
+    });
+  })();
+</script>
+
+</body>
+</html>
