@@ -32,6 +32,7 @@ The standalone `italy-2026` repo (`~/Documents/Git/italy-2026/italy-2026/`) now 
 - Where We're Going: Ski/Ride 2027–Park City (Feb 12–26, inactive). Where We've Been: Italy 2026 (May 10–Jun 22) — moved here once the trip concluded and the retrospective site went live
 - `.inactive-link` class: faded (var(--faded)), no href, cursor default — for planned trips without pages yet
 - When a trip wraps, move its link from "Where We're Going" to "Where We've Been"
+- **"Go to TravelApp" link (added 2026_07_22):** links out to the separate Laravel app at `travelapp.daveandmike.net` (this repo's own static site is unrelated — see the TravelApp Firewall-adjacent note in `~/Herd/travelapp/CLAUDE.md`'s Visual system section: the two projects deliberately use different palettes/fonts and aren't meant to be conflated). The clickable element is TravelApp's real brand mark — ring icon + rotated two-tone sage/clay pill + "Travel**App**" wordmark — reproduced as inline SVG/CSS directly in `index.html` (not an `assets/` image file, unlike this site's other logos), using TravelApp's own hex tokens (`#5F7359` sage-deep, `#C08462` clay, `#C6BFA9` ring, `#2C2925` ink) so it stays crisp and matches TravelApp's actual branding exactly.
 
 ## Known decisions
 - All black (`var(--text)`) backgrounds replaced with `var(--slate)` site-wide
