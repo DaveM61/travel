@@ -246,6 +246,39 @@
       cursor: default;
     }
 
+    /* ── "Go to TravelApp" lockup link — a clean inline copy of the
+       TravelApp brand mark (icon + wordmark), reproduced as SVG/text so it
+       renders crisply with no external image asset. Colors match the real
+       app's own tokens (resources/css/app.css): ring #C6BFA9, pill
+       gradient #5F7359/#C08462, ink #2C2925, cream #FBF5EA, clay #C08462 —
+       not this site's own slate/muted palette, since this is identifying
+       a distinct linked app, not restyling to match the host page. ── */
+    .go-to-travelapp {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .travelapp-lockup {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+
+    .travelapp-lockup:hover { opacity: 0.85; }
+
+    .travelapp-lockup .wordmark {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      letter-spacing: -0.02em;
+      color: #2C2925;
+    }
+
+    .travelapp-lockup .wordmark .accent { color: #C08462; }
+
     /* ── Footer ── */
     footer {
       background: var(--footer-bg);
@@ -332,7 +365,23 @@
 
   <main>
     <div class="content">
-      <p class="descriptor" style="margin-bottom: 1.5rem;"><a href="https://travelapp.daveandmike.net" style="color: var(--slate); text-decoration: none;">Go to TravelApp →</a></p>
+      <p class="descriptor go-to-travelapp">
+        Go to
+        <a href="https://travelapp.daveandmike.net" class="travelapp-lockup" aria-label="Go to TravelApp">
+          <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
+            <circle cx="13" cy="13" r="12" stroke="#C6BFA9" stroke-width="2"/>
+            <defs>
+              <linearGradient id="travelapp-pill-grad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="50%" stop-color="#5F7359"/>
+                <stop offset="50%" stop-color="#C08462"/>
+              </linearGradient>
+            </defs>
+            <rect x="-2.5" y="-9" width="5" height="18" rx="2" fill="url(#travelapp-pill-grad)" transform="translate(13 13) rotate(38)"/>
+            <circle cx="13" cy="13" r="2" fill="#FBF5EA" stroke="#2C2925" stroke-width="1.5"/>
+          </svg>
+          <span class="wordmark">Travel<span class="accent">App</span></span>
+        </a>
+      </p>
       <div class="trips-grid">
         <div class="trips-col">
           <div class="col-header">Where We're Going</div>
